@@ -5,59 +5,189 @@
     android:layout_height="match_parent"
     android:background="@color/homeBackground"
     tools:context=".fragments.HomeFragment">
-
     <LinearLayout
-        android:id="@+id/Latitude_layout"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="270dp"
-        android:layout_marginRight="40dp"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:background="@color/black"
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            android:layout_weight="1"
-            android:text="Latitude:" />
+        <LinearLayout
+            android:id="@+id/search_layout"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:gravity="center_vertical"
+            android:background="@color/black"
+            android:padding="10dp"
+            >
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textSize="30sp"
-            android:text="1.223131" />
+            <EditText
+                android:id="@+id/search_btn"
+                android:text="@string/search"
+                android:textColor="@color/grey"
+                android:textSize="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/background_border"
+                android:drawableLeft="@drawable/ic_baseline_search_24"
+                android:padding="10dp"
+                android:layout_marginBottom="30dp"
+                />
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/grey"
+                >
+            </com.google.android.material.divider.MaterialDivider>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/amenities"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                ></TextView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center"
+                >
+                <TextView
+                    android:id="@+id/amenity1"
+                    android:text="wifi"
+                    android:textColor="@color/white"
+                    android:textSize="18dp"
+                    android:layout_width="80dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/amenity_active"
+                    android:layout_marginRight="5dp"
+                    android:gravity="center"
+                    android:textAlignment="center"                    />
+
+                <TextView
+                    android:id="@+id/amenity2"
+                    android:text="wifi"
+                    android:textColor="@color/white"
+                    android:textSize="18dp"
+                    android:layout_width="80dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/amenity_active"
+                    android:layout_marginRight="5dp"
+                    android:gravity="center"
+                    android:textAlignment="center"                    />
+                <TextView
+                    android:id="@+id/amenity3"
+                    android:text="wifi"
+                    android:textColor="@color/white"
+                    android:textSize="18dp"
+                    android:layout_width="80dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/amenity_active"
+                    android:layout_marginRight="5dp"
+                    android:gravity="center"
+                    android:textAlignment="center"                    />
+                <TextView
+                    android:id="@+id/amenity4"
+                    android:text="wifi"
+                    android:textColor="@color/white"
+                    android:textSize="18dp"
+                    android:layout_width="80dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/amenity_active"
+                    android:layout_marginRight="5dp"
+                    android:gravity="center"
+                    android:textAlignment="center"
+                    />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="450dp"
+            android:background="@color/light"
+            android:padding="10dp">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/card_back"
+                    >
+
+                    <ImageView
+                        android:id="@+id/imageview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="250dp"
+                        android:layout_margin="10dp"
+                        android:src="@drawable/house_image" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:layout_weight="1"
+                        android:background="@color/white"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:paddingLeft="15dp"
+                        android:paddingTop="10dp"
+                        android:paddingEnd="10dp"
+                        android:paddingRight="15dp">
+
+                        <LinearLayout
+                            android:layout_width="250dp"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            >
+                            <TextView
+                                android:id="@+id/textName"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Alton Apartment"
+                                android:textColor="@color/black"
+                                android:textSize="20dp"
+                                android:textStyle="bold"
+                                android:layout_marginRight="18dp"/>
+                            <TextView
+                                android:id="@+id/address"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Kimironko, Nayinzira"
+                                android:textColor="@color/grey"
+                                android:textSize="15dp"
+                                android:textStyle="bold"
+                                android:layout_marginRight="18dp"/>
+                        </LinearLayout>
+
+
+
+                        <TextView
+                            android:id="@+id/textPrice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:text="$100/Monthly"
+                            android:textSize="18dp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+        </LinearLayout>
+
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/Longitude_layout"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_below="@id/Latitude_layout"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="40dp"
-        android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            android:text="Longitude" />
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textSize="30sp"
-            android:text="-31.0.01231" />
-    </LinearLayout>
 </RelativeLayout>
