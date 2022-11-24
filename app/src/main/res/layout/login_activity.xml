@@ -74,7 +74,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
-    <Button
+    <android.widget.Button
         android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -84,6 +84,7 @@
         android:layout_marginRight="30dp"
         android:background="@drawable/login_button"
         android:backgroundTint="@color/colorPrimary"
+        android:textColor="@color/white"
         android:text="Login"
         android:textStyle="bold"
         android:translationZ="40dp"
