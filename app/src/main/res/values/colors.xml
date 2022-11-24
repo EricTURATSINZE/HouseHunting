@@ -2,6 +2,7 @@
 <resources>
     <color name="colorPrimary">#0088CC</color>
     <color name="homeBackground">#C5CDD7</color>
+    <color name="houseScreenBackground">#F5F5F5</color>
     <color name="inputBackground">#F1EFFD</color>
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
