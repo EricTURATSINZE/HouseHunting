@@ -1,102 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="match_parent">
-
-    <include android:id="@+id/toolbar_id"
-        layout="@layout/toolbar"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/toolbar_id"
-        android:paddingVertical="100dp"
-        android:background="@color/colorPrimary">
+        android:background="@color/white"
+        android:paddingVertical="100dp">
 
         <LinearLayout
             android:id="@+id/frst_ll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="60dp"
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Verification Code"
                 android:gravity="center"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:textSize="25dp" />
+                android:text="Verification Code"
+                android:textColor="@color/colorPrimary"
+                android:textSize="25dp"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Please type the verification code sent\nto +91999922228888"
-                android:gravity="center"
+                android:layout_marginLeft="30dp"
                 android:layout_marginTop="10dp"
-                android:textColor="@color/white"
-                android:textSize="15dp" />
+                android:layout_marginRight="30dp"
+                android:gravity="center"
+                android:text="@string/action_enter_otp"
+                android:textColor="@color/light_black"
+                android:textSize="20dp" />
 
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/otp_code"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/frst_ll"
-            android:orientation="horizontal"
             android:layout_centerInParent="true"
+            android:layout_marginTop="60dp"
             android:gravity="center"
-            android:layout_marginTop="60dp">
+            android:orientation="horizontal">
 
             <EditText
                 android:layout_width="50dp"
                 android:layout_height="50dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/login_input"
                 android:gravity="center"
-                android:textStyle="bold"
+                android:maxLength="1"
                 android:textColor="@color/white"
                 android:textSize="20dp"
-                android:maxLength="1"
-                android:layout_marginRight="8dp"
-                android:background="@color/white"/>
+                android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/et_2"
+                android:id="@+id/et2"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/login_input"
                 android:gravity="center"
-                android:textStyle="bold"
                 android:maxLength="1"
                 android:textColor="@color/white"
                 android:textSize="20dp"
-                android:layout_marginRight="8dp"
-                android:background="@color/white"/>
+                android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/et_3"
+                android:id="@+id/et3"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/login_input"
                 android:gravity="center"
-                android:textStyle="bold"
+                android:maxLength="1"
                 android:textColor="@color/white"
                 android:textSize="20dp"
-                android:maxLength="1"
-                android:layout_marginRight="8dp"
-                android:background="@color/white"/>
+                android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/et_4"
+                android:id="@+id/et4"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
+                android:background="@drawable/login_input"
                 android:gravity="center"
-                android:textStyle="bold"
-                android:layout_marginRight="8dp"
-                android:textSize="20dp"
                 android:maxLength="1"
                 android:textColor="@color/white"
-                android:background="@color/white"/>
+                android:textSize="20dp"
+                android:textStyle="bold" />
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/action_btns"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/otp_code"
+            android:layout_marginTop="70dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/verify_code_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/verify_email"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/resend_otp"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp" />
         </LinearLayout>
 
     </RelativeLayout>
