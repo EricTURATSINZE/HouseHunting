@@ -13,6 +13,8 @@
         android:theme="@style/Theme.HouseHunting"
         tools:targetApi="31">
         <activity android:name=".MainActivity" />
+        <activity android:name=".VerifyCode" />
+        <activity android:name=".Login" />
         <activity android:name=".SignUp" />
         <activity android:name=".HouseDetail" />
         <activity
@@ -29,5 +31,9 @@
                 android:value="" />
         </activity>
     </application>
+
+    <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>
