@@ -93,24 +93,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/email_tv" />
 
-<!--    <android.widget.Button-->
-<!--        android:id="@+id/btn_signup"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginLeft="30dp"-->
-<!--        android:layout_marginTop="70dp"-->
-<!--        android:layout_marginRight="30dp"-->
-<!--        android:background="@drawable/login_button"-->
-<!--        android:backgroundTint="@color/colorPrimary"-->
-<!--        android:text="@string/Signup"-->
-<!--        android:textColor="@color/white"-->
-<!--        android:textStyle="bold"-->
-<!--        android:theme="@style/Button.Primary"-->
-<!--        android:translationZ="40dp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/password" />-->
-
     <RelativeLayout
         android:id="@+id/signup_btn"
         android:layout_width="match_parent"

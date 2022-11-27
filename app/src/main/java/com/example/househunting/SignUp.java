@@ -58,14 +58,13 @@ public class SignUp extends AppCompatActivity {
             public void onClick(View view) {
                 signup_btn_txt.setVisibility(View.GONE);
                 progressBar.setVisibility(View.VISIBLE);
-                RetrofitClient.getClient("https://house-hunting.onrender.com/api/v1/").create(ApiService.class)
-                        .signup(""+names.getText(), ""+email.getText(), ""+password.getText(), ""+phone.getText())
+                RetrofitClient.getClient("").create(ApiService.class)
+                        .signup("" + names.getText(), "" + email.getText(), "" + password.getText(), "" + phone.getText())
                         .enqueue(new Callback<SignupResponse>() {
                             @Override
                             public void onResponse(Call<SignupResponse> call, Response<SignupResponse> response) {
                                 signup_btn_txt.setVisibility(View.VISIBLE);
                                 progressBar.setVisibility(View.GONE);
-                                System.out.println("Erorrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr" + response.code());
                                 if (response.code()== 201) {
                                     try {
                                         storage.setToken(response.body().getUser().getToken());
@@ -82,7 +81,6 @@ public class SignUp extends AppCompatActivity {
                             public void onFailure(Call<SignupResponse> call, Throwable t) {
                                 signup_btn_txt.setVisibility(View.VISIBLE);
                                 progressBar.setVisibility(View.GONE);
-                                System.out.println("Erorrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr" + t.getMessage());
                                 Toast.makeText(SignUp.this, t.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         });

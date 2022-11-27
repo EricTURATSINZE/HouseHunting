@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         bottomNav.setOnItemSelectedListener(navListener);
     }
 
-    private NavigationBarView.OnItemSelectedListener navListener =
+    private final NavigationBarView.OnItemSelectedListener navListener =
             new BottomNavigationView.OnItemSelectedListener()
             {
                 @Override

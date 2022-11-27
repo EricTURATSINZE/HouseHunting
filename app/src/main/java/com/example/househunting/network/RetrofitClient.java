@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
     private static Retrofit retrofit;
-    private static final String BASE_URL = "https://142.93.204.111:5000/";
+    private static final String BASE_URL = "https://house-hunting.onrender.com/api/v1/";
 
     public static Retrofit getClient(String url) {
         if (url.equals("")) {
