@@ -39,7 +39,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="21dp"
-        android:text="Sign In To Continue"
+        android:text="@string/Sigin_text"
         android:textColor="@color/black"
         android:textSize="25sp"
         android:textStyle="bold"
@@ -47,35 +47,38 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_margin="30dp"
-        android:background="@drawable/login_input"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView7">
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/email_tv"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_margin="30dp"
         android:height="40dp"
         android:background="@drawable/login_input"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
         android:paddingLeft="10dp"
-        android:text="Password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+    <EditText
+        android:id="@+id/password_et"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_margin="30dp"
+        android:background="@drawable/login_input"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:paddingLeft="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.733"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/email_tv" />
 
     <android.widget.Button
-        android:id="@+id/button"
+        android:id="@+id/login_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
@@ -90,6 +93,6 @@
         android:translationZ="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+        app:layout_constraintTop_toBottomOf="@+id/password_et" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

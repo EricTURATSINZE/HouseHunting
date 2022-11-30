@@ -5,7 +5,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -15,7 +14,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.househunting.model.SignupResponse;
-import com.example.househunting.network.ApiService;
+import com.example.househunting.network.AuthApiService;
 import com.example.househunting.network.RetrofitClient;
 import com.example.househunting.utils.Storage;
 import com.google.android.material.snackbar.Snackbar;
@@ -25,7 +24,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class SignUp extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity {
     TextView names;
     TextView email;
     TextView phone;
@@ -58,22 +57,25 @@ public class SignUp extends AppCompatActivity {
             public void onClick(View view) {
                 signup_btn_txt.setVisibility(View.GONE);
                 progressBar.setVisibility(View.VISIBLE);
-                RetrofitClient.getClient("").create(ApiService.class)
+                RetrofitClient.getClient("").create(AuthApiService.class)
                         .signup("" + names.getText(), "" + email.getText(), "" + password.getText(), "" + phone.getText())
                         .enqueue(new Callback<SignupResponse>() {
                             @Override
                             public void onResponse(Call<SignupResponse> call, Response<SignupResponse> response) {
                                 signup_btn_txt.setVisibility(View.VISIBLE);
                                 progressBar.setVisibility(View.GONE);
+                                System.out.println("ttttttttttttttttttttttttttttttttttttttttttttt 201 " + response.body());
                                 if (response.code()== 201) {
+                                    System.out.println("ttttttttttttttttttttttttttttttttttttttttttttt 201 " + response.body());
                                     try {
                                         storage.setToken(response.body().getUser().getToken());
-                                        storage.setLogin(true);
-                                        Intent i = new Intent(SignUp.this, VerifyCode.class);
+                                        Intent i = new Intent(SignUpActivity.this, VerifyEmailActivity.class);
                                         startActivity(i);
                                     } catch (Exception e) {
                                         Snackbar.make(view, e.getMessage(), Snackbar.LENGTH_LONG).show();
                                     }
+                                } else {
+                                    Toast.makeText(SignUpActivity.this, response.code(), Toast.LENGTH_SHORT).show();
                                 }
                             }
 
@@ -81,7 +83,8 @@ public class SignUp extends AppCompatActivity {
                             public void onFailure(Call<SignupResponse> call, Throwable t) {
                                 signup_btn_txt.setVisibility(View.VISIBLE);
                                 progressBar.setVisibility(View.GONE);
-                                Toast.makeText(SignUp.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                                System.out.println("ttttttttttttttttttttttttttttttttttttttttttttt 201 " + t);
+                                Toast.makeText(SignUpActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         });
             }

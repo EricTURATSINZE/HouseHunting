@@ -23,6 +23,9 @@
     <string name="Signup">Sign Up</string>
     <string name="Already_have_Account">Already Have An Account?</string>
 
+    <!-- ************ OTP Verification ************* -->
+    <string name="Sigin_text">Sign In To Continue</string>
+
     <!-- OTP Verification -->
     <string name="verification_code">Verification Code</string>
     <string name="action_enter_otp">Please enter the verification code sent to your andrew email</string>
