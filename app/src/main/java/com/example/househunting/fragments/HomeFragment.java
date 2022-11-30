@@ -2,10 +2,12 @@ package com.example.househunting.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
@@ -13,9 +15,18 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.example.househunting.HouseDetail;
 import com.example.househunting.R;
 import com.example.househunting.adapter.HouseAdapter;
+import com.google.gson.JsonArray;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class HomeFragment extends Fragment {
 
@@ -35,6 +46,7 @@ public class HomeFragment extends Fragment {
     protected RecyclerView mRecyclerView;
     protected HouseAdapter houseAdapter;
     protected RecyclerView.LayoutManager mLayoutManager;
+    private static final String JSON_URL = "https://house-hunting.onrender.com/api/v1/houses";
     protected String[] mDataset = {"1", "2", "3"};
 
     View view;
@@ -43,7 +55,7 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
+        loadHouseList();
         view =  inflater.inflate(R.layout.home_fragment, container, false);
 
         CardView house = (CardView) view.findViewById(R.id.card_house);
@@ -106,6 +118,31 @@ public class HomeFragment extends Fragment {
 
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.scrollToPosition(scrollPosition);
+    }
+
+    private void loadHouseList()
+    {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, JSON_URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject obj = new JSONObject(response);
+                    JSONArray housesArray = obj.getJSONArray("data");
+                    for (int i = 0; i < housesArray.length(); i++) {
+                        JSONObject houseObject = housesArray.getJSONObject(i);
+                        Log.d("id=================", houseObject.getString("bedRooms")+"============================");
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
 /** End of david edit */
