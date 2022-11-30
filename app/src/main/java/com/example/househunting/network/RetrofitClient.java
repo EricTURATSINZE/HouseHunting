@@ -8,7 +8,7 @@ public class RetrofitClient {
     private static final String BASE_URL = "https://house-hunting.onrender.com/api/v1/";
 
     public static Retrofit getClient(String url) {
-        if (url.equals("")) {
+        if(url.equals("")) {
             if (retrofit == null) {
                 retrofit = new Retrofit.Builder()
                         .baseUrl(BASE_URL)
