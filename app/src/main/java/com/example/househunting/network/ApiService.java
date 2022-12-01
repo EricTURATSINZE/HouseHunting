@@ -21,9 +21,7 @@ public interface ApiService {
                               @Field("password") String password,
                               @Field("phone") String phone);
 
-    @GET("houses/{id}")
-    Call<ViewHouseResponse> getHouse(@Url String url,
-                                     @Path("id") String id,
+    Call<ViewHouseResponse> getHouse(@Path("id") String id,
                                      @Header("Bearer ") String token
                                      );
 }

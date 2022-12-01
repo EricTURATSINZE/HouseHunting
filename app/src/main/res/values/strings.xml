@@ -32,4 +32,7 @@
     <string name="verify_email">Verify Code</string>
     <string name="resend_otp">Re-send Code</string>
     <string name="loading">Loading...</string>
+    <string name="currency">rwf</string>
+    <string name="month">/mon</string>
+    <string name="rooms">Bedrooms</string>
 </resources>
