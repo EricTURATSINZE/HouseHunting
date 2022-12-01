@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -34,6 +35,7 @@ public class ProfileFragment extends Fragment {
     private TextView manageHousebtn;
     private ShimmerFrameLayout shimmerFrameLayout;
     private LinearLayout profileContainer;
+    private RelativeLayout info;
 
     private View view;
     @Override
@@ -51,7 +53,10 @@ public class ProfileFragment extends Fragment {
         phone = view.findViewById(R.id.phone_tv);
         manageHousebtn = view.findViewById(R.id.manage_btn);
         profileContainer = view.findViewById(R.id.profile_container);
+        info = view.findViewById(R.id.info);
+        info.setVisibility(View.GONE);
         profile.setVisibility(View.GONE);
+        profileContainer.setVisibility(View.GONE);
 
         manageHousebtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,12 +81,14 @@ public class ProfileFragment extends Fragment {
                             shimmerFrameLayout.stopShimmer();
                             shimmerFrameLayout.setVisibility(View.GONE);
                             profileContainer.setVisibility(View.VISIBLE);
+                            profile.setVisibility(View.VISIBLE);
+                            info.setVisibility(View.VISIBLE);
 
                             Profile data = response.body().getData();
                             String fname = data.getNames().split(" ")[0];
                             String lname = data.getNames().split(" ")[1];
-                            LoadImage.loadImage(getContext(), data.getProfile(), profile, R.drawable.ic_baseline_person_pin_24);
-                            greetings.setText(getString(R.string.greeting) + fname);
+                            LoadImage.loadImage(getContext(), data.getProfile(), profile, R.drawable.ic_profile);
+                            greetings.setText(getString(R.string.greeting) + " " + fname);
                             firstName.setText(fname);
                             lastName.setText(lname);
                             phone.setText(data.getPhone());

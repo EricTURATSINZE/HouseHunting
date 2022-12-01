@@ -1,7 +1,6 @@
 package com.example.househunting;
 import android.app.ActionBar;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -12,11 +11,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
+
 import com.example.househunting.model.house.Data;
 import com.example.househunting.model.house.ViewHouseResponse;
-import com.example.househunting.network.ApiService;
+import com.example.househunting.network.HouseApiService;
 import com.example.househunting.network.RetrofitClient;
 import com.example.househunting.utils.LoadImage;
 import com.example.househunting.utils.Storage;
@@ -58,16 +56,32 @@ public class HouseDetailActivity extends AppCompatActivity {
         description = findViewById(R.id.txt_description);
         houseContainer.setVisibility(View.GONE);
 
-        houseId = "6387de9aa239796011cc81c2";
+        if(houseId.isEmpty())
+            houseId = "6387de9aa239796011cc81c2";
         fetchData(houseId);
-//        Storage storage = new Storage(this);
-//        token = storage.getToken();
+        Storage storage = new Storage(this);
+        token = storage.getToken();
+
+        map.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // To DO
+            }
+        });
+
+        bookNow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // To DO
+
+            }
+        });
 
     }
 
     private void fetchData(String id){
-        RetrofitClient.getClient("").create(ApiService.class)
-                .getHouse(houseId, "")
+        RetrofitClient.getClient("").create(HouseApiService.class)
+                .getHouse(houseId, token)
                 .enqueue(new Callback<ViewHouseResponse>() {
                     @Override
                     public void onResponse(Call<ViewHouseResponse> call, Response<ViewHouseResponse> response) {
