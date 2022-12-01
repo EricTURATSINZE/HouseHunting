@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
-import com.example.househunting.HouseDetail;
+import com.example.househunting.HouseDetailActivity;
 import com.example.househunting.R;
 
 public class HomeFragment extends Fragment {
@@ -25,7 +25,7 @@ public class HomeFragment extends Fragment {
         house.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), HouseDetail.class));
+                startActivity(new Intent(getActivity(), HouseDetailActivity.class));
             }
         });
         return view;

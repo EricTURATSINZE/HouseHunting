@@ -1,7 +1,7 @@
 package com.example.househunting.network;
 
+import com.example.househunting.model.OTPResponse;
 import com.example.househunting.model.SignupResponse;
-import com.example.househunting.model.house.ViewHouseResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -9,10 +9,8 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
-import retrofit2.http.Path;
-import retrofit2.http.Url;
 
-public interface ApiService {
+public interface AuthApiService {
 
     @POST("users/signup")
     @FormUrlEncoded
@@ -21,10 +19,17 @@ public interface ApiService {
                               @Field("password") String password,
                               @Field("phone") String phone);
 
-    @GET("houses/{id}")
-    Call<ViewHouseResponse> getHouse(@Url String url,
-                                     @Path("id") String id,
-                                     @Header("Bearer ") String token
-                                     );
+    @POST("users/verifyEmail")
+    @FormUrlEncoded
+    Call<OTPResponse>verifyEmail(@Field("otp") String otp,
+                               @Header("Authorization") String token);
+
+    @GET("users/resendOTP")
+    Call<OTPResponse>resendOtp(@Header("Authorization") String token);
+
+    @POST("users/login")
+    @FormUrlEncoded
+    Call<SignupResponse>login(@Field("email") String email,
+                               @Field("password") String password);
 }
 
