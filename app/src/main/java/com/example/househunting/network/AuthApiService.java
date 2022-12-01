@@ -1,7 +1,8 @@
 package com.example.househunting.network;
 
-import com.example.househunting.model.OTPResponse;
-import com.example.househunting.model.SignupResponse;
+import com.example.househunting.model.auth.OTPResponse;
+import com.example.househunting.model.auth.ProfileResponse;
+import com.example.househunting.model.auth.SignupResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -26,6 +27,9 @@ public interface AuthApiService {
 
     @GET("users/resendOTP")
     Call<OTPResponse>resendOtp(@Header("Authorization") String token);
+
+    @GET("users/me")
+    Call<ProfileResponse>getMe(@Header("Authorization") String token);
 
     @POST("users/login")
     @FormUrlEncoded

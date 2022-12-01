@@ -1,7 +1,6 @@
 package com.example.househunting;
 
 import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -13,7 +12,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.househunting.model.SignupResponse;
+import com.example.househunting.model.auth.SignupResponse;
 import com.example.househunting.network.AuthApiService;
 import com.example.househunting.network.RetrofitClient;
 import com.example.househunting.utils.Storage;
@@ -59,7 +58,35 @@ public class SignUpActivity extends AppCompatActivity {
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                singUp(view);
+                signup_btn_txt.setVisibility(View.GONE);
+                progressBar.setVisibility(View.VISIBLE);
+                RetrofitClient.getClient("").create(AuthApiService.class)
+                        .signup("" + names.getText(), "" + email.getText(), "" + password.getText(), "" + phone.getText())
+                        .enqueue(new Callback<SignupResponse>() {
+                            @Override
+                            public void onResponse(Call<SignupResponse> call, Response<SignupResponse> response) {
+                                signup_btn_txt.setVisibility(View.VISIBLE);
+                                progressBar.setVisibility(View.GONE);
+                                if (response.code()== 201) {
+                                    try {
+                                        storage.setToken(response.body().getUser().getToken());
+                                        Intent i = new Intent(SignUpActivity.this, VerifyEmailActivity.class);
+                                        startActivity(i);
+                                    } catch (Exception e) {
+                                        Snackbar.make(view, e.getMessage(), Snackbar.LENGTH_LONG).show();
+                                    }
+                                } else {
+                                    Toast.makeText(SignUpActivity.this, response.code(), Toast.LENGTH_SHORT).show();
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<SignupResponse> call, Throwable t) {
+                                signup_btn_txt.setVisibility(View.VISIBLE);
+                                progressBar.setVisibility(View.GONE);
+                                Toast.makeText(SignUpActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
             }
         });
     }

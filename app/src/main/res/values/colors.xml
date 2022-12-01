@@ -14,4 +14,5 @@
     <color name="grey">#6B6969</color>
     <color name="light_black">#242527</color>
     <color name="light">#C5CDD7</color>
+    <color name="shimmer_effect">#9E9C9C</color>
 </resources>

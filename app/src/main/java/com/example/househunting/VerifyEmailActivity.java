@@ -16,8 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.chaos.view.PinView;
-import com.example.househunting.model.OTPResponse;
-import com.example.househunting.model.SignupResponse;
+import com.example.househunting.model.auth.OTPResponse;
 import com.example.househunting.network.AuthApiService;
 import com.example.househunting.network.RetrofitClient;
 import com.example.househunting.utils.Storage;
