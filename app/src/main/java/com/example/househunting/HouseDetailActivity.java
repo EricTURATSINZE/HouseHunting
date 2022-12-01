@@ -18,6 +18,7 @@ import com.example.househunting.model.house.Data;
 import com.example.househunting.model.house.ViewHouseResponse;
 import com.example.househunting.network.ApiService;
 import com.example.househunting.network.RetrofitClient;
+import com.example.househunting.utils.LoadImage;
 import com.example.househunting.utils.Storage;
 import com.facebook.shimmer.ShimmerFrameLayout;
 
@@ -75,8 +76,7 @@ public class HouseDetailActivity extends AppCompatActivity {
                             shimmerFrameLayout.setVisibility(View.GONE);
                             houseContainer.setVisibility(View.VISIBLE);
                             Data data = response.body().getData();
-                            RequestOptions option = new RequestOptions().override(500, 500).optionalCenterCrop().placeholder(R.drawable.card_back).error(R.drawable.card_back);
-                            Glide.with(HouseDetailActivity.this).load(data.getImageCover()).apply(option).into(coverImage);
+                            LoadImage.loadImage(HouseDetailActivity.this, data.getImageCover(), coverImage, R.drawable.card_back);
 
                             price.setText(String.valueOf(data.getPriceMonthly()) + getString(R.string.currency ) + getString(R.string.month));
                             bedRooms.setText(String.valueOf(data.getBedRooms()) + getString(R.string.rooms));
@@ -94,7 +94,6 @@ public class HouseDetailActivity extends AppCompatActivity {
                                 );
 
                                 card.setLayoutParams(lyt);
-//
                                 ViewGroup.MarginLayoutParams margin = (ViewGroup.MarginLayoutParams) card.getLayoutParams();
                                 margin.setMargins(5, 5,5,5);
                                 card.setRadius(20);
@@ -106,11 +105,9 @@ public class HouseDetailActivity extends AppCompatActivity {
                                         1.0f
                                 );
                                 imageHolder.setLayoutParams(imgLyt);
-//
                                 imageHolder.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                                RequestOptions optionImg = new RequestOptions().override(300, 300).optionalCenterCrop().placeholder(R.drawable.card_back).error(R.drawable.card_back);
-                                Glide.with(HouseDetail.this).load(image).apply(option).into(imageHolder);
-//
+                                LoadImage.loadImage(HouseDetailActivity.this, image, imageHolder, R.drawable.card_back);
+
                                 card.addView(imageHolder);
                                 gallery.addView(card);
 

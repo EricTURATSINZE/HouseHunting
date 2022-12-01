@@ -1,4 +1,4 @@
-package com.example.househunting.model;
+package com.example.househunting.model.auth;
 
 public class User {
 

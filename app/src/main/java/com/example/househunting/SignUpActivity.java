@@ -1,7 +1,6 @@
 package com.example.househunting;
 
 import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -13,7 +12,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.househunting.model.SignupResponse;
+import com.example.househunting.model.auth.SignupResponse;
 import com.example.househunting.network.AuthApiService;
 import com.example.househunting.network.RetrofitClient;
 import com.example.househunting.utils.Storage;
