@@ -24,7 +24,7 @@ public interface ApiService {
     @GET("houses/{id}")
     Call<ViewHouseResponse> getHouse(@Url String url,
                                      @Path("id") String id,
-                                     @Header("Authorization") String token
+                                     @Header("Bearer ") String token
                                      );
 }
 

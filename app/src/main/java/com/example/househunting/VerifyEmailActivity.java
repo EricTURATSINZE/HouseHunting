@@ -8,6 +8,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +33,8 @@ public class VerifyEmailActivity extends AppCompatActivity {
     TextView resendCode;
     Storage storage;
     ProgressDialog progressDialog;
+    Button veriyCode_Btn;
+    private String otp;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,6 +43,13 @@ public class VerifyEmailActivity extends AppCompatActivity {
 
         storage = new Storage(this);
 
+        veriyCode_Btn = (Button) findViewById(R.id.verify_code_btn);
+        veriyCode_Btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                veriyEmail(otp);
+            }
+        });
         progressDialog = new ProgressDialog(this);
         resendCode = (TextView) findViewById(R.id.resendCode_tv);
         resendCode.setOnClickListener(new View.OnClickListener() {
@@ -61,8 +71,9 @@ public class VerifyEmailActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if(charSequence.toString().length() == 4) {
+                    otp = charSequence.toString();
                     Toast.makeText(getApplicationContext(), "working " + charSequence, Toast.LENGTH_SHORT).show();
-                    veriyEmail(charSequence.toString());
+                    veriyEmail(otp);
                 }
             }
 
@@ -75,6 +86,7 @@ public class VerifyEmailActivity extends AppCompatActivity {
 
     private void veriyEmail(String otp) {
         progressDialog.show();
+        progressDialog.setContentView(R.layout.progress_dialog);
         RetrofitClient.getClient("").create(AuthApiService.class)
                 .verifyEmail(otp.toString(), storage.getToken())
                 .enqueue(new Callback<OTPResponse>() {
@@ -89,6 +101,8 @@ public class VerifyEmailActivity extends AppCompatActivity {
                             } catch (Exception e) {
                                 Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                             }
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Not 200", Toast.LENGTH_SHORT);
                         }
                     }
                     @Override
@@ -101,6 +115,8 @@ public class VerifyEmailActivity extends AppCompatActivity {
 
     private void resendCode() {
         progressDialog.show();
+        progressDialog.setContentView(R.layout.progress_dialog);
+        progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         RetrofitClient.getClient("").create(AuthApiService.class)
                 .resendOtp(storage.getToken())
                 .enqueue(new Callback<OTPResponse>() {
@@ -109,26 +125,22 @@ public class VerifyEmailActivity extends AppCompatActivity {
                         progressDialog.dismiss();
                         if (response.code()== 200) {
                             try {
-                                System.out.println("Tokennnnnnnnnnnnnnnnnnnnnnnn " + response.body().getMessage());
-                                Toast.makeText(getApplicationContext(), "Code successfully sent to your email!", Toast.LENGTH_SHORT);
+                                Toast.makeText(getApplicationContext(), response.body().getMessage(), Toast.LENGTH_LONG).show();
                             } catch (Exception e) {
                                 Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         } else {
                             try {
                                 JSONObject jObjError = new JSONObject(response.errorBody().string());
-                                System.out.println("Elseeeeeeeeeeeeeeeee " + response + " oo " + jObjError.getJSONObject("error").getString("message"));
-                                Toast.makeText(getApplicationContext(), jObjError.getJSONObject("error").getString("message"), Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), "Error " + response.code(), Toast.LENGTH_LONG).show();
                             } catch (Exception e) {
                                 Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
                             }
-//                            System.out.println("Elseeeeeeeeeeeeeeeee " + response + " oo " + jObjError.getJSONObject("error").getString("message"));
                         }
                     }
                     @Override
                     public void onFailure(Call<OTPResponse> call, Throwable t) {
                         progressDialog.dismiss();
-                        System.out.println("ttttttttttttttttttttttttttttttttttttttttttttttt " + t);
                         Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });

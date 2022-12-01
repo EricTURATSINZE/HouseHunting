@@ -1,7 +1,6 @@
 package com.example.househunting;
 
 import android.app.ActionBar;
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -26,7 +25,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class HouseDetail extends AppCompatActivity {
+public class HouseDetailActivity extends AppCompatActivity {
     private String houseId;
     private ImageView coverImage;
     private TextView bedRooms;
@@ -64,7 +63,7 @@ public class HouseDetail extends AppCompatActivity {
                         if(response.code() == 200){
                             Data data = response.body().getData();
                             RequestOptions option = new RequestOptions().override(500, 500).optionalCenterCrop().placeholder(R.drawable.card_back).error(R.drawable.card_back);
-                            Glide.with(HouseDetail.this).load(data.getImageCover()).apply(option).into(coverImage);
+                            Glide.with(HouseDetailActivity.this).load(data.getImageCover()).apply(option).into(coverImage);
 
                             bedRooms.setText(String.valueOf(data.getBedRooms()));
                             internet.setText(String.join("-", data.getInternet()));
@@ -74,7 +73,7 @@ public class HouseDetail extends AppCompatActivity {
                             LinearLayout gallery = (LinearLayout) findViewById(R.id.gallery);
 
                             for(String image: data.getImages()){
-                                CardView card = new CardView(HouseDetail.this);
+                                CardView card = new CardView(HouseDetailActivity.this);
                                 ActionBar.LayoutParams lyt = new ActionBar.LayoutParams(
                                         ActionBar.LayoutParams.MATCH_PARENT,
                                         ActionBar.LayoutParams.MATCH_PARENT
@@ -89,7 +88,7 @@ public class HouseDetail extends AppCompatActivity {
                                 margin.setMargins(5, 5,5,5);
                                 card.setRadius(20);
 
-                                ImageView imageHolder = new ImageView(HouseDetail.this);
+                                ImageView imageHolder = new ImageView(HouseDetailActivity.this);
                                 ActionBar.LayoutParams imgLyt = new ActionBar.LayoutParams(
                                         ActionBar.LayoutParams.WRAP_CONTENT,
                                         ActionBar.LayoutParams.WRAP_CONTENT
@@ -110,7 +109,7 @@ public class HouseDetail extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<ViewHouseResponse> call, Throwable t) {
-                        Toast.makeText(HouseDetail.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(HouseDetailActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
     }

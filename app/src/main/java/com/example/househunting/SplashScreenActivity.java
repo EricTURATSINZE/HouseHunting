@@ -20,28 +20,29 @@ public class SplashScreenActivity extends AppCompatActivity {
         storage = new Storage(this);
 
         boolean isLoggedIn = storage.isLoggedIn();
-
-        navigate(isLoggedIn);
-
-//        new Timer().schedule(new TimerTask() {
-//            @Override
-//            public void run() {
-//                startActivity(new Intent(SplashScreenActivity.this, VerifyEmailActivity.class));
-//            }
-//        }, 2000L);
+        checkAuth(isLoggedIn);
     }
 
-    public void navigate(boolean isLoggedIn) {
+    public void checkAuth(boolean isLoggedIn) {
         if(isLoggedIn) {
-            startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
+            navigate(new Intent(SplashScreenActivity.this, MainActivity.class));
         } else {
             String token = storage.getToken();
 
             if(token.equals("")) {
-                startActivity(new Intent(SplashScreenActivity.this, SignUpActivity.class));
+                navigate(new Intent(SplashScreenActivity.this, SignUpActivity.class));
             } else {
-                startActivity(new Intent(SplashScreenActivity.this, VerifyEmailActivity.class));
+                navigate(new Intent(SplashScreenActivity.this, VerifyEmailActivity.class));
             }
         }
+    }
+
+    public void navigate(Intent intent) {
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                startActivity(intent);
+            }
+        }, 1000L);
     }
 }

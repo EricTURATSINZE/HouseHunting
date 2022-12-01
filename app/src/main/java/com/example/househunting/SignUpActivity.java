@@ -23,7 +23,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-
 public class SignUpActivity extends AppCompatActivity {
     TextView names;
     TextView email;
@@ -33,14 +32,16 @@ public class SignUpActivity extends AppCompatActivity {
     RelativeLayout signUp;
     TextView signup_btn_txt;
     ProgressBar progressBar;
+    Storage storage;
+//    AwesomeValidation awesomeValidation;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signup_activity);
 
-        final Storage storage = new Storage(this);
-        final ProgressDialog progressDialog = new ProgressDialog(this);
+        storage = new Storage(this);
 
         signUp = (RelativeLayout) findViewById(R.id.signup_btn);
         names = (TextView) findViewById(R.id.names_tv);
@@ -51,44 +52,51 @@ public class SignUpActivity extends AppCompatActivity {
         progressBar = (ProgressBar) findViewById(R.id.signup_btn_pb);
         login_btn = (TextView) findViewById(R.id.login_btn);
 
+        // Initilize validation style
+//        awesomeValidation = new Aweso
+
 
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                signup_btn_txt.setVisibility(View.GONE);
-                progressBar.setVisibility(View.VISIBLE);
-                RetrofitClient.getClient("").create(AuthApiService.class)
-                        .signup("" + names.getText(), "" + email.getText(), "" + password.getText(), "" + phone.getText())
-                        .enqueue(new Callback<SignupResponse>() {
-                            @Override
-                            public void onResponse(Call<SignupResponse> call, Response<SignupResponse> response) {
-                                signup_btn_txt.setVisibility(View.VISIBLE);
-                                progressBar.setVisibility(View.GONE);
-                                System.out.println("ttttttttttttttttttttttttttttttttttttttttttttt 201 " + response.body());
-                                if (response.code()== 201) {
-                                    System.out.println("ttttttttttttttttttttttttttttttttttttttttttttt 201 " + response.body());
-                                    try {
-                                        storage.setToken(response.body().getUser().getToken());
-                                        Intent i = new Intent(SignUpActivity.this, VerifyEmailActivity.class);
-                                        startActivity(i);
-                                    } catch (Exception e) {
-                                        Snackbar.make(view, e.getMessage(), Snackbar.LENGTH_LONG).show();
-                                    }
-                                } else {
-                                    Toast.makeText(SignUpActivity.this, response.code(), Toast.LENGTH_SHORT).show();
-                                }
-                            }
 
-                            @Override
-                            public void onFailure(Call<SignupResponse> call, Throwable t) {
-                                signup_btn_txt.setVisibility(View.VISIBLE);
-                                progressBar.setVisibility(View.GONE);
-                                System.out.println("ttttttttttttttttttttttttttttttttttttttttttttt 201 " + t);
-                                Toast.makeText(SignUpActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        });
             }
         });
     }
 
+    public void singUp(View view) {
+        signup_btn_txt.setVisibility(View.GONE);
+        progressBar.setVisibility(View.VISIBLE);
+        RetrofitClient.getClient("").create(AuthApiService.class)
+                .signup("" + names.getText(), "" + email.getText(), "" + password.getText(), "" + phone.getText())
+                .enqueue(new Callback<SignupResponse>() {
+                    @Override
+                    public void onResponse(Call<SignupResponse> call, Response<SignupResponse> response) {
+                        signup_btn_txt.setVisibility(View.VISIBLE);
+                        progressBar.setVisibility(View.GONE);
+                        if (response.code()== 201) {
+                            try {
+                                storage.setToken(response.body().getUser().getToken());
+                                Intent i = new Intent(SignUpActivity.this, VerifyEmailActivity.class);
+                                startActivity(i);
+                            } catch (Exception e) {
+                                Snackbar.make(view, e.getMessage(), Snackbar.LENGTH_LONG).show();
+                            }
+                        } else {
+                            Toast.makeText(SignUpActivity.this, response.code(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<SignupResponse> call, Throwable t) {
+                        signup_btn_txt.setVisibility(View.VISIBLE);
+                        progressBar.setVisibility(View.GONE);
+                        Toast.makeText(SignUpActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    public void checkAllFields() {
+//        if
+    }
 }
