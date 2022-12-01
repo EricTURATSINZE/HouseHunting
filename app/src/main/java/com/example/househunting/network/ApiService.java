@@ -1,6 +1,7 @@
 package com.example.househunting.network;
 
 import com.example.househunting.model.SignupResponse;
+import com.example.househunting.model.house.ViewAllHouseResponse;
 import com.example.househunting.model.house.ViewHouseResponse;
 
 import retrofit2.Call;
@@ -20,11 +21,14 @@ public interface ApiService {
                               @Field("email") String email,
                               @Field("password") String password,
                               @Field("phone") String phone);
-
+    @GET("houses")
+    Call<ViewAllHouseResponse> getAllHouse(@Header("Authorization") String token);
     @GET("houses/{id}")
     Call<ViewHouseResponse> getHouse(@Url String url,
                                      @Path("id") String id,
                                      @Header("Authorization") String token
                                      );
+
+
 }
 
