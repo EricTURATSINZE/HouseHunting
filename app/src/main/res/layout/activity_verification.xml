@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:paddingVertical="100dp">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white"
-        android:paddingVertical="100dp">
+
 
         <LinearLayout
             android:id="@+id/frst_ll"
@@ -16,6 +15,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
             android:orientation="vertical">
+
+<!--            <com.chaos.view.PinView />-->
+
 
             <TextView
                 android:layout_width="match_parent"
@@ -39,63 +41,85 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/otp_code"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/frst_ll"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="60dp"
-            android:gravity="center"
-            android:orientation="horizontal">
+<!--        <LinearLayout-->
+<!--            android:id="@+id/otp_code"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@+id/frst_ll"-->
+<!--            android:layout_centerInParent="true"-->
+<!--            android:layout_marginTop="60dp"-->
+<!--            android:gravity="center"-->
+<!--            android:orientation="horizontal">-->
 
-            <EditText
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginRight="15dp"
-                android:background="@drawable/login_input"
-                android:gravity="center"
-                android:maxLength="1"
-                android:textColor="@color/white"
-                android:textSize="20dp"
-                android:textStyle="bold" />
+<!--            <EditText-->
+<!--                android:layout_width="50dp"-->
+<!--                android:layout_height="50dp"-->
+<!--                android:layout_marginRight="15dp"-->
+<!--                android:background="@drawable/login_input"-->
+<!--                android:gravity="center"-->
+<!--                android:maxLength="1"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:textSize="20dp"-->
+<!--                android:textStyle="bold" />-->
 
-            <EditText
-                android:id="@+id/et2"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginRight="15dp"
-                android:background="@drawable/login_input"
-                android:gravity="center"
-                android:maxLength="1"
-                android:textColor="@color/white"
-                android:textSize="20dp"
-                android:textStyle="bold" />
+<!--            <EditText-->
+<!--                android:id="@+id/et2"-->
+<!--                android:layout_width="50dp"-->
+<!--                android:layout_height="50dp"-->
+<!--                android:layout_marginRight="15dp"-->
+<!--                android:background="@drawable/login_input"-->
+<!--                android:gravity="center"-->
+<!--                android:maxLength="1"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:textSize="20dp"-->
+<!--                android:textStyle="bold" />-->
 
-            <EditText
-                android:id="@+id/et3"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginRight="15dp"
-                android:background="@drawable/login_input"
-                android:gravity="center"
-                android:maxLength="1"
-                android:textColor="@color/white"
-                android:textSize="20dp"
-                android:textStyle="bold" />
+<!--            <EditText-->
+<!--                android:id="@+id/et3"-->
+<!--                android:layout_width="50dp"-->
+<!--                android:layout_height="50dp"-->
+<!--                android:layout_marginRight="15dp"-->
+<!--                android:background="@drawable/login_input"-->
+<!--                android:gravity="center"-->
+<!--                android:maxLength="1"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:textSize="20dp"-->
+<!--                android:textStyle="bold" />-->
 
-            <EditText
-                android:id="@+id/et4"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="@drawable/login_input"
-                android:gravity="center"
-                android:maxLength="1"
-                android:textColor="@color/white"
-                android:textSize="20dp"
-                android:textStyle="bold" />
+<!--            <EditText-->
+<!--                android:id="@+id/et4"-->
+<!--                android:layout_width="50dp"-->
+<!--                android:layout_height="50dp"-->
+<!--                android:background="@drawable/login_input"-->
+<!--                android:gravity="center"-->
+<!--                android:maxLength="1"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:textSize="20dp"-->
+<!--                android:textStyle="bold" />-->
 
-        </LinearLayout>
+<!--        </LinearLayout>-->
+
+    <com.chaos.view.PinView
+        android:id="@+id/otp_code"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_below="@+id/frst_ll"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:inputType="number"
+        android:elevation="10dp"
+        android:textColor="@color/black"
+        app:itemWidth="60dp"
+        app:itemHeight="60dp"
+        android:itemBackground="@drawable/login_input"
+        android:textSize="20sp"
+        app:itemRadius="15dp"
+        app:itemSpacing="20dp"
+        app:lineColor="@color/colorPrimary"
+        app:viewType="rectangle"
+        >
+
+    </com.chaos.view.PinView>
 
         <LinearLayout
             android:id="@+id/action_btns"
@@ -114,7 +138,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/resendCode_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -123,6 +147,4 @@
                 android:textColor="@color/colorPrimary"
                 android:textSize="18sp" />
         </LinearLayout>
-
-    </RelativeLayout>
 </RelativeLayout>

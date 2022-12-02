@@ -6,7 +6,18 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/shimmer"
+        >
+
+        <include layout="@layout/shimmer_house_layout"></include>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
     <LinearLayout
+        android:id="@+id/houseContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/houseScreenBackground"
@@ -29,18 +40,45 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_margin="30dp"
+            android:layout_height="70dp"
+            android:layout_marginVertical="10dp"
+            android:paddingHorizontal="10dp"
             android:background="@drawable/card_house_features"
+            android:gravity="center"
             android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="120dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:paddingTop="2dp"
+                android:layout_marginRight="10dp"
                 android:paddingBottom="2dp">
+
+                <ImageView
+                    android:id="@+id/priceIcon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_baseline_price_check_24" />
+
+                <TextView
+                    android:id="@+id/priceView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="3000 Rwf"
+                    android:textSize="12dp"
+                    android:textColor="@color/grey"
+                    android:textAlignment="center" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="6dp"
+                >
 
                 <ImageView
                     android:id="@+id/imageView1"
@@ -53,6 +91,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="3 Bedrooms"
+                    android:textSize="12dp"
+                    android:textColor="@color/grey"
                     android:textAlignment="center" />
             </LinearLayout>
 
@@ -68,18 +108,20 @@
                     android:id="@+id/imageView3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/ic_bed" />
+                    app:srcCompat="@drawable/ic_baseline_wifi_24" />
 
                 <TextView
                     android:id="@+id/internet"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="3 Bedrooms"
+                    android:textSize="12dp"
+                    android:textColor="@color/grey"
                     android:textAlignment="center" />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="120dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:orientation="vertical"
@@ -90,100 +132,79 @@
                     android:id="@+id/imageView6"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/ic_bed" />
+                    app:srcCompat="@drawable/ic_baseline_location_on_24" />
 
                 <TextView
                     android:id="@+id/address"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="3 Bedrooms"
+                    android:textSize="12dp"
+                    android:textColor="@color/grey"
                     android:textAlignment="center" />
             </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="120dp"
             android:background="@color/white"
             android:orientation="vertical"
-            android:paddingLeft="10dp"
-            android:paddingTop="15dp"
-            tools:layout_height="180dp">
+            android:padding="10dp">
 
             <TextView
                 android:id="@+id/textView8"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="House Description"
-                android:textSize="20sp"
+                android:textSize="18dp"
+                android:textColor="@color/grey"
                 android:textStyle="bold" />
 
-            <EditText
+            <TextView
                 android:id="@+id/txt_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:gravity="start|top"
+                android:textSize="15dp"
+                android:textColor="@color/grey"
                 android:inputType="textMultiLine"
-                tools:text="Lorem ipsum dolor sit amet consectetur. Viverra orci velit urna ac eget sit sit a consectetur. Praesent quis ac neque nulla egestas orci erat sit.Lorem ipsum dolor sit amet consectetur. Viverra orci velit urna ac eget." />
+                android:text="Viverra orci velit urna ac eget sit sit a consectetur. Praesent quis ac neque nulla egestas orci erat sit.Lorem ipsum dolor sit amet consectetur. Viverra orci velit urna ac eget." />
         </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/gallery"
+        <HorizontalScrollView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:orientation="horizontal"
-            android:padding="10dp">
+            android:layout_height="120dp">
 
-            <androidx.cardview.widget.CardView
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                app:cardCornerRadius="20dp">
-
-                <ImageView
-                    android:id="@+id/imageView4"
+                android:layout_height="match_parent">
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/house_images3" />
-            </androidx.cardview.widget.CardView>
+                    android:layout_height="120dp"
+                    android:orientation="vertical"
+                    android:weightSum="10" >
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                app:cardCornerRadius="20dp">
+                    <GridLayout
+                        android:id="@+id/gallery"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight = "1"
+                        android:columnCount="3"
+                        android:rowCount="5"
+                        android:alignmentMode="alignMargins"
+                        android:columnOrderPreserved="false"
+                        android:padding="10dp">
 
-                <ImageView
-                    android:id="@+id/imageView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/house_image_container"
-                    android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/house_images1" />
-            </androidx.cardview.widget.CardView>
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                app:cardCornerRadius="20dp">
+                    </GridLayout>
 
-                <ImageView
-                    android:id="@+id/imageView5"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/house_images2" />
-            </androidx.cardview.widget.CardView>
-        </LinearLayout>
+                </LinearLayout>
+
+            </ScrollView>
+        </HorizontalScrollView>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -194,7 +215,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/map"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
@@ -206,7 +227,7 @@
                 android:textColor="@color/colorPrimary" />
 
             <Button
-                android:id="@+id/button3"
+                android:id="@+id/book"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"

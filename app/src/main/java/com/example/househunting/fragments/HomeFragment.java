@@ -24,6 +24,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.househunting.HouseDetail;
+import com.example.househunting.HouseDetailActivity;
 import com.example.househunting.R;
 import com.example.househunting.adapter.HouseAdapter;
 import com.example.househunting.model.house.Data;
@@ -96,6 +97,12 @@ public class HomeFragment extends Fragment {
 /** to be removed */
 
 
+        house.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), HouseDetailActivity.class));
+            }
+        });
         return view;
     }
 
