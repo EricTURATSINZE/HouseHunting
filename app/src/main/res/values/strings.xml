@@ -51,12 +51,18 @@
 
 
     <!-- ******** register house************-->
+    <!-- Author: NGIRIMANA Schadrack -->
     <string name="house_address_label"> House address</string>
     <string name="house_price_label_label"> Price per month</string>
     <string name="house_bedroom_label"> Bedroom</string>
     <string name="house_bathroom_label"> Bathroom</string>
     <string name="house_main_image_label"> Main image</string>
     <string name="house_first_step_btn"> Next</string>
+    <string name="house_more_images">More images</string>
+    <string name="house_description">Description</string>
+    <string name="house_landlord_names">Landlord names</string>
+    <string name="house_landlord_contact">Landlord contact</string>
+    <string name="house_second_step_btn"> Next</string>
 
 
 </resources>

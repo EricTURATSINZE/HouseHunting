@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--@Athor NGIRIMANA SCHADRACK-->
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.RegisterHouseFirstStep">
+    tools:context=".RegisterHouseFirstStep">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -13,7 +15,7 @@
             android:id="@+id/house_address_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="50dp"
             android:layout_marginHorizontal="30dp"
             android:layout_marginBottom="0dp"
             android:text="@string/house_address_label"
@@ -33,37 +35,37 @@
             android:layout_below="@id/house_address_label"
             android:textSize="16dp"
             />
-             <TextView
-                 android:id="@+id/house_price_per_month_label"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:textSize="14dp"
-                 android:text="@string/house_price_label_label"
-                 android:layout_marginHorizontal="30dp"
-                 android:layout_below="@id/house_address"
+        <TextView
+            android:id="@+id/house_price_per_month_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14dp"
+            android:text="@string/house_price_label_label"
+            android:layout_marginHorizontal="30dp"
+            android:layout_below="@id/house_address"
             />
-            <EditText
-                android:id="@+id/price_per_month"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginVertical="15dp"
-                android:layout_marginHorizontal="30dp"
-                android:background="@drawable/login_input"
-                android:ems="10"
-                android:textSize="16dp"
-                android:hint="200,000 Rwf"
-                android:inputType="numberDecimal"
-                android:paddingLeft="10dp"
-                android:layout_below="@+id/house_price_per_month_label"
+        <EditText
+            android:id="@+id/price_per_month"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginVertical="15dp"
+            android:layout_marginHorizontal="30dp"
+            android:background="@drawable/login_input"
+            android:ems="10"
+            android:textSize="16dp"
+            android:hint="200,000 Rwf"
+            android:inputType="numberDecimal"
+            android:paddingLeft="10dp"
+            android:layout_below="@+id/house_price_per_month_label"
             />
-            <TextView
-                android:id="@+id/house_bedroom_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/house_bedroom_label"
-                android:textSize="14dp"
-                android:layout_marginHorizontal="30dp"
-                android:layout_below="@id/price_per_month"
+        <TextView
+            android:id="@+id/house_bedroom_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/house_bedroom_label"
+            android:textSize="14dp"
+            android:layout_marginHorizontal="30dp"
+            android:layout_below="@id/price_per_month"
             />
         <EditText
             android:id="@+id/house_bedroom"
@@ -136,7 +138,7 @@
             android:textAllCaps="false"
             android:layout_margin="30dp"
             android:layout_below="@+id/house_main_image"
-
             />
     </RelativeLayout>
-</FrameLayout>
+
+</LinearLayout>
