@@ -1,6 +1,6 @@
 package com.example.househunting.network;
 
-import com.example.househunting.model.SignupResponse;
+import com.example.househunting.model.auth.SignupResponse;
 import com.example.househunting.model.house.ViewAllHouseResponse;
 import com.example.househunting.model.house.ViewHouseResponse;
 

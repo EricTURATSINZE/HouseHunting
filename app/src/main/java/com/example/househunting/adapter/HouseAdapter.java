@@ -18,9 +18,10 @@ import android.widget.Toast;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.househunting.HouseDetail;
+import com.example.househunting.HouseDetailActivity;
 import com.example.househunting.R;
 import com.example.househunting.model.house.Data;
+import com.example.househunting.utils.LoadImage;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -87,7 +88,8 @@ public class HouseAdapter extends RecyclerView.Adapter<HouseAdapter.ViewHolder> 
 
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(context, HouseDetail.class);
+            Intent intent = new Intent(context, HouseDetailActivity.class);
+            intent.putExtra("houseId", "");
             context.startActivity(intent);
 //            Log.d(TAG, "onClick+++++++++++++++++++++++++++++ ");
         }
@@ -125,7 +127,8 @@ public class HouseAdapter extends RecyclerView.Adapter<HouseAdapter.ViewHolder> 
         viewHolder.getTextName().setText(houseList.get(pos).getOwnerInfo().getNames());
         viewHolder.getAddress().setText(houseList.get(pos).getLocation().getAddress());
         viewHolder.getPriceText().setText(Integer.toString(houseList.get(pos).getPriceMonthly()));
-        new DownloadImageFromInternet((ImageView) viewHolder.getImage()).execute(houseList.get(pos).getImageCover());
+        LoadImage.loadImage(context, houseList.get(pos).getImageCover(), viewHolder.getImage(), R.drawable.card_back);
+//        new DownloadImageFromInternet((ImageView) viewHolder.getImage()).execute(houseList.get(pos).getImageCover());
     }
 
     // Return the size of your dataset (invoked by the layout manager)

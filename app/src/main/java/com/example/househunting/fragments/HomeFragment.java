@@ -3,13 +3,9 @@ package com.example.househunting.fragments;
 import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.Toast;
 
 import androidx.cardview.widget.CardView;
@@ -17,13 +13,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.android.volley.Request;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
-import com.example.househunting.HouseDetail;
 import com.example.househunting.HouseDetailActivity;
 import com.example.househunting.R;
 import com.example.househunting.adapter.HouseAdapter;
@@ -32,6 +21,8 @@ import com.example.househunting.model.house.ViewAllHouseResponse;
 import com.example.househunting.model.house.ViewHouseResponse;
 import com.example.househunting.network.ApiService;
 import com.example.househunting.network.RetrofitClient;
+import com.example.househunting.utils.Storage;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.gson.JsonArray;
 
 import org.json.JSONArray;
@@ -60,7 +51,7 @@ public class HomeFragment extends Fragment {
     }
 
     protected LayoutManagerType mCurrentLayoutManagerType;
-
+    private ShimmerFrameLayout shimmerFrameLayout;
     protected RecyclerView mRecyclerView;
     protected HouseAdapter houseAdapter;
     protected RecyclerView.LayoutManager mLayoutManager;
@@ -73,10 +64,12 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.home_fragment, container, false);
+        shimmerFrameLayout = view.findViewById(R.id.shimmer);
+        shimmerFrameLayout.startShimmer();
         fetchData();
-        CardView house = (CardView) view.findViewById(R.id.card_house);
         // BEGIN_INCLUDE(initializeRecyclerView)
         mRecyclerView = (RecyclerView) view.findViewById(R.id.house_recycleview);
+        mRecyclerView.setVisibility(View.GONE);
 
         // LinearLayoutManager is used here, this will layout the elements in a similar fashion
         // to the way ListView would layout elements. The RecyclerView.LayoutManager defines how
@@ -96,13 +89,6 @@ public class HomeFragment extends Fragment {
 
 /** to be removed */
 
-
-        house.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getActivity(), HouseDetailActivity.class));
-            }
-        });
         return view;
     }
 
@@ -134,12 +120,17 @@ public class HomeFragment extends Fragment {
     }
 
     private void fetchData() {
+        Storage storage = new Storage(getContext());
+        String token = storage.getToken();
         RetrofitClient.getClient("").create(ApiService.class)
-                .getAllHouse("")
+                .getAllHouse(token)
                 .enqueue(new Callback<ViewAllHouseResponse>() {
                     @Override
                     public void onResponse(Call<ViewAllHouseResponse> call, Response<ViewAllHouseResponse> response) {
                         if (response.code() == 200) {
+                            shimmerFrameLayout.stopShimmer();
+                            shimmerFrameLayout.setVisibility(View.GONE);
+                            mRecyclerView.setVisibility(View.VISIBLE);
                             houseAdapter = new HouseAdapter(response.body().getData());
                             mRecyclerView.setAdapter(houseAdapter);
                         }

@@ -47,7 +47,8 @@ public class HouseDetailActivity extends AppCompatActivity {
         houseContainer = findViewById(R.id.houseContainer);
         shimmerFrameLayout = findViewById(R.id.shimmer);
         shimmerFrameLayout.startShimmer();
-        houseId = bundle.getString("houseId");
+//        houseId = bundle.getString("houseId");
+        houseId = "6387de9aa239796011cc81c2";;
         coverImage = findViewById(R.id.coverImage);
         price = findViewById(R.id.priceView);
         bedRooms = findViewById(R.id.numBedRooms);
@@ -55,9 +56,9 @@ public class HouseDetailActivity extends AppCompatActivity {
         address = findViewById(R.id.address);
         description = findViewById(R.id.txt_description);
         houseContainer.setVisibility(View.GONE);
+        map = findViewById(R.id.map);
+        bookNow = findViewById(R.id.book);
 
-        if(houseId.isEmpty())
-            houseId = "6387de9aa239796011cc81c2";
         fetchData(houseId);
         Storage storage = new Storage(this);
         token = storage.getToken();
@@ -114,8 +115,8 @@ public class HouseDetailActivity extends AppCompatActivity {
 
                                 ImageView imageHolder = new ImageView(HouseDetailActivity.this);
                                 LinearLayout.LayoutParams imgLyt = new LinearLayout.LayoutParams(
-                                        ActionBar.LayoutParams.WRAP_CONTENT,
-                                        ActionBar.LayoutParams.WRAP_CONTENT,
+                                        ActionBar.LayoutParams.MATCH_PARENT,
+                                        ActionBar.LayoutParams.MATCH_PARENT,
                                         1.0f
                                 );
                                 imageHolder.setLayoutParams(imgLyt);
