@@ -100,7 +100,7 @@
             android:ems="10"
             android:hint="3"
             android:textSize="16dp"
-            android:inputType="textPassword"
+            android:inputType="number"
             android:paddingLeft="10dp"
             android:layout_below="@id/house_bathroom_label"
             />

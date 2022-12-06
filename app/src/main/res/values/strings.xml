@@ -62,7 +62,7 @@
     <string name="house_description">Description</string>
     <string name="house_landlord_names">Landlord names</string>
     <string name="house_landlord_contact">Landlord contact</string>
-    <string name="house_second_step_btn"> Next</string>
+    <string name="house_second_step_btn"> Submit</string>
 
 
 </resources>

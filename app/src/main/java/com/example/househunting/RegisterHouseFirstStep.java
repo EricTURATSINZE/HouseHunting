@@ -51,6 +51,11 @@ public class RegisterHouseFirstStep extends AppCompatActivity
     EditText numberOfBedrooms;
     EditText numberOfBathroom;
     ImageView mainImage;
+    String houseLocation;
+    String price;
+    String bedroom;
+    String bathroom;
+    String mainImageUrl;
     private static int IMAGE_REQ=1;
     private Uri imagePath;
     private static final int IMAGE_PICK_CAMERA_CODE=102;
@@ -66,47 +71,87 @@ public class RegisterHouseFirstStep extends AppCompatActivity
         numberOfBedrooms = findViewById(R.id.house_bedroom);
         mainImage= findViewById(R.id.house_main_image);
         nextButton = findViewById(R.id.house_next_btn);
+
         mainImage.setOnClickListener(v->
         {
             imagePickDialog();
 
         });
+
         initConfig();
 
         nextButton.setOnClickListener(v ->
         {
             Log.d(TAG, ": "+" button clicked");
 
-            MediaManager.get().upload(imagePath).callback(new UploadCallback() {
+            MediaManager.get().upload(imagePath).callback(new UploadCallback()
+            {
                 @Override
-                public void onStart(String requestId) {
+                public void onStart(String requestId)
+                {
                     Log.d(TAG, "=================================: "+"started");
                 }
 
                 @Override
-                public void onProgress(String requestId, long bytes, long totalBytes) {
+                public void onProgress(String requestId, long bytes, long totalBytes)
+                {
                     Log.d(TAG, "=================================: "+"uploading");
                 }
 
                 @Override
                 public void onSuccess(String requestId, Map resultData) {
                     Log.d(TAG, "=================================: "+"success");
+                    mainImageUrl= (String) resultData.get("url");
+                    houseLocation = String.valueOf(houseAddress.getText());
+                    bedroom= String.valueOf(numberOfBedrooms.getText());
+                    bathroom = String.valueOf(numberOfBathroom.getText());
+                    price = String.valueOf(pricePerMonth.getText());
+
+
+                    if(houseLocation.length()==0)
+                    {
+                        Toast.makeText(getApplicationContext(),"House address is empty",Toast.LENGTH_SHORT).show();
+                    }
+                    else if(bedroom.length()==0)
+                    {
+                        Toast.makeText(getApplicationContext(),"House bedroom is empty",Toast.LENGTH_SHORT).show();
+                    }
+                    else if(bathroom.length()==0)
+                    {
+                        Toast.makeText(getApplicationContext(),"House bathroom is empty",Toast.LENGTH_SHORT).show();
+                    }
+                    else if(price.length()==0)
+                    {
+                        Toast.makeText(getApplicationContext(),"House price is empty",Toast.LENGTH_SHORT).show();
+                    }
+                    else if(mainImageUrl.length()==0)
+                    {
+                        Toast.makeText(getApplicationContext(),"House main image is empty",Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                    {
+                        Intent intent = new Intent(RegisterHouseFirstStep.this, RegisterHouseSecondStep.class);
+                        intent.putExtra("address",houseLocation);
+                        intent.putExtra("price",price);
+                        intent.putExtra("bedroom",bedroom);
+                        intent.putExtra("bathroom",bathroom);
+                        intent.putExtra("main_image_url",mainImageUrl);
+                        startActivity(intent);
+                    }
+
                     System.out.println("========================================="+resultData.get("url"));
                 }
-
                 @Override
-                public void onError(String requestId, ErrorInfo error) {
+                public void onError(String requestId, ErrorInfo error)
+                {
                     Log.d(TAG, "=================================: "+error);
                 }
-
                 @Override
-                public void onReschedule(String requestId, ErrorInfo error) {
+                public void onReschedule(String requestId, ErrorInfo error)
+                {
                     Log.d(TAG, "=================================: "+error);
                 }
             }).dispatch();
-
-//            Intent intent = new Intent(RegisterHouseFirstStep.this, RegisterHouseSecondStep.class);
-//            startActivity(intent);
         });
     }
 
@@ -126,16 +171,13 @@ public class RegisterHouseFirstStep extends AppCompatActivity
         builder.setTitle("Select image");
         builder.setItems(options, (dialog, which) ->
         {
-
             if(which == 0)
             {
-
                     pickFromCamera();
             }
             else
             {
                     pickFromStorage();
-
             }
         });
         builder.create().show();
@@ -164,7 +206,6 @@ public class RegisterHouseFirstStep extends AppCompatActivity
         {
             ActivityCompat.requestPermissions(RegisterHouseFirstStep.this,new String[]{Manifest.permission.CAMERA},IMAGE_REQ);
         }
-
     }
 
     private void selectImage()
@@ -185,19 +226,19 @@ public class RegisterHouseFirstStep extends AppCompatActivity
         Picasso.get().load(imagePath).into(mainImage);
         Intent cameraIntent=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT,imagePath);
-
         startActivityForResult(cameraIntent,IMAGE_PICK_CAMERA_CODE);
-
 
     }
 
     ActivityResultLauncher<Intent> someActivityResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
-            new ActivityResultCallback<ActivityResult>() {
+            new ActivityResultCallback<ActivityResult>()
+            {
                 @Override
-                public void onActivityResult(ActivityResult result) {
-                    if (result.getResultCode() == Activity.RESULT_OK) {
-                        // There are no request codes
+                public void onActivityResult(ActivityResult result)
+                {
+                    if (result.getResultCode() == Activity.RESULT_OK)
+                    {
                         Intent data = result.getData();
                         imagePath=data.getData();
                         Picasso.get().load(imagePath).into(mainImage);
@@ -205,5 +246,4 @@ public class RegisterHouseFirstStep extends AppCompatActivity
                     }
                 }
             });
-
 }
