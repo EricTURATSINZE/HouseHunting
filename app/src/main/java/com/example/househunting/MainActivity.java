@@ -1,5 +1,7 @@
 package com.example.househunting;
 
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -11,6 +13,8 @@ import com.example.househunting.fragments.HomeFragment;
 import com.example.househunting.fragments.NotificationsFragment;
 import com.example.househunting.fragments.PreferencesFragment;
 import com.example.househunting.fragments.ProfileFragment;
+import com.example.househunting.services.NotificationService;
+import com.example.househunting.utils.Storage;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -28,6 +32,14 @@ public class MainActivity extends AppCompatActivity {
 
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setOnItemSelectedListener(navListener);
+
+        // Notification Service: Note It will be taken from here!!!
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            if(!new NotificationService().notificationServiceRunning(this)){
+                Intent notificationService = new Intent(this, NotificationService.class);
+                startForegroundService(notificationService);
+            }
+        }
     }
 
     private final NavigationBarView.OnItemSelectedListener navListener =
@@ -60,4 +72,6 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 }
             };
+
+
 }
