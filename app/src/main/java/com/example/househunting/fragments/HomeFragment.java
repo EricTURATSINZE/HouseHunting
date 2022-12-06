@@ -3,6 +3,7 @@ package com.example.househunting.fragments;
 import static com.example.househunting.utils.HouseFilters.WIFI;
 
 import android.app.ActionBar;
+import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -115,7 +116,6 @@ public class HomeFragment extends Fragment {
 
         return view;
     }
-
 
     public void setRecyclerViewLayoutManager(LayoutManagerType layoutManagerType) {
         int scrollPosition = 0;
