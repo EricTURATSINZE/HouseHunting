@@ -86,7 +86,7 @@ public class SignUpActivity extends AppCompatActivity {
                                 Snackbar.make(view, e.getMessage(), Snackbar.LENGTH_LONG).show();
                             }
                         } else {
-                            Toast.makeText(SignUpActivity.this, response.code(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignUpActivity.this, String.valueOf(response.code()), Toast.LENGTH_SHORT).show();
                         }
                     }
 
