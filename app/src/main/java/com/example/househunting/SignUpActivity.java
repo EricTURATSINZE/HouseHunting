@@ -54,44 +54,17 @@ public class SignUpActivity extends AppCompatActivity {
         // Initilize validation style
 //        awesomeValidation = new Aweso
 
-
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 signup_btn_txt.setVisibility(View.GONE);
                 progressBar.setVisibility(View.VISIBLE);
-                RetrofitClient.getClient("").create(AuthApiService.class)
-                        .signup("" + names.getText(), "" + email.getText(), "" + password.getText(), "" + phone.getText())
-                        .enqueue(new Callback<SignupResponse>() {
-                            @Override
-                            public void onResponse(Call<SignupResponse> call, Response<SignupResponse> response) {
-                                signup_btn_txt.setVisibility(View.VISIBLE);
-                                progressBar.setVisibility(View.GONE);
-                                if (response.code()== 201) {
-                                    try {
-                                        storage.setToken(response.body().getUser().getToken());
-                                        Intent i = new Intent(SignUpActivity.this, VerifyEmailActivity.class);
-                                        startActivity(i);
-                                    } catch (Exception e) {
-                                        Snackbar.make(view, e.getMessage(), Snackbar.LENGTH_LONG).show();
-                                    }
-                                } else {
-                                    Toast.makeText(SignUpActivity.this, response.code(), Toast.LENGTH_SHORT).show();
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(Call<SignupResponse> call, Throwable t) {
-                                signup_btn_txt.setVisibility(View.VISIBLE);
-                                progressBar.setVisibility(View.GONE);
-                                Toast.makeText(SignUpActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                signUp(view);
             }
         });
     }
 
-    public void singUp(View view) {
+    public void signUp(View view) {
         signup_btn_txt.setVisibility(View.GONE);
         progressBar.setVisibility(View.VISIBLE);
         RetrofitClient.getClient("").create(AuthApiService.class)

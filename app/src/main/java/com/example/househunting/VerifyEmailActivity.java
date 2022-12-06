@@ -71,7 +71,6 @@ public class VerifyEmailActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if(charSequence.toString().length() == 4) {
                     otp = charSequence.toString();
-                    Toast.makeText(getApplicationContext(), "working " + charSequence, Toast.LENGTH_SHORT).show();
                     veriyEmail(otp);
                 }
             }

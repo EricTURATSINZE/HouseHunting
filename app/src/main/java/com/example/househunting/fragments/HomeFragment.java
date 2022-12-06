@@ -1,35 +1,23 @@
 package com.example.househunting.fragments;
 
-import android.app.ActionBar;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.househunting.HouseDetailActivity;
+
 import com.example.househunting.R;
 import com.example.househunting.adapter.HouseAdapter;
-import com.example.househunting.model.house.Data;
 import com.example.househunting.model.house.ViewAllHouseResponse;
-import com.example.househunting.model.house.ViewHouseResponse;
-import com.example.househunting.network.ApiService;
+import com.example.househunting.network.HouseApiService;
 import com.example.househunting.network.RetrofitClient;
 import com.example.househunting.utils.Storage;
 import com.facebook.shimmer.ShimmerFrameLayout;
-import com.google.gson.JsonArray;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -122,7 +110,7 @@ public class HomeFragment extends Fragment {
     private void fetchData() {
         Storage storage = new Storage(getContext());
         String token = storage.getToken();
-        RetrofitClient.getClient("").create(ApiService.class)
+        RetrofitClient.getClient("").create(HouseApiService.class)
                 .getAllHouse(token)
                 .enqueue(new Callback<ViewAllHouseResponse>() {
                     @Override
