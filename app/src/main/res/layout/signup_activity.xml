@@ -41,7 +41,7 @@
         android:layout_marginTop="21dp"
         android:text="Create an account"
         android:textColor="@color/black"
-        android:textSize="25sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -113,7 +113,7 @@
             android:layout_centerInParent="true"
             android:text="@string/Signup"
             android:textColor="@color/white"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:textStyle="bold" />
 
         <ProgressBar
@@ -136,7 +136,7 @@
         android:layout_marginTop="24dp"
         android:text="@string/Already_have_Account"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:textStyle="normal"
         app:layout_constraintEnd_toStartOf="@id/login_btn"
         app:layout_constraintHorizontal_bias="0.095"
@@ -151,7 +151,7 @@
         android:layout_marginRight="40dp"
         android:text="Login"
         android:textColor="@color/colorPrimary"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:textStyle="normal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/login"

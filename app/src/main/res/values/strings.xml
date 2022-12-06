@@ -36,4 +36,7 @@
     <string name="month">/mon</string>
     <string name="rooms">Bedrooms</string>
     <string name="greeting">Hello,</string>
+
+    <!-- Login -->
+    <string name="no_account">Don\'t Have Account?</string>
 </resources>
