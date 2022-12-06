@@ -32,7 +32,6 @@ public class SignUpActivity extends AppCompatActivity {
     TextView signup_btn_txt;
     ProgressBar progressBar;
     Storage storage;
-//    AwesomeValidation awesomeValidation;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -51,8 +50,12 @@ public class SignUpActivity extends AppCompatActivity {
         progressBar = (ProgressBar) findViewById(R.id.signup_btn_pb);
         login_btn = (TextView) findViewById(R.id.login_btn);
 
-        // Initilize validation style
-//        awesomeValidation = new Aweso
+        login_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
+            }
+        });
 
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,9 +97,5 @@ public class SignUpActivity extends AppCompatActivity {
                         Toast.makeText(SignUpActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
-    }
-
-    public void checkAllFields() {
-//        if
     }
 }
