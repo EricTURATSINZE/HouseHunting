@@ -1,11 +1,16 @@
 package com.example.househunting.fragments;
 
+import static com.example.househunting.utils.HouseFilters.WIFI;
+
 import android.app.ActionBar;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.cardview.widget.CardView;
@@ -16,7 +21,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.househunting.HouseDetailActivity;
 import com.example.househunting.R;
 import com.example.househunting.adapter.HouseAdapter;
+import com.example.househunting.model.house.CriteriaWifi;
 import com.example.househunting.model.house.Data;
+import com.example.househunting.model.house.Database;
+import com.example.househunting.model.house.HouseFilter;
 import com.example.househunting.model.house.ViewAllHouseResponse;
 import com.example.househunting.model.house.ViewHouseResponse;
 import com.example.househunting.network.ApiService;
@@ -55,8 +63,9 @@ public class HomeFragment extends Fragment {
     protected RecyclerView mRecyclerView;
     protected HouseAdapter houseAdapter;
     protected RecyclerView.LayoutManager mLayoutManager;
+    protected  TextView textView;
 
-
+    ArrayList<Data> houseList;
     View view;
 
     @Override
@@ -64,6 +73,21 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.home_fragment, container, false);
+        TextView wifi = view.findViewById(R.id.amenity1);
+        wifi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                shimmerFrameLayout.stopShimmer();
+                shimmerFrameLayout.setVisibility(View.GONE);
+                mRecyclerView.setVisibility(View.VISIBLE);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
+                {
+                    houseAdapter = new HouseAdapter((ArrayList<Data>) new CriteriaWifi().meetCriteria(Database.returnAllHouse()));
+                    Log.d("Size++++++++++++++++", ""+new CriteriaWifi().meetCriteria(Database.returnAllHouse()).size());
+                }
+                mRecyclerView.setAdapter(houseAdapter);
+            }
+        });
         shimmerFrameLayout = view.findViewById(R.id.shimmer);
         shimmerFrameLayout.startShimmer();
         fetchData();
@@ -91,6 +115,7 @@ public class HomeFragment extends Fragment {
 
         return view;
     }
+
 
     public void setRecyclerViewLayoutManager(LayoutManagerType layoutManagerType) {
         int scrollPosition = 0;
