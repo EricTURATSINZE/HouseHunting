@@ -1,78 +1,60 @@
 package com.example.househunting.services;
 
-import android.app.ActivityManager;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.app.Service;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.os.IBinder;
-import android.util.Log;
+import android.os.Build;
 
-import androidx.annotation.Nullable;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
-import com.example.househunting.R;
+import com.example.househunting.MainActivity;
 
 import java.util.UUID;
 
-public class NotificationService extends Service {
+public class NotificationService {
+    private String title;
+    private String body;
+    private int icon;
+    private Context context;
 
-    @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
-        new Thread(
-                new Runnable() {
-                    @Override
-                    public void run() {
-                        while (true) {
-                            Log.e("Service", "Service is running...");
-                            try {
-                                Thread.sleep(10000);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }
-                }
-        ).start();
-        final String CHANNEL_ID = "Foreground Service ID";
-        NotificationChannel channel = null;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            channel = new NotificationChannel(
-                    CHANNEL_ID,
-                    CHANNEL_ID,
-                    NotificationManager.IMPORTANCE_LOW
-            );
-
-            getSystemService(NotificationManager.class).createNotificationChannel(channel);
-            Notification.Builder notification = new Notification.Builder(this, CHANNEL_ID)
-                    .setContentText("Service is running")
-                    .setContentTitle("Service enabled")
-                    .setSmallIcon(R.drawable.ic_launcher_background);
-
-            startForeground(1001, notification.build());
-        }
-
-        return super.onStartCommand(intent, flags, startId);
+    public NotificationService(String inTitle, String inBody, int inIcon, Context ctx) {
+        title = inTitle;
+        body = inBody;
+        icon = inIcon;
+        context = ctx;
     }
 
+    public Notification createNotification(NotificationManager manager, int importance){
+        Intent intent = new Intent(context, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_IMMUTABLE);
 
-    @Nullable
-    @Override
-    public IBinder onBind(Intent intent) {
+
+        if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.O){
+            final String CHANNEL_ID = UUID.randomUUID().toString();
+            NotificationChannel channel= new NotificationChannel(CHANNEL_ID,
+                    CHANNEL_ID, importance);
+            manager.createNotificationChannel(channel);
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(context,CHANNEL_ID)
+                    .setSmallIcon(icon)
+                    .setContentTitle(title)
+                    .setContentText(body)
+                    .setContentIntent(pendingIntent);
+            return builder.build();
+        }
         return null;
     }
 
-    @SuppressWarnings("deprecation")
-    public boolean notificationServiceRunning(Context context) {
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-            for (ActivityManager.RunningServiceInfo service : activityManager.getRunningServices(Integer.MAX_VALUE)) {
-                if (NotificationService.class.getName().equals(service.service.getClassName())) {
-                    return true;
-                }
-            }
+    public void sendNotification( Notification notification)
+    {
+        if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.O)
+        {
+            NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
+            notificationManagerCompat.notify(1, notification);
         }
-        return false;
     }
 }

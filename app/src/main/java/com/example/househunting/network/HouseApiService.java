@@ -16,5 +16,9 @@ public interface HouseApiService {
     Call<ViewHouseResponse> getHouse(@Path("id") String id,
                                      @Header("Authorization") String token
                                      );
+
+    @GET("houses/preferred-houses")
+    Call<ViewAllHouseResponse> getPreferredHouses(@Header("Authorization") String token
+    );
 }
 

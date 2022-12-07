@@ -1,5 +1,6 @@
 package com.example.househunting.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,13 +12,17 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.househunting.HouseDetailActivity;
 import com.example.househunting.R;
 import com.example.househunting.adapter.HouseAdapter;
+import com.example.househunting.model.house.Data;
 import com.example.househunting.model.house.ViewAllHouseResponse;
 import com.example.househunting.network.HouseApiService;
 import com.example.househunting.network.RetrofitClient;
 import com.example.househunting.utils.Storage;
 import com.facebook.shimmer.ShimmerFrameLayout;
+
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -119,8 +124,18 @@ public class HomeFragment extends Fragment {
                             shimmerFrameLayout.stopShimmer();
                             shimmerFrameLayout.setVisibility(View.GONE);
                             mRecyclerView.setVisibility(View.VISIBLE);
-                            houseAdapter = new HouseAdapter(response.body().getData());
+                            ArrayList<Data> data = response.body().getData();
+                            houseAdapter = new HouseAdapter(data);
                             mRecyclerView.setAdapter(houseAdapter);
+                            houseAdapter.setOnItemClickListener(new HouseAdapter.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(int position) {
+                                    Intent intent = new Intent(getContext(), HouseDetailActivity.class);
+                                    intent.putExtra("houseId", data.get(position).get_id());
+                                    startActivity(intent);
+                                }
+                            });
+
                         }
                     }
 

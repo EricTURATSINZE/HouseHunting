@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,13 +15,12 @@ import com.example.househunting.fragments.HomeFragment;
 import com.example.househunting.fragments.NotificationsFragment;
 import com.example.househunting.fragments.PreferencesFragment;
 import com.example.househunting.fragments.ProfileFragment;
-import com.example.househunting.services.NotificationService;
-import com.example.househunting.utils.Storage;
+import com.example.househunting.services.PullPreferredHousesService;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 public class MainActivity extends AppCompatActivity {
-
+    private RelativeLayout upload_btn;
     Fragment selectedFragment;
 
     @Override
@@ -32,11 +33,20 @@ public class MainActivity extends AppCompatActivity {
 
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setOnItemSelectedListener(navListener);
+        upload_btn = findViewById(R.id.btn_upload);
+
+        upload_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                Intent intent = new Intent(this, RegisterHouseFirstStep.class);
+//                startActivity(intent);
+            }
+        });
 
         // Notification Service: Note It will be taken from here!!!
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            if(!new NotificationService().notificationServiceRunning(this)){
-                Intent notificationService = new Intent(this, NotificationService.class);
+            if(!new PullPreferredHousesService().notificationServiceRunning(this)){
+                Intent notificationService = new Intent(this, PullPreferredHousesService.class);
                 startForegroundService(notificationService);
             }
         }
