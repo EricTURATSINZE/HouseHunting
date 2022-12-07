@@ -16,18 +16,25 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.location.Location;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.cloudinary.android.MediaManager;
@@ -35,6 +42,7 @@ import com.cloudinary.android.callback.ErrorInfo;
 import com.cloudinary.android.callback.UploadCallback;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -43,7 +51,8 @@ import java.util.Map;
  * Author: NGIRIMANA Schadrack
  */
 
-public class RegisterHouseFirstStep extends AppCompatActivity
+public class RegisterHouseFirstStep extends AppCompatActivity implements
+        AdapterView.OnItemSelectedListener
 {
     Button nextButton;
     EditText houseAddress;
@@ -57,9 +66,12 @@ public class RegisterHouseFirstStep extends AppCompatActivity
     String bathroom;
     String mainImageUrl;
     private static int IMAGE_REQ=1;
+    private static final int REQUEST_LOCATION =1 ;
     private Uri imagePath;
     private static final int IMAGE_PICK_CAMERA_CODE=102;
-
+    Spinner locationSpinner;
+    ArrayList<String> locationChoices = new ArrayList<>();
+    Location houseCoordinates;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -71,15 +83,35 @@ public class RegisterHouseFirstStep extends AppCompatActivity
         numberOfBedrooms = findViewById(R.id.house_bedroom);
         mainImage= findViewById(R.id.house_main_image);
         nextButton = findViewById(R.id.house_next_btn);
+        locationSpinner = (Spinner) findViewById(R.id.spinner_location);
 
+        locationChoices.add("Select mode");
+        locationChoices.add("Current location");
+        locationChoices.add("From google map");
+
+        /**
+         * setting the location choice mode
+         */
+        locationSpinner .setOnItemSelectedListener(this);
+        ArrayAdapter choiceAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, locationChoices);
+        choiceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        locationSpinner.setAdapter(choiceAdapter );
+
+        /**
+         * Picking image from gallery or camera
+         */
         mainImage.setOnClickListener(v->
         {
             imagePickDialog();
 
         });
 
-        initConfig();
 
+
+        initConfig();
+        /**
+         * Setting sending data to the next screen and upload main image to cloudinary
+         */
         nextButton.setOnClickListener(v ->
         {
             Log.d(TAG, ": "+" button clicked");
@@ -128,14 +160,21 @@ public class RegisterHouseFirstStep extends AppCompatActivity
                     {
                         Toast.makeText(getApplicationContext(),"House main image is empty",Toast.LENGTH_SHORT).show();
                     }
+                    else if (houseCoordinates == null) {
+                        Toast.makeText(getApplicationContext(),"The location is not available, try other way!",Toast.LENGTH_SHORT).show();
+                    }
                     else
                     {
+
                         Intent intent = new Intent(RegisterHouseFirstStep.this, RegisterHouseSecondStep.class);
                         intent.putExtra("address",houseLocation);
                         intent.putExtra("price",price);
                         intent.putExtra("bedroom",bedroom);
                         intent.putExtra("bathroom",bathroom);
                         intent.putExtra("main_image_url",mainImageUrl);
+                        intent.putExtra("latitude",houseCoordinates.getLatitude());
+                        intent.putExtra("longitude",houseCoordinates.getLongitude());
+
                         startActivity(intent);
                     }
 
@@ -155,6 +194,10 @@ public class RegisterHouseFirstStep extends AppCompatActivity
         });
     }
 
+    /**
+     * Initializing cloudinary configuration
+     */
+
     private void initConfig()
     {
         Map config = new HashMap();
@@ -164,6 +207,10 @@ public class RegisterHouseFirstStep extends AppCompatActivity
         config.put("secure", true);
         MediaManager.init(this, config);
     }
+
+    /**
+     * Picking image dialog
+     */
     private void imagePickDialog()
     {
         String[] options={"Camera","Gallery"};
@@ -183,6 +230,10 @@ public class RegisterHouseFirstStep extends AppCompatActivity
         builder.create().show();
     }
 
+    /**
+     * picking image from gallery
+     */
+
     public void pickFromStorage ()
     {
         if(ContextCompat.checkSelfPermission(RegisterHouseFirstStep.this, Manifest.permission.READ_EXTERNAL_STORAGE)== PackageManager.PERMISSION_GRANTED)
@@ -195,6 +246,10 @@ public class RegisterHouseFirstStep extends AppCompatActivity
         }
 
     }
+
+    /**
+     * picking image from camera
+     */
 
     public void pickFromCamera ()
     {
@@ -242,8 +297,44 @@ public class RegisterHouseFirstStep extends AppCompatActivity
                         Intent data = result.getData();
                         imagePath=data.getData();
                         Picasso.get().load(imagePath).into(mainImage);
-
                     }
                 }
             });
+
+
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+    {
+        String choice= locationChoices.get(position);
+        if(choice.equals("Current location"))
+        {
+            houseCoordinates= getCurrentLocation();
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent)
+    {
+
+    }
+
+    /**
+     * getting current location
+     */
+
+    private Location getCurrentLocation()
+    {
+        LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        Location loc=null;
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+        {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
+        }
+        else
+        {
+            loc = lm.getLastKnownLocation("gps");
+        }
+        return loc;
+    }
 }

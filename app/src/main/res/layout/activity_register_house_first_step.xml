@@ -36,13 +36,33 @@
             android:textSize="16dp"
             />
         <TextView
-            android:id="@+id/house_price_per_month_label"
+            android:id="@+id/location_choice_label"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14dp"
+            android:text="@string/house_location_choice"
+            android:layout_marginHorizontal="30dp"
+            android:layout_below="@id/house_address"
+            />
+        <Spinner
+            android:id="@+id/spinner_location"
+            android:layout_width="match_parent"
+            android:background="@drawable/login_input"
+            android:layout_height="50dp"
+            android:textSize="16dp"
+            android:paddingLeft="10dp"
+            android:layout_marginVertical="15dp"
+            android:layout_marginHorizontal="30dp"
+            android:layout_below="@+id/location_choice_label"
+            />
+        <TextView
+            android:id="@+id/house_price_per_month_label"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="14dp"
             android:text="@string/house_price_label_label"
             android:layout_marginHorizontal="30dp"
-            android:layout_below="@id/house_address"
+            android:layout_below="@+id/spinner_location"
             />
         <EditText
             android:id="@+id/price_per_month"
@@ -116,27 +136,26 @@
             />
 
         <ImageView
-
-            android:layout_width="130dp"
-            android:layout_height="130dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:id="@+id/house_main_image"
             android:layout_centerHorizontal="true"
             android:layout_below="@id/house_main_image_label"
             android:padding="2dp"
-
             android:src="@drawable/add_photo"
             android:layout_marginTop="16dp"
             />
         <Button
             android:id="@+id/house_next_btn"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:text="@string/house_first_step_btn"
             android:textSize="20dp"
             android:background="@drawable/login_button"
             android:textStyle="bold"
             android:textAllCaps="false"
-            android:layout_margin="30dp"
+            android:layout_marginVertical="15dp"
+            android:layout_marginHorizontal="30dp"
             android:layout_below="@+id/house_main_image"
             />
     </RelativeLayout>

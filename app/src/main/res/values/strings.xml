@@ -63,6 +63,7 @@
     <string name="house_landlord_names">Landlord names</string>
     <string name="house_landlord_contact">Landlord contact</string>
     <string name="house_second_step_btn"> Submit</string>
+    <string name="house_location_choice">Choose location mode</string>
 
 
 </resources>
