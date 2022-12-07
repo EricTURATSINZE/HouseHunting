@@ -1,5 +1,6 @@
 package com.example.househunting;
 import android.app.ActionBar;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,7 +67,8 @@ public class HouseDetailActivity extends AppCompatActivity {
         map.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // To DO
+                System.out.println("Startiii Mappppppppppppppppppppp 1");
+//                startActivity(new Intent(HouseDetailActivity.this, MapActivity.class));
             }
         });
 
@@ -74,6 +76,7 @@ public class HouseDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // To DO
+                System.out.println("Startiiii Mapppppppp 2");
 
             }
         });
