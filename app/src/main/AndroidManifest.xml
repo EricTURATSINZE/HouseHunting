@@ -34,7 +34,7 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <service android:name=".services.NotificationService"/>
+        <service android:name=".services.PullPreferredHousesService"/>
         <receiver android:exported="false" android:name=".broadcastReceivers.NotificationBroadCastReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"></action>

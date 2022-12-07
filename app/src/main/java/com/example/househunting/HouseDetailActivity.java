@@ -44,12 +44,12 @@ public class HouseDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.house_activity);
-        Bundle bundle = new Bundle();
         houseContainer = findViewById(R.id.houseContainer);
         shimmerFrameLayout = findViewById(R.id.shimmer);
         shimmerFrameLayout.startShimmer();
-//        houseId = bundle.getString("houseId");
-        houseId = "6387de9aa239796011cc81c2";;
+        houseId = getIntent().getStringExtra("houseId");
+        if(houseId.isEmpty())
+            houseId = "6387de9aa239796011cc81c2";;
         coverImage = findViewById(R.id.coverImage);
         price = findViewById(R.id.priceView);
         bedRooms = findViewById(R.id.numBedRooms);
@@ -57,8 +57,8 @@ public class HouseDetailActivity extends AppCompatActivity {
         address = findViewById(R.id.address);
         description = findViewById(R.id.txt_description);
         houseContainer.setVisibility(View.GONE);
-        map = findViewById(R.id.map);
-        bookNow = findViewById(R.id.book);
+        map = (Button) findViewById(R.id.map);
+        bookNow = (Button) findViewById(R.id.book);
 
         fetchData(houseId);
         Storage storage = new Storage(this);

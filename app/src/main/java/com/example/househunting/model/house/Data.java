@@ -75,6 +75,13 @@ public class Data {
         return id;
     }
 
+    @Override
+    public String toString() {
+        return "Data{" +
+                "id='" + id + '\'' +
+                '}';
+    }
+
     public ArrayList<String> getInternet() {
         return internet;
     }
