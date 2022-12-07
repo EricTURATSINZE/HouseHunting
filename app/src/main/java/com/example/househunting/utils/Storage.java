@@ -10,7 +10,6 @@ public class Storage {
     private static final String PREF_NAME = "HouseHuntingApp";
     private static final String KEY_IS_LOGGEDIN = "isLoggedIn";
     private static final String USER_TOKEN = "USER_TOKEN";
-    private static final String PREFERRED_HOUSES= "PREFERRED_HOUSES";
     private static final String SEEN_HOUSES="SEEN_HOUSES";
 
     public Storage(Context context) {
@@ -26,18 +25,11 @@ public class Storage {
 
     public void setSeenHouses(String seenHouses) {
         editor.putString(SEEN_HOUSES, seenHouses);
+        editor.commit();
     }
 
     public String getSeenHouses() {
         return pref.getString(SEEN_HOUSES, "");
-    }
-
-    public void setPreferredHouses(String preferredHouses) {
-        editor.putString(PREFERRED_HOUSES, preferredHouses);
-    }
-
-    public String getPreferredHouses() {
-        return pref.getString(PREFERRED_HOUSES, "");
     }
 
     public boolean isLoggedIn() {

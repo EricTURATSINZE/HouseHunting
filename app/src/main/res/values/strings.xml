@@ -31,11 +31,15 @@
     <string name="action_enter_otp">Please enter the verification code sent to your andrew email</string>
     <string name="verify_email">Verify Code</string>
     <string name="resend_otp">Re-send Code</string>
-    <string name="loading">Loading...</string>
+    <string name="loading">Loading.....</string>
     <string name="currency">rwf</string>
-    <string name="month">/mon</string>
+    <string name="month">/monthly</string>
     <string name="rooms">Bedrooms</string>
     <string name="greeting">Hello,</string>
+    <string name="foreground">"Service to pull new houses"</string>
+    <string name="notificationTitle">New house has been created</string>
+    <string name="notificationBody">The newly created house match your preferences, Be the first person to talk to the own!</string>
+    <string name="near">Km away from Campus</string>
 
     <!-- Login -->
     <string name="no_account">Don\'t Have Account?</string>
