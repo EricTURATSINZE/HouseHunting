@@ -301,7 +301,9 @@ public class RegisterHouseFirstStep extends AppCompatActivity implements
                 }
             });
 
-
+    /**
+     * select how to get location
+     */
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id)

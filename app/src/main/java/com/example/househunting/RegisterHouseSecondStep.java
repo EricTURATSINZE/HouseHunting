@@ -35,7 +35,7 @@ public class RegisterHouseSecondStep extends AppCompatActivity
     Uri imagePath;
     EditText description;
     ArrayList<Uri> images = new ArrayList<>();
-    ArrayList<String> imagesUrl =new ArrayList<>();
+    ArrayList<String> moreImagesUrls =new ArrayList<>();
     private static final int IMAGE_PICK_GALLERY_CODE=103;
 
     @Override
@@ -76,7 +76,7 @@ public class RegisterHouseSecondStep extends AppCompatActivity
                     public void onSuccess(String requestId, Map resultData)
                     {
                         Log.d(TAG, "=================================: "+"success");
-                        imagesUrl.add((String) resultData.get("url"));
+                        moreImagesUrls.add((String) resultData.get("url"));
                         System.out.println("========================================="+resultData.get("url"));
                     }
                     @Override
@@ -99,10 +99,15 @@ public class RegisterHouseSecondStep extends AppCompatActivity
             String desc= String.valueOf(description.getText());
             String ownerNames= String.valueOf(landLordNames.getText());
             String ownerContact= String.valueOf(landLordContact.getText());
+            /* use images urls to get more images urls uploaded*/
 
         });
     }
 
+
+    /**
+     * Selecting many images from gallery
+     */
     private void selectImage()
     {
         Intent intent = new Intent();
