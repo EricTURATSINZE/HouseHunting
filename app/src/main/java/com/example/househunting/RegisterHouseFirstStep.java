@@ -103,6 +103,7 @@ public class RegisterHouseFirstStep extends AppCompatActivity implements
         mainImage.setOnClickListener(v->
         {
             imagePickDialog();
+            System.out.println("========================================="+houseCoordinates.getLongitude());
 
         });
 
