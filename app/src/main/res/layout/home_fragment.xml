@@ -24,7 +24,7 @@
 
             <EditText
                 android:id="@+id/search_btn"
-                android:text="@string/search"
+                android:hint="Search"
                 android:textColor="@color/grey"
                 android:textSize="12dp"
                 android:layout_width="match_parent"
@@ -115,9 +115,20 @@
             android:layout_height="450dp"
             android:background="@color/light"
             android:padding="10dp"
+            android:visibility="gone"
             android:id="@+id/house_recycleview">
 
         </androidx.recyclerview.widget.RecyclerView>
+        <TextView
+            android:id="@+id/empty_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="@color/white"
+            android:textColor="@color/black"
+            android:height="450dp"
+            android:visibility="gone"
+            android:text="No data found" />
 
     </LinearLayout>
 

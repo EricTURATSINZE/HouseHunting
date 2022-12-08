@@ -36,4 +36,5 @@
     <string name="month">/mon</string>
     <string name="rooms">Bedrooms</string>
     <string name="greeting">Hello,</string>
+    <string name="no_data_available">no_string</string>
 </resources>

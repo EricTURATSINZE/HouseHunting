@@ -19,6 +19,16 @@ public class Data {
     private String id;
     private ArrayList<String> internet;
 
+    //calculated distance<David>
+    private Integer distance = null;
+
+    public Integer getDistance() {
+        return distance;
+    }
+
+    public void setDistance(Integer distance) {
+        this.distance = distance;
+    }
     public Location getLocation() {
         return location;
     }

@@ -3,6 +3,7 @@ package com.example.househunting.model.house;
 import java.util.ArrayList;
 import java.util.List;
 
+/**Author: David */
 public class CriteriaWifi implements Criteria
 {
     @Override
