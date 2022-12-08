@@ -65,5 +65,7 @@
     <string name="house_second_step_btn"> Submit</string>
     <string name="house_location_choice">Choose location mode</string>
 
+    <string name="house_map_title">House map location</string>
+
 
 </resources>
