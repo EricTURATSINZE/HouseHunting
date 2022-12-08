@@ -1,5 +1,6 @@
 package com.example.househunting;
 import android.app.ActionBar;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,12 +14,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import com.example.househunting.model.house.Data;
+import com.example.househunting.model.house.Location;
 import com.example.househunting.model.house.ViewHouseResponse;
 import com.example.househunting.network.HouseApiService;
 import com.example.househunting.network.RetrofitClient;
 import com.example.househunting.utils.LoadImage;
 import com.example.househunting.utils.Storage;
 import com.facebook.shimmer.ShimmerFrameLayout;
+
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,10 +38,10 @@ public class HouseDetailActivity extends AppCompatActivity {
     private TextView description;
     private ShimmerFrameLayout shimmerFrameLayout;
     private LinearLayout houseContainer;
-    private Button map;
-    private Button bookNow;
+    private Button mapBtn;
+    private Button bookNowBtn;
     private String token;
-
+    ArrayList<Double> houseLocation = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,25 +60,25 @@ public class HouseDetailActivity extends AppCompatActivity {
         address = findViewById(R.id.address);
         description = findViewById(R.id.txt_description);
         houseContainer.setVisibility(View.GONE);
-        map = (Button) findViewById(R.id.map);
-        bookNow = (Button) findViewById(R.id.book);
+        mapBtn =  findViewById(R.id.map_btn);
+        bookNowBtn =  findViewById(R.id.book_btn);
 
         fetchData(houseId);
         Storage storage = new Storage(this);
         token = storage.getToken();
 
-        map.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // To DO
+        mapBtn.setOnClickListener(v-> {
+                Intent intent = new Intent(HouseDetailActivity.this, HouseMapLocation.class);
+                intent.putExtra("longitude",houseLocation.get(0));
+                intent.putExtra("latitude",houseLocation.get(1));
+                startActivity(intent);
             }
-        });
+        );
 
-        bookNow.setOnClickListener(new View.OnClickListener() {
+        bookNowBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // To DO
-
+                System.out.println("============================="+"Hello from book");
             }
         });
 
@@ -98,7 +102,7 @@ public class HouseDetailActivity extends AppCompatActivity {
                             internet.setText(String.join("-", data.getInternet()));
                             address.setText(data.getLocation().getAddress());
                             description.setText(data.getDescription());
-
+                            houseLocation=  data.getLocation().getCoordinates();
                             GridLayout gallery = findViewById(R.id.gallery);
                             for(String image: data.getImages()){
                                 CardView card = new CardView(HouseDetailActivity.this);
