@@ -22,9 +22,16 @@
     <!-- String Resources for Sign Up Screen -->
     <string name="Signup">Sign Up</string>
     <string name="Already_have_Account">Already Have An Account?</string>
+    <string name="house_hunting_title">House Hunting</string>
+    <string name="create_account">Create an account</string>
+    <string name="names_hint">Names</string>
+    <string name="email_hint">Email</string>
+    <string name="phone_hint">Phone</string>
+    <string name="password_hint">Password</string>
 
     <!-- ************ OTP Verification ************* -->
     <string name="Sigin_text">Sign In To Continue</string>
+    <string name="login_btn">Login</string>
 
     <!-- OTP Verification -->
     <string name="verification_code">Verification Code</string>
@@ -69,6 +76,8 @@
     <string name="map_location_choice">Map</string>
 
     <string name="house_map_title">House map location</string>
+    <string name="map_house_btn">Map</string>
+    <string name="book_house_btn">Book now</string>
 
 
 </resources>
