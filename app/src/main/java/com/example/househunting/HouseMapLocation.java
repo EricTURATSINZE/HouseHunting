@@ -37,7 +37,7 @@ public class HouseMapLocation extends FragmentActivity implements OnMapReadyCall
 
             googleMapLocation = googleMap;
             LatLng houseLocation = new LatLng(lat, lng);
-            googleMapLocation.addMarker(new MarkerOptions().position(houseLocation).title("House map location"));
+            googleMapLocation.addMarker(new MarkerOptions().position(houseLocation).title(String.valueOf(R.string.house_map_title)));
             googleMapLocation.moveCamera(CameraUpdateFactory.newLatLng(houseLocation));
             googleMapLocation.animateCamera(CameraUpdateFactory.newLatLngZoom(houseLocation,20));
     }
