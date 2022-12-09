@@ -1,5 +1,6 @@
 package com.example.househunting.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.househunting.LoginActivity;
 import com.example.househunting.R;
 import com.example.househunting.model.auth.Profile;
 import com.example.househunting.model.auth.ProfileResponse;
@@ -33,6 +35,7 @@ public class ProfileFragment extends Fragment {
     private TextView email;
     private TextView phone;
     private TextView manageHousebtn;
+    private TextView logoutBtn;
     private ShimmerFrameLayout shimmerFrameLayout;
     private LinearLayout profileContainer;
     private RelativeLayout info;
@@ -53,7 +56,8 @@ public class ProfileFragment extends Fragment {
         phone = view.findViewById(R.id.phone_tv);
         manageHousebtn = view.findViewById(R.id.manage_btn);
         profileContainer = view.findViewById(R.id.profile_container);
-        info = view.findViewById(R.id.info);
+        logoutBtn = view.findViewById(R.id.logout_btn);
+                info = view.findViewById(R.id.info);
         info.setVisibility(View.GONE);
         profile.setVisibility(View.GONE);
         profileContainer.setVisibility(View.GONE);
@@ -62,6 +66,17 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 // TO DO
+            }
+        });
+
+        logoutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Storage storage = new Storage(getContext());
+                storage.setLogin(false);
+                storage.setToken("");
+                Intent intent = new Intent(getContext(), LoginActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -85,10 +100,16 @@ public class ProfileFragment extends Fragment {
                             info.setVisibility(View.VISIBLE);
 
                             Profile data = response.body().getData();
-                            String fname = data.getNames().split(" ")[0];
-                            String lname = data.getNames().split(" ")[1];
+                            String arr[] = data.getNames().split(" ");
+                            String fname = null;
+                            String lname = null;
+                            if(arr.length > 2){
+                                 fname = data.getNames().split(" ")[0];
+                                 lname = data.getNames().split(" ")[1];
+                            } else
+                                fname = data.getNames().split(" ")[0];
                             LoadImage.loadImage(getContext(), data.getProfile(), profile, R.drawable.ic_profile);
-                            greetings.setText(getString(R.string.greeting) + " " + fname);
+                            greetings.setText(getString(R.string.greeting) + " " + (fname.isEmpty() ? "User" : fname));
                             firstName.setText(fname);
                             lastName.setText(lname);
                             phone.setText(data.getPhone());

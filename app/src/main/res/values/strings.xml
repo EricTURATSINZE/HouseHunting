@@ -22,19 +22,63 @@
     <!-- String Resources for Sign Up Screen -->
     <string name="Signup">Sign Up</string>
     <string name="Already_have_Account">Already Have An Account?</string>
+    <string name="house_hunting_title">House Hunting</string>
+    <string name="create_account">Create an account</string>
+    <string name="names_hint">Names</string>
+    <string name="email_hint">Email</string>
+    <string name="phone_hint">Phone</string>
+    <string name="password_hint">Password</string>
 
     <!-- ************ OTP Verification ************* -->
     <string name="Sigin_text">Sign In To Continue</string>
+    <string name="login_btn">Login</string>
 
     <!-- OTP Verification -->
     <string name="verification_code">Verification Code</string>
     <string name="action_enter_otp">Please enter the verification code sent to your andrew email</string>
     <string name="verify_email">Verify Code</string>
     <string name="resend_otp">Re-send Code</string>
-    <string name="loading">Loading...</string>
+
+    <string name="loading">Loading.....</string>
     <string name="currency">rwf</string>
-    <string name="month">/mon</string>
+    <string name="month">/monthly</string>
     <string name="rooms">Bedrooms</string>
     <string name="greeting">Hello,</string>
+<<<<<<< HEAD
     <string name="no_data_available">no_string</string>
+=======
+    <string name="foreground">"Service to pull new houses"</string>
+    <string name="notificationTitle">New house has been created</string>
+    <string name="notificationBody">The newly created house match your preferences, Be the first person to talk to the own!</string>
+    <string name="near">Km away from Campus</string>
+
+    <!-- Login -->
+    <string name="no_account">Don\'t Have Account?</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <!-- ******** register house************-->
+    <!-- Author: NGIRIMANA Schadrack -->
+    <string name="house_address_label"> House address</string>
+    <string name="house_price_label_label"> Price per month</string>
+    <string name="house_bedroom_label"> Bedroom</string>
+    <string name="house_bathroom_label"> Bathroom</string>
+    <string name="house_main_image_label"> Main image</string>
+    <string name="house_first_step_btn"> Next</string>
+    <string name="house_more_images">More images</string>
+    <string name="house_description">Description</string>
+    <string name="house_landlord_names">Landlord names</string>
+    <string name="house_landlord_contact">Landlord contact</string>
+    <string name="house_second_step_btn"> Submit</string>
+    <string name="house_location_choice">Choose location mode</string>
+
+    <string name="house_map_title">House map location</string>
+    <string name="map_house_btn">Map</string>
+    <string name="book_house_btn">Book now</string>
+
+
+>>>>>>> c356b5d55eba9d25885ecd5ef2c69e2206110cf8
 </resources>

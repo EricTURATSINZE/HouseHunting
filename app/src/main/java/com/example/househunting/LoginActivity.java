@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.househunting.model.auth.SignupResponse;
 import com.example.househunting.network.AuthApiService;
 import com.example.househunting.network.RetrofitClient;
+import com.example.househunting.utils.Storage;
 import com.google.android.material.snackbar.Snackbar;
 
 import retrofit2.Call;
@@ -22,9 +23,11 @@ import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
     TextView email;
+    TextView signup;
     EditText password;
     Button login_btn;
     ProgressDialog progressDialog;
+    Storage storage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +37,17 @@ public class LoginActivity extends AppCompatActivity {
         email = findViewById(R.id.email_tv);
         password = (EditText) findViewById(R.id.password_et);
         login_btn = (Button) findViewById(R.id.login_btn);
-//        startActivity(new Intent(Login.this, MainActivity.class));
+        signup = (TextView) findViewById(R.id.signup_tv);
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading ...");
+        storage = new Storage(this);
+
+        signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
+            }
+        });
 
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +67,8 @@ public class LoginActivity extends AppCompatActivity {
                         progressDialog.dismiss();
                         if (response.code()== 200) {
                             try {
+                                storage.setToken(response.body().getUser().getToken());
+                                storage.setLogin(true);
                                 Intent i = new Intent(LoginActivity.this, MainActivity.class);
                                 startActivity(i);
                             } catch (Exception e) {

@@ -7,6 +7,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -23,6 +24,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.househunting.HouseDetailActivity;
 import com.example.househunting.R;
 import com.example.househunting.adapter.HouseAdapter;
 import com.example.househunting.model.house.CriteriaGlobal;
@@ -33,6 +35,7 @@ import com.example.househunting.model.house.CriteriaWifi;
 import com.example.househunting.model.house.Data;
 import com.example.househunting.model.house.ViewAllHouseResponse;
 import com.example.househunting.network.ApiService;
+import com.example.househunting.network.HouseApiService;
 import com.example.househunting.network.RetrofitClient;
 import com.example.househunting.utils.CustomDistanceComparator;
 import com.example.househunting.utils.CustomPriceComparator;
@@ -228,7 +231,7 @@ public class HomeFragment extends Fragment implements LocationListener {
     private void fetchData() {
         Storage storage = new Storage(getContext());
         String token = storage.getToken();
-        RetrofitClient.getClient("").create(ApiService.class)
+        RetrofitClient.getClient("").create(HouseApiService.class)
                 .getAllHouse(token)
                 .enqueue(new Callback<ViewAllHouseResponse>() {
                     @Override
@@ -237,10 +240,17 @@ public class HomeFragment extends Fragment implements LocationListener {
                             shimmerFrameLayout.stopShimmer();
                             shimmerFrameLayout.setVisibility(View.GONE);
                             mRecyclerView.setVisibility(View.VISIBLE);
-                            assert response.body() != null;
-                            houseList = (ArrayList<Data>) new CriteriaVisible().meetCriteria(response.body().getData());
-                            houseAdapter = new HouseAdapter(houseList, location);
+                            ArrayList<Data> data = response.body().getData();
+                            houseAdapter = new HouseAdapter(data);
                             mRecyclerView.setAdapter(houseAdapter);
+                            houseAdapter.setOnItemClickListener(new HouseAdapter.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(int position) {
+                                    Intent intent = new Intent(getContext(), HouseDetailActivity.class);
+                                    intent.putExtra("houseId", data.get(position).get_id());
+                                    startActivity(intent);
+                                }
+                            });
 
                         }
                     }
