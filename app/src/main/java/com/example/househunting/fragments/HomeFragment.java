@@ -34,7 +34,6 @@ import com.example.househunting.model.house.CriteriaVisible;
 import com.example.househunting.model.house.CriteriaWifi;
 import com.example.househunting.model.house.Data;
 import com.example.househunting.model.house.ViewAllHouseResponse;
-import com.example.househunting.network.ApiService;
 import com.example.househunting.network.HouseApiService;
 import com.example.househunting.network.RetrofitClient;
 import com.example.househunting.utils.CustomDistanceComparator;
@@ -242,6 +241,7 @@ public class HomeFragment extends Fragment implements LocationListener {
                             mRecyclerView.setVisibility(View.VISIBLE);
                             ArrayList<Data> data = response.body().getData();
                             houseAdapter = new HouseAdapter(data);
+                            houseList = data;
                             mRecyclerView.setAdapter(houseAdapter);
                             houseAdapter.setOnItemClickListener(new HouseAdapter.OnItemClickListener() {
                                 @Override

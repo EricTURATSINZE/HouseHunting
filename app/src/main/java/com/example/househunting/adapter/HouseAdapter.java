@@ -72,7 +72,6 @@ public class HouseAdapter extends RecyclerView.Adapter<HouseAdapter.ViewHolder> 
             textName = view.findViewById(R.id.textName);
             address = view.findViewById(R.id.address);
             priceText = view.findViewById(R.id.textPrice);
-            distanceText = view.findViewById(R.id.distance);
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -145,10 +144,10 @@ public class HouseAdapter extends RecyclerView.Adapter<HouseAdapter.ViewHolder> 
         Location loc = new Location("dummyprovider");
         loc.setLatitude(houseList.get(pos).getLocation().getCoordinates().get(0));
         loc.setLongitude(houseList.get(pos).getLocation().getCoordinates().get(1));
-        int distance = EarthDistance.distance(location, loc);
+        int nearDistance = EarthDistance.distance(location, loc);
 
         if(houseList.get(pos).getDistance() == null)
-            houseList.get(pos).setDistance(distance);
+            houseList.get(pos).setDistance(nearDistance);
 
         DecimalFormat formatter = (DecimalFormat) NumberFormat.getInstance(Locale.US);
         DecimalFormatSymbols symbols = formatter.getDecimalFormatSymbols();
