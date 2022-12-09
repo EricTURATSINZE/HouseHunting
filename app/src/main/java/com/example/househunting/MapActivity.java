@@ -2,6 +2,7 @@ package com.example.househunting;
 
 import android.Manifest;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -23,13 +24,13 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class MapActivity extends FragmentActivity {
+public class MapActivity extends FragmentActivity implements LocationDialog.LocationDialogListener {
     private static final int LOCATION_PERMISSION_CODE = 101;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.map_activity);
+        setContentView(R.layout.map_activity2);
 
 
         // Initialize map fragment
@@ -80,5 +81,11 @@ public class MapActivity extends FragmentActivity {
     public void openDialog() {
         LocationDialog exampleDialog = new LocationDialog();
         exampleDialog.show(getSupportFragmentManager(), "example dialog");
+    }
+
+    @Override
+    public void onYesClicked() {
+        System.out.println("Navigating backkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk ");
+        startActivity(new Intent(MapActivity.this, RegisterHouseFirstStep.class));
     }
 }

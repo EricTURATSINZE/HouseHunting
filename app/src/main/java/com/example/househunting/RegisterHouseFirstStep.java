@@ -73,11 +73,14 @@ public class RegisterHouseFirstStep extends AppCompatActivity implements
     Spinner locationSpinner;
     ArrayList<String> locationChoices = new ArrayList<>();
     Location houseCoordinates;
+    MyCustomApplication application;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_house_first_step);
+        application = new MyCustomApplication();
         houseAddress = findViewById(R.id.house_address);
         pricePerMonth = findViewById(R.id.price_per_month);
         numberOfBathroom = findViewById(R.id.house_bathroom);
@@ -85,6 +88,10 @@ public class RegisterHouseFirstStep extends AppCompatActivity implements
         mainImage= findViewById(R.id.house_main_image);
         nextButton = findViewById(R.id.house_next_btn);
         locationSpinner = (Spinner) findViewById(R.id.spinner_location);
+
+//        numberOfBathroom.setText(application.getBathroom());
+        pricePerMonth.setText(((MyCustomApplication)getApplication()).getPrice());
+        System.out.println("Priceeeeeeeeeeeeeeeeeeeeeeeeeee========================= " + application.getPrice());
 
         locationChoices.add(getApplicationContext().getString(R.string.location_choice));
         locationChoices.add(getApplicationContext().getString(R.string.current_location_choice));
@@ -104,13 +111,9 @@ public class RegisterHouseFirstStep extends AppCompatActivity implements
         mainImage.setOnClickListener(v->
         {
             imagePickDialog();
-            System.out.println("========================================="+houseCoordinates.getLongitude());
 
         });
 
-
-
-        initConfig();
         /**
          * Setting sending data to the next screen and upload main image to cloudinary
          */
@@ -194,20 +197,6 @@ public class RegisterHouseFirstStep extends AppCompatActivity implements
                 }
             }).dispatch();
         });
-    }
-
-    /**
-     * Initializing cloudinary configuration
-     */
-
-    private void initConfig()
-    {
-        Map config = new HashMap();
-        config.put("cloud_name", "kuranga");
-        config.put("api_key","622489496465415");
-        config.put("api_secret","dAogkM6LaPF9S_m9oHKnHquzITA");
-        config.put("secure", true);
-        MediaManager.init(this, config);
     }
 
     /**
@@ -316,6 +305,16 @@ public class RegisterHouseFirstStep extends AppCompatActivity implements
             houseCoordinates= LocationService.getCurrentLocation(this, this, REQUEST_LOCATION);
         } else if (choice.equals(getApplicationContext().getString(R.string.map_location_choice)))
         {
+            application.setBathroom(String.valueOf(numberOfBathroom.getText()));
+            application.setBedroom(String.valueOf(numberOfBedrooms.getText()));
+
+            ((MyCustomApplication)getApplication()).setPrice(String.valueOf(pricePerMonth.getText()));
+            System.out.println("Priceeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee " + application.getPrice());
+//            mainImageUrl= (String) resultData.get("url");
+//            houseLocation = String.valueOf(houseAddress.getText());
+//            bedroom= String.valueOf(numberOfBedrooms.getText());
+//            bathroom =
+//            price = String.valueOf(pricePerMonth.getText());
             startActivity(new Intent(RegisterHouseFirstStep.this, MapActivity.class));
         }
     }

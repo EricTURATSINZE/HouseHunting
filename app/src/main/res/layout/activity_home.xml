@@ -23,11 +23,11 @@
         android:layout_marginRight="25dp"
         android:textAlignment="center"
         >
+
         <ImageView
             android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="@drawable/ic_baseline_add_btn"
-            />
+            android:layout_height="70dp"
+            android:src="@drawable/ic_baseline_add_btn" />
     </RelativeLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
