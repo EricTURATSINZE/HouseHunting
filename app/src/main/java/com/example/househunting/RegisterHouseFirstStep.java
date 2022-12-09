@@ -40,6 +40,7 @@ import android.widget.Toast;
 import com.cloudinary.android.MediaManager;
 import com.cloudinary.android.callback.ErrorInfo;
 import com.cloudinary.android.callback.UploadCallback;
+import com.example.househunting.services.LocationService;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -85,9 +86,9 @@ public class RegisterHouseFirstStep extends AppCompatActivity implements
         nextButton = findViewById(R.id.house_next_btn);
         locationSpinner = (Spinner) findViewById(R.id.spinner_location);
 
-        locationChoices.add("Select mode");
-        locationChoices.add("Current location");
-        locationChoices.add("From google map");
+        locationChoices.add(getApplicationContext().getString(R.string.location_choice));
+        locationChoices.add(getApplicationContext().getString(R.string.current_location_choice));
+        locationChoices.add(getApplicationContext().getString(R.string.map_location_choice));
 
         /**
          * setting the location choice mode
@@ -310,9 +311,12 @@ public class RegisterHouseFirstStep extends AppCompatActivity implements
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
     {
         String choice= locationChoices.get(position);
-        if(choice.equals("Current location"))
+        if(choice.equals(getApplicationContext().getString(R.string.current_location_choice)))
         {
-            houseCoordinates= getCurrentLocation();
+            houseCoordinates= LocationService.getCurrentLocation(this, this, REQUEST_LOCATION);
+        } else if (choice.equals(getApplicationContext().getString(R.string.map_location_choice)))
+        {
+            startActivity(new Intent(RegisterHouseFirstStep.this, MapActivity.class));
         }
     }
 
@@ -326,18 +330,4 @@ public class RegisterHouseFirstStep extends AppCompatActivity implements
      * getting current location
      */
 
-    private Location getCurrentLocation()
-    {
-        LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        Location loc=null;
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
-        {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
-        }
-        else
-        {
-            loc = lm.getLastKnownLocation("gps");
-        }
-        return loc;
-    }
 }

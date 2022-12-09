@@ -1,6 +1,7 @@
 package com.example.househunting;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -11,12 +12,16 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
+import com.example.househunting.services.LocationService;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MapActivity extends FragmentActivity {
     private static final int LOCATION_PERMISSION_CODE = 101;
@@ -26,12 +31,6 @@ public class MapActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.map_activity);
 
-        if(isLocationPermissionGranted()) {
-
-        } else {
-            requestLocationPermission();
-        }
-
 
         // Initialize map fragment
         SupportMapFragment supportMapFragment=(SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.google_map);
@@ -40,20 +39,12 @@ public class MapActivity extends FragmentActivity {
         supportMapFragment.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(GoogleMap googleMap) {
-//                MarkerOptions markerOptions=new MarkerOptions();
-//                Location loc = LocationParent.getLoc();
-//                LatLng latLng;
-//
-//                if(loc == null) {
-//                    latLng = new LatLng(-1.97448365, 30.12518607);
-//                } else {
-//                    latLng = new LatLng(loc.getLatitude(), loc.getLongitude());
-//                }
-//
-//                markerOptions.position(latLng);
-//                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,14));
-//                googleMap.addMarker(markerOptions);
-//                 When map is loaded
+                MarkerOptions markerOptions=new MarkerOptions();
+                Location loc = LocationService.getCurrentLocation(MapActivity.this, MapActivity.this, LOCATION_PERMISSION_CODE);
+
+                LatLng latLng = new LatLng(loc.getLatitude(), loc.getLongitude());
+                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,13));
+
                 googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
                     @Override
                     public void onMapClick(LatLng latLng) {
@@ -64,27 +55,30 @@ public class MapActivity extends FragmentActivity {
                         markerOptions.position(latLng);
                         // Set title of marker
                         markerOptions.title(latLng.latitude+" : "+latLng.longitude);
+                        Location newLocation = new Location(loc);
+                        newLocation.setLatitude(latLng.latitude);
+                        newLocation.setLongitude(latLng.longitude);
+                        LocationService.setLocation(newLocation);
                         // Remove all marker
                         googleMap.clear();
                         // Animating to zoom the marker
-                        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,10));
+                        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,14));
                         // Add marker on map
                         googleMap.addMarker(markerOptions);
+                        new Timer().schedule(new TimerTask() {
+                            @Override
+                            public void run() {
+                                openDialog();
+                            }
+                        }, 2000L);
                     }
                 });
             }
         });
     }
 
-    private boolean isLocationPermissionGranted() {
-        if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    private void requestLocationPermission() {
-        ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_PERMISSION_CODE);
+    public void openDialog() {
+        LocationDialog exampleDialog = new LocationDialog();
+        exampleDialog.show(getSupportFragmentManager(), "example dialog");
     }
 }

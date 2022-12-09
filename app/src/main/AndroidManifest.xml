@@ -35,6 +35,7 @@
         <activity android:name=".LoginActivity" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".HouseDetailActivity" />
+        <activity android:name=".MapActivity" />
         <activity
             android:name=".SplashScreenActivity"
             android:exported="true" >
