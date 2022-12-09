@@ -221,7 +221,7 @@
                 android:backgroundTint="@color/white"
                 android:drawableLeft="@drawable/ic_map"
                 android:paddingLeft="23dp"
-                android:text="Map"
+                android:text="@string/map_house_btn"
                 android:textColor="@color/colorPrimary" />
 
             <Button
@@ -231,7 +231,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/colorPrimary"
-                android:text="Book Now" />
+                android:text="@string/book_house_btn" />
         </LinearLayout>
     </LinearLayout>
 

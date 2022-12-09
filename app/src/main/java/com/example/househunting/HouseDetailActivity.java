@@ -1,6 +1,7 @@
 package com.example.househunting;
 import android.app.ActionBar;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +43,7 @@ public class HouseDetailActivity extends AppCompatActivity {
     private Button bookNowBtn;
     private String token;
     ArrayList<Double> houseLocation = new ArrayList<>();
+    String landlordContact;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,20 +70,32 @@ public class HouseDetailActivity extends AppCompatActivity {
         token = storage.getToken();
 
         mapBtn.setOnClickListener(v-> {
-                Intent intent = new Intent(HouseDetailActivity.this, HouseMapLocation.class);
-                intent.putExtra("longitude",houseLocation.get(0));
-                intent.putExtra("latitude",houseLocation.get(1));
-                startActivity(intent);
-            }
-        );
+            /**
+             * Author NGIRIMANA Schadrack
+             */
+            Intent intent = new Intent(HouseDetailActivity.this, HouseMapLocation.class);
+            intent.putExtra("longitude",houseLocation.get(0));
+            intent.putExtra("latitude",houseLocation.get(1));
+            startActivity(intent);
 
-        bookNowBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                System.out.println("============================="+"Hello from book");
-            }
         });
 
+        bookNowBtn.setOnClickListener(v-> {
+
+            /**
+             * Author NGIRIMANA Schadrack
+             */
+            try
+            {
+                Intent intent = new Intent ( Intent.ACTION_VIEW );
+                intent.setData ( Uri.parse ( "https://wa.me/" +landlordContact + "/?text=" + "") );
+                startActivity ( intent );
+            } catch (Exception e)
+            {
+                Toast.makeText(HouseDetailActivity.this, "Whatsapp app not installed in your phone", Toast.LENGTH_SHORT).show();
+                e.printStackTrace();
+            }
+        });
     }
 
     private void fetchData(String id){
@@ -103,6 +117,7 @@ public class HouseDetailActivity extends AppCompatActivity {
                             address.setText(data.getLocation().getAddress());
                             description.setText(data.getDescription());
                             houseLocation=  data.getLocation().getCoordinates();
+                            landlordContact = data.getOwnerInfo().getPhone();
                             GridLayout gallery = findViewById(R.id.gallery);
                             for(String image: data.getImages()){
                                 CardView card = new CardView(HouseDetailActivity.this);
