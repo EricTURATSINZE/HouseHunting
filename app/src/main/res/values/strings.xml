@@ -68,5 +68,7 @@
     <string name="current_location_choice">Current Location</string>
     <string name="map_location_choice">Map</string>
 
+    <string name="house_map_title">House map location</string>
+
 
 </resources>

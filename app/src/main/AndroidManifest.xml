@@ -36,6 +36,7 @@
         <activity android:name=".SignUpActivity" />
         <activity android:name=".HouseDetailActivity" />
         <activity android:name=".MapActivity" />
+        <activity android:name=".HouseMapLocation" />
         <activity
             android:name=".SplashScreenActivity"
             android:exported="true" >
@@ -56,6 +57,9 @@
             android:name="CLOUDINARY_URL"
             android:value="CLOUDINARY_URL=cloudinary://622489496465415:dAogkM6LaPF9S_m9oHKnHquzITA@kuranga"
             />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAGqdDkrQVUQiWYTKwqWjF5mqCtcLSgEwE"/>
     </application>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />

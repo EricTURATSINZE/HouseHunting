@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@color/white">
 
     <com.facebook.shimmer.ShimmerFrameLayout
@@ -11,9 +11,7 @@
         android:layout_height="match_parent"
         android:id="@+id/shimmer"
         >
-
         <include layout="@layout/shimmer_house_layout"></include>
-
     </com.facebook.shimmer.ShimmerFrameLayout>
 
     <LinearLayout
@@ -215,11 +213,11 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/map"
+                android:id="@+id/map_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
-                android:layout_weight="1"
+
                 android:backgroundTint="@color/white"
                 android:drawableLeft="@drawable/ic_map"
                 android:paddingLeft="23dp"
@@ -227,7 +225,7 @@
                 android:textColor="@color/colorPrimary" />
 
             <Button
-                android:id="@+id/book"
+                android:id="@+id/book_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -236,4 +234,5 @@
                 android:text="Book Now" />
         </LinearLayout>
     </LinearLayout>
-</RelativeLayout>
+
+</LinearLayout>
