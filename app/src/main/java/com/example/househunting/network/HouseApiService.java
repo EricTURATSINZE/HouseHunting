@@ -1,16 +1,22 @@
 package com.example.househunting.network;
 
+import com.example.househunting.model.RootResponse;
 import com.example.househunting.model.house.ViewAllHouseResponse;
 import com.example.househunting.model.house.ViewHouseResponse;
 
 import retrofit2.Call;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public interface HouseApiService {
     @GET("houses")
     Call<ViewAllHouseResponse> getAllHouse(@Header("Authorization") String token);
+
+    @GET("houses/my-houses")
+    Call<ViewAllHouseResponse> getMyHouses(@Header("Authorization") String token);
 
     @GET("houses/{id}")
     Call<ViewHouseResponse> getHouse(@Path("id") String id,
@@ -19,6 +25,16 @@ public interface HouseApiService {
 
     @GET("houses/preferred-houses")
     Call<ViewAllHouseResponse> getPreferredHouses(@Header("Authorization") String token
+    );
+
+    @DELETE("houses/{id}")
+    Call<RootResponse> getDeleteHouse(@Path("id") String id,
+                                        @Header("Authorization") String token
+    );
+
+    @GET("houses/{id}/booked")
+    Call<RootResponse> getBookedHouse(@Path("id") String id,
+                                      @Header("Authorization") String token
     );
 }
 

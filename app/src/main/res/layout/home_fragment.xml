@@ -55,7 +55,7 @@
                 >
                 <TextView
                     android:id="@+id/amenity1"
-                    android:text="wifi"
+                    android:text="Wifi"
                     android:textColor="@color/white"
                     android:textSize="18dp"
                     android:layout_width="80dp"
