@@ -12,6 +12,9 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
 import android.Manifest;
 import android.app.Activity;
 import android.app.PendingIntent;
@@ -20,6 +23,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.location.Location;
 import android.location.LocationManager;
@@ -40,10 +45,12 @@ import android.widget.Toast;
 import com.cloudinary.android.MediaManager;
 import com.cloudinary.android.callback.ErrorInfo;
 import com.cloudinary.android.callback.UploadCallback;
+import com.example.househunting.fragments.ProfileFragment;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 
@@ -72,6 +79,10 @@ public class RegisterHouseFirstStep extends AppCompatActivity implements
     Spinner locationSpinner;
     ArrayList<String> locationChoices = new ArrayList<>();
     Location houseCoordinates;
+
+    private Spinner spinner;
+    public static final String[] languages = {"Select Language", "English", "Swahili", "Français"};
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -84,7 +95,7 @@ public class RegisterHouseFirstStep extends AppCompatActivity implements
         mainImage= findViewById(R.id.house_main_image);
         nextButton = findViewById(R.id.house_next_btn);
         locationSpinner = (Spinner) findViewById(R.id.spinner_location);
-
+        spinner = findViewById(R.id.spinner);
         locationChoices.add("Select mode");
         locationChoices.add("Current location");
         locationChoices.add("From google map");
@@ -93,7 +104,7 @@ public class RegisterHouseFirstStep extends AppCompatActivity implements
          * setting the location choice mode
          */
         locationSpinner .setOnItemSelectedListener(this);
-        ArrayAdapter choiceAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, locationChoices);
+        ArrayAdapter choiceAdapter = new ArrayAdapter(this, R.layout.spinner_item, locationChoices);
         choiceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         locationSpinner.setAdapter(choiceAdapter );
 
@@ -107,7 +118,36 @@ public class RegisterHouseFirstStep extends AppCompatActivity implements
 
         });
 
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,languages);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setSelection(0);
 
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selectedLang = parent.getItemAtPosition(position).toString();
+                if(selectedLang.equals("English")){
+                    setLocal(RegisterHouseFirstStep.this, "en");
+                    finish();
+                    startActivity(getIntent());
+
+                } else if(selectedLang.equals("Swahili")){
+                    setLocal(RegisterHouseFirstStep.this, "sw");
+                    finish();
+                    startActivity(getIntent());
+                } else if(selectedLang.equals("Français")){
+                    setLocal(RegisterHouseFirstStep.this, "fr");
+                    finish();
+                    startActivity(getIntent());
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         initConfig();
         /**
@@ -208,7 +248,6 @@ public class RegisterHouseFirstStep extends AppCompatActivity implements
         config.put("secure", true);
         MediaManager.init(this, config);
     }
-
     /**
      * Picking image dialog
      */
@@ -340,4 +379,14 @@ public class RegisterHouseFirstStep extends AppCompatActivity implements
         }
         return loc;
     }
+
+    private void setLocal(Activity activity, String langCode){
+        Locale locale = new Locale(langCode);
+        locale.setDefault(locale);
+        Resources resources = activity.getResources();
+        Configuration config = resources.getConfiguration();
+        config.setLocale(locale);
+        resources.updateConfiguration(config, resources.getDisplayMetrics());
+    }
+
 }
