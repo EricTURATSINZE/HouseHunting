@@ -278,7 +278,7 @@ public class HomeFragment extends Fragment implements LocationListener {
     private void fetchData(boolean isMyHouse) {
         Storage storage = new Storage(getContext());
         String token = storage.getToken();
-        RetrofitClient.getClient(isMyhouses?"houses/my-houses":"houses/my-houses").create(HouseApiService.class)
+        RetrofitClient.getClient("").create(HouseApiService.class)
                 .getMyHouses(token)
                 .enqueue(new Callback<ViewAllHouseResponse>() {
                     @Override
@@ -322,7 +322,7 @@ public class HomeFragment extends Fragment implements LocationListener {
     private void fetchData() {
         Storage storage = new Storage(getContext());
         String token = storage.getToken();
-        RetrofitClient.getClient(isMyhouses?"houses/my-houses":"houses/my-houses").create(HouseApiService.class)
+        RetrofitClient.getClient("").create(HouseApiService.class)
                 .getAllHouse(token)
                 .enqueue(new Callback<ViewAllHouseResponse>() {
                     @Override
