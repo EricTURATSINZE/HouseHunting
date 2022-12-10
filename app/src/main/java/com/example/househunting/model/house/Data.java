@@ -5,20 +5,30 @@ import java.util.ArrayList;
 public class Data {
     private Location location;
     private OwnerInfo ownerInfo;
-    private double ratingsAverage;
+    private Double ratingsAverage;
     private boolean available;
     private int ratingsQuantity;
     private ArrayList<String> images;
     private boolean visible;
     private String _id;
     private int bedRooms;
-    public int priceMonthly;
+    public Integer priceMonthly;
     private String description;
     private String imageCover;
     private int __v;
     private String id;
     private ArrayList<String> internet;
 
+    //calculated distance<David>
+    private Integer distance = null;
+
+    public Integer getDistance() {
+        return distance;
+    }
+
+    public void setDistance(Integer distance) {
+        this.distance = distance;
+    }
     public Location getLocation() {
         return location;
     }
@@ -27,7 +37,7 @@ public class Data {
         return ownerInfo;
     }
 
-    public double getRatingsAverage() {
+    public Double getRatingsAverage() {
         return ratingsAverage;
     }
 
@@ -55,7 +65,7 @@ public class Data {
         return bedRooms;
     }
 
-    public int getPriceMonthly() {
+    public Integer getPriceMonthly() {
         return priceMonthly;
     }
 
@@ -85,4 +95,5 @@ public class Data {
     public ArrayList<String> getInternet() {
         return internet;
     }
+
 }

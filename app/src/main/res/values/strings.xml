@@ -22,9 +22,16 @@
     <!-- String Resources for Sign Up Screen -->
     <string name="Signup">Sign Up</string>
     <string name="Already_have_Account">Already Have An Account?</string>
+    <string name="house_hunting_title">House Hunting</string>
+    <string name="create_account">Create an account</string>
+    <string name="names_hint">Names</string>
+    <string name="email_hint">Email</string>
+    <string name="phone_hint">Phone</string>
+    <string name="password_hint">Password</string>
 
     <!-- ************ OTP Verification ************* -->
     <string name="Sigin_text">Sign In To Continue</string>
+    <string name="login_btn">Login</string>
 
     <!-- OTP Verification -->
     <string name="verification_code">Verification Code</string>
@@ -37,6 +44,9 @@
     <string name="month">/monthly</string>
     <string name="rooms">Bedrooms</string>
     <string name="greeting">Hello,</string>
+
+    <string name="no_data_available">no_string</string>
+
     <string name="foreground">"Service to pull new houses"</string>
     <string name="notificationTitle">New house has been created</string>
     <string name="notificationBody">The newly created house match your preferences, Be the first person to talk to the own!</string>
@@ -77,5 +87,9 @@
     <string name="min_price">Min Price</string>
     <string name="location">location</string>
     <string name="number_of_bed">Number of Bed</string>
+
+    <string name="house_map_title">House map location</string>
+    <string name="map_house_btn">Map</string>
+    <string name="book_house_btn">Book now</string>
 
 </resources>

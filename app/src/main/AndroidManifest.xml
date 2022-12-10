@@ -28,7 +28,7 @@
         <activity android:name=".LoginActivity" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".HouseDetailActivity" />
-
+        <activity android:name=".HouseMapLocation" />
         <activity
             android:name=".SplashScreenActivity"
             android:exported="true" >
@@ -55,12 +55,23 @@
             android:value="CLOUDINARY_URL=cloudinary://622489496465415:dAogkM6LaPF9S_m9oHKnHquzITA@kuranga"
 
             />
-
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAGqdDkrQVUQiWYTKwqWjF5mqCtcLSgEwE"/>
     </application>
     <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- Always include this permission -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <!-- Include only if your app benefits from precise location access. -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <uses-permission android:name="android.permission.READ_PHONE_NUMBERS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
 
 </manifest>
