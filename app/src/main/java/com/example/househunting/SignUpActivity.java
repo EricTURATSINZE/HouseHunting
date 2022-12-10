@@ -60,8 +60,6 @@ public class SignUpActivity extends AppCompatActivity {
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                signup_btn_txt.setVisibility(View.GONE);
-                progressBar.setVisibility(View.VISIBLE);
                 signUp(view);
             }
         });

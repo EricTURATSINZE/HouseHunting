@@ -13,6 +13,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
+import com.example.househunting.model.HouseRegister.House;
 import com.example.househunting.services.LocationService;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -85,7 +86,10 @@ public class MapActivity extends FragmentActivity implements LocationDialog.Loca
 
     @Override
     public void onYesClicked() {
-        System.out.println("Navigating backkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk ");
+        System.out.println( ((MyCustomApplication)getApplication()).getHouse() == null);
+        System.out.println("YYYYYyyyyyyyyyyyyyyyyyyyye sit  9888 ");
+        House house = ((MyCustomApplication)getApplication()).getHouse();
+        house.getLocation().setCoordinates(new double[]{LocationService.getLocation().getLatitude(), LocationService.getLocation().getLongitude()});
         startActivity(new Intent(MapActivity.this, RegisterHouseFirstStep.class));
     }
 }

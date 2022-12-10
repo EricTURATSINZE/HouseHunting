@@ -1,11 +1,16 @@
-package com.example.househunting.model.house;
+package com.example.househunting.model.HouseRegister;
 
-public class OwnerInfo {
+public class LandLord {
     private String phone;
     private String names;
 
     public String getPhone() {
         return phone;
+    }
+
+    public LandLord(String phone, String names) {
+        this.phone = phone;
+        this.names = names;
     }
 
     public void setPhone(String phone) {

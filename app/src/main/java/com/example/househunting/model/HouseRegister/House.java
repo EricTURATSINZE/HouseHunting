@@ -1,53 +1,100 @@
 package com.example.househunting.model.HouseRegister;
 
-import android.location.Location;
+import com.example.househunting.model.house.OwnerInfo;
 
 import java.util.ArrayList;
 
 public class House {
-    private String houseLocation;
-    private Location location;
-    private String price;
-    private String bedroom;
-    private String bathroom;
+    private int bedrooms;
+    private int bathrooms;
+    private int priceMonthly;
+    private String description;
+    private ArrayList<String> images;
+    private String imageCover;
+    private ArrayList<String> internet;
+    private HouseLocation location;
+    private OwnerInfo ownerInfo;
 
-    public String getHouseLocation() {
-        return houseLocation;
+    public House() {
+        bedrooms = 0;
+        bathrooms = 0;
+        priceMonthly = 0;
+        images = new ArrayList<String>();
+        internet = new ArrayList<String>();
+        imageCover = null;
+        location = new HouseLocation();
+        ownerInfo = new OwnerInfo();
     }
 
-    public void setHouseLocation(String houseLocation) {
-        this.houseLocation = houseLocation;
+    public int getBedrooms() {
+        return bedrooms;
     }
 
-    public Location getLocation() {
+    public void setBedrooms(int bedrooms) {
+        this.bedrooms = bedrooms;
+    }
+
+    public int getBathrooms() {
+        return bathrooms;
+    }
+
+    public void setBathrooms(int bathrooms) {
+        this.bathrooms = bathrooms;
+    }
+
+    public int getPriceMonthly() {
+        return priceMonthly;
+    }
+
+    public void setPriceMonthly(int priceMonthly) {
+        this.priceMonthly = priceMonthly;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public ArrayList<String> getImages() {
+        return images;
+    }
+
+    public void setImages(ArrayList<String> images) {
+        this.images = images;
+    }
+
+    public ArrayList<String> getInternet() {
+        return internet;
+    }
+
+    public void setInternet(ArrayList<String> internet) {
+        this.internet = internet;
+    }
+
+    public String getImageCover() {
+        return imageCover;
+    }
+
+    public void setImageCover(String imageCover) {
+        this.imageCover = imageCover;
+    }
+
+    public HouseLocation getLocation() {
         return location;
     }
 
-    public void setLocation(Location location) {
+    public void setLocation(HouseLocation location) {
         this.location = location;
     }
 
-    public String getPrice() {
-        return price;
+    public OwnerInfo getOwnerInfo() {
+        return ownerInfo;
     }
 
-    public void setPrice(String price) {
-        this.price = price;
-    }
-
-    public String getBedroom() {
-        return bedroom;
-    }
-
-    public void setBedroom(String bedroom) {
-        this.bedroom = bedroom;
-    }
-
-    public String getBathroom() {
-        return bathroom;
-    }
-
-    public void setBathroom(String bathroom) {
-        this.bathroom = bathroom;
+    public void setOwnerInfo(OwnerInfo ownerInfo) {
+        this.ownerInfo = ownerInfo;
     }
 }

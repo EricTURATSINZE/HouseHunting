@@ -3,6 +3,7 @@ package com.example.househunting;
 import android.app.Application;
 
 import com.cloudinary.android.MediaManager;
+import com.example.househunting.model.HouseRegister.House;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,36 +14,14 @@ import java.util.Map;
 
 public class MyCustomApplication extends Application {
 
-    public String getHouseLocation() {
-        return houseLocation;
+    private House house;
+
+    public House getHouse() {
+        return house;
     }
 
-    public void setHouseLocation(String houseLocation) {
-        this.houseLocation = houseLocation;
-    }
-
-    public String getPrice() {
-        return price;
-    }
-
-    public void setPrice(String price) {
-        this.price = price;
-    }
-
-    public String getBedroom() {
-        return bedroom;
-    }
-
-    public void setBedroom(String bedroom) {
-        this.bedroom = bedroom;
-    }
-
-    public String getBathroom() {
-        return bathroom;
-    }
-
-    public void setBathroom(String bathroom) {
-        this.bathroom = bathroom;
+    public void setHouse(House house) {
+        this.house = house;
     }
 
     @Override

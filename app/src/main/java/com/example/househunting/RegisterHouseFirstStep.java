@@ -6,45 +6,39 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.app.Activity;
-import android.app.PendingIntent;
 import android.content.ContentValues;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.location.Location;
-import android.location.LocationManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cloudinary.android.MediaManager;
 import com.cloudinary.android.callback.ErrorInfo;
 import com.cloudinary.android.callback.UploadCallback;
+import com.example.househunting.model.HouseRegister.House;
 import com.example.househunting.services.LocationService;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 
@@ -55,13 +49,14 @@ import java.util.Map;
 public class RegisterHouseFirstStep extends AppCompatActivity implements
         AdapterView.OnItemSelectedListener
 {
-    Button nextButton;
-    EditText houseAddress;
+    RelativeLayout next_button;
+    TextView next;
+    EditText houseAddress_et;
     EditText pricePerMonth;
     EditText numberOfBedrooms;
     EditText numberOfBathroom;
     ImageView mainImage;
-    String houseLocation;
+    String houseAddress;
     String price;
     String bedroom;
     String bathroom;
@@ -74,6 +69,8 @@ public class RegisterHouseFirstStep extends AppCompatActivity implements
     ArrayList<String> locationChoices = new ArrayList<>();
     Location houseCoordinates;
     MyCustomApplication application;
+    ProgressBar progressBar;
+    House house;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -81,17 +78,31 @@ public class RegisterHouseFirstStep extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_house_first_step);
         application = new MyCustomApplication();
-        houseAddress = findViewById(R.id.house_address);
+        houseAddress_et = findViewById(R.id.house_address);
         pricePerMonth = findViewById(R.id.price_per_month);
         numberOfBathroom = findViewById(R.id.house_bathroom);
         numberOfBedrooms = findViewById(R.id.house_bedroom);
         mainImage= findViewById(R.id.house_main_image);
-        nextButton = findViewById(R.id.house_next_btn);
+        next_button = findViewById(R.id.loading_button);
+        next = findViewById(R.id.house_next_btn);
+        progressBar = (ProgressBar) findViewById(R.id.next_btn_pb);
         locationSpinner = (Spinner) findViewById(R.id.spinner_location);
 
-//        numberOfBathroom.setText(application.getBathroom());
-        pricePerMonth.setText(((MyCustomApplication)getApplication()).getPrice());
-        System.out.println("Priceeeeeeeeeeeeeeeeeeeeeeeeeee========================= " + application.getPrice());
+        /**
+         * Populating fields with their prior values, if there are, once you are navigating back to this screen
+         */
+        house = ((MyCustomApplication)getApplication()).getHouse();
+        if(house != null) {
+            numberOfBathroom.setText(String.valueOf(house.getBathrooms()));
+            numberOfBedrooms.setText(String.valueOf(house.getBedrooms()));
+            houseAddress_et.setText(house.getLocation().getAddress());
+            pricePerMonth.setText(String.valueOf(house.getPriceMonthly()));
+        } else {
+            House h = new House();
+            ((MyCustomApplication)getApplication()).setHouse(new House());
+            house = ((MyCustomApplication)getApplication()).getHouse();
+        }
+
 
         locationChoices.add(getApplicationContext().getString(R.string.location_choice));
         locationChoices.add(getApplicationContext().getString(R.string.current_location_choice));
@@ -117,85 +128,90 @@ public class RegisterHouseFirstStep extends AppCompatActivity implements
         /**
          * Setting sending data to the next screen and upload main image to cloudinary
          */
-        nextButton.setOnClickListener(v ->
+        next_button.setOnClickListener(v ->
         {
-            Log.d(TAG, ": "+" button clicked");
+            next.setVisibility(View.GONE);
+            progressBar.setVisibility(View.VISIBLE);
 
-            MediaManager.get().upload(imagePath).callback(new UploadCallback()
-            {
-                @Override
-                public void onStart(String requestId)
+            if(imagePath != null) {
+                MediaManager.get().upload(imagePath).callback(new UploadCallback()
                 {
-                    Log.d(TAG, "=================================: "+"started");
-                }
-
-                @Override
-                public void onProgress(String requestId, long bytes, long totalBytes)
-                {
-                    Log.d(TAG, "=================================: "+"uploading");
-                }
-
-                @Override
-                public void onSuccess(String requestId, Map resultData) {
-                    Log.d(TAG, "=================================: "+"success");
-                    mainImageUrl= (String) resultData.get("url");
-                    houseLocation = String.valueOf(houseAddress.getText());
-                    bedroom= String.valueOf(numberOfBedrooms.getText());
-                    bathroom = String.valueOf(numberOfBathroom.getText());
-                    price = String.valueOf(pricePerMonth.getText());
-
-
-                    if(houseLocation.length()==0)
+                    @Override
+                    public void onStart(String requestId)
                     {
-                        Toast.makeText(getApplicationContext(),"House address is empty",Toast.LENGTH_SHORT).show();
-                    }
-                    else if(bedroom.length()==0)
-                    {
-                        Toast.makeText(getApplicationContext(),"House bedroom is empty",Toast.LENGTH_SHORT).show();
-                    }
-                    else if(bathroom.length()==0)
-                    {
-                        Toast.makeText(getApplicationContext(),"House bathroom is empty",Toast.LENGTH_SHORT).show();
-                    }
-                    else if(price.length()==0)
-                    {
-                        Toast.makeText(getApplicationContext(),"House price is empty",Toast.LENGTH_SHORT).show();
-                    }
-                    else if(mainImageUrl.length()==0)
-                    {
-                        Toast.makeText(getApplicationContext(),"House main image is empty",Toast.LENGTH_SHORT).show();
-                    }
-                    else if (houseCoordinates == null) {
-                        Toast.makeText(getApplicationContext(),"The location is not available, try other way!",Toast.LENGTH_SHORT).show();
-                    }
-                    else
-                    {
-
-                        Intent intent = new Intent(RegisterHouseFirstStep.this, RegisterHouseSecondStep.class);
-                        intent.putExtra("address",houseLocation);
-                        intent.putExtra("price",price);
-                        intent.putExtra("bedroom",bedroom);
-                        intent.putExtra("bathroom",bathroom);
-                        intent.putExtra("main_image_url",mainImageUrl);
-                        intent.putExtra("latitude",houseCoordinates.getLatitude());
-                        intent.putExtra("longitude",houseCoordinates.getLongitude());
-
-                        startActivity(intent);
+                        Log.d(TAG, "=================================: "+"started");
                     }
 
-                    System.out.println("========================================="+resultData.get("url"));
-                }
-                @Override
-                public void onError(String requestId, ErrorInfo error)
-                {
-                    Log.d(TAG, "=================================: "+error);
-                }
-                @Override
-                public void onReschedule(String requestId, ErrorInfo error)
-                {
-                    Log.d(TAG, "=================================: "+error);
-                }
-            }).dispatch();
+                    @Override
+                    public void onProgress(String requestId, long bytes, long totalBytes)
+                    {
+                        Log.d(TAG, "=================================: "+"uploading");
+                    }
+
+                    @Override
+                    public void onSuccess(String requestId, Map resultData) {
+                        Log.d(TAG, "=================================: "+"success");
+                        mainImageUrl= (String) resultData.get("url");
+                        houseAddress = String.valueOf(houseAddress_et.getText());
+                        bedroom= String.valueOf(numberOfBedrooms.getText());
+                        bathroom = String.valueOf(numberOfBathroom.getText());
+                        price = String.valueOf(pricePerMonth.getText());
+
+
+                        if(houseAddress.length()==0)
+                        {
+                            Toast.makeText(getApplicationContext(),"House address is empty",Toast.LENGTH_SHORT).show();
+                        }
+                        else if(bedroom.length()==0)
+                        {
+                            Toast.makeText(getApplicationContext(),"House bedroom is empty",Toast.LENGTH_SHORT).show();
+                        }
+                        else if(bathroom.length()==0)
+                        {
+                            Toast.makeText(getApplicationContext(),"House bathroom is empty",Toast.LENGTH_SHORT).show();
+                        }
+                        else if(price.length()==0)
+                        {
+                            Toast.makeText(getApplicationContext(),"House price is empty",Toast.LENGTH_SHORT).show();
+                        }
+                        else if(mainImageUrl.length()==0)
+                        {
+                            Toast.makeText(getApplicationContext(),"House main image is empty",Toast.LENGTH_SHORT).show();
+                        }
+                        else if (houseCoordinates == null) {
+                            Toast.makeText(getApplicationContext(),"The location is not available, try other way!",Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                        {
+                            // Close the progress bar
+
+                            Intent intent = new Intent(RegisterHouseFirstStep.this, RegisterHouseSecondStep.class);
+                            house.getLocation().setAddress(houseAddress);
+                            house.setBathrooms(Integer.parseInt(bathroom));
+                            house.setBedrooms(Integer.parseInt(bedroom));
+                            house.setPriceMonthly(Integer.parseInt(price));
+                            house.setImageCover(mainImageUrl);
+                            next.setVisibility(View.VISIBLE);
+                            progressBar.setVisibility(View.GONE);
+                            startActivity(intent);
+                        }
+
+                        System.out.println("========================================="+resultData.get("url"));
+                    }
+                    @Override
+                    public void onError(String requestId, ErrorInfo error)
+                    {
+                        Log.d(TAG, "=================================: "+error);
+                    }
+                    @Override
+                    public void onReschedule(String requestId, ErrorInfo error)
+                    {
+                        Log.d(TAG, "=================================: "+error);
+                    }
+                }).dispatch();
+            } else {
+                Toast.makeText(getApplicationContext(),"Please Pick House Image",Toast.LENGTH_SHORT).show();
+            }
         });
     }
 
@@ -303,18 +319,14 @@ public class RegisterHouseFirstStep extends AppCompatActivity implements
         if(choice.equals(getApplicationContext().getString(R.string.current_location_choice)))
         {
             houseCoordinates= LocationService.getCurrentLocation(this, this, REQUEST_LOCATION);
+            house.getLocation().setCoordinates(new double[]{houseCoordinates.getLongitude(), houseCoordinates.getLatitude()});
         } else if (choice.equals(getApplicationContext().getString(R.string.map_location_choice)))
         {
-            application.setBathroom(String.valueOf(numberOfBathroom.getText()));
-            application.setBedroom(String.valueOf(numberOfBedrooms.getText()));
-
-            ((MyCustomApplication)getApplication()).setPrice(String.valueOf(pricePerMonth.getText()));
-            System.out.println("Priceeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee " + application.getPrice());
-//            mainImageUrl= (String) resultData.get("url");
-//            houseLocation = String.valueOf(houseAddress.getText());
-//            bedroom= String.valueOf(numberOfBedrooms.getText());
-//            bathroom =
-//            price = String.valueOf(pricePerMonth.getText());
+            house.getLocation().setAddress(String.valueOf(houseAddress_et.getText()));
+            if(!String.valueOf(numberOfBathroom.getText()).equals("")) house.setBathrooms(Integer.parseInt(String.valueOf(numberOfBathroom.getText())));
+            if(!String.valueOf(numberOfBedrooms.getText()).equals("")) house.setBedrooms(Integer.parseInt(String.valueOf(numberOfBedrooms.getText())));
+            if(!String.valueOf(pricePerMonth.getText()).equals("")) house.setPriceMonthly(Integer.parseInt(String.valueOf(pricePerMonth.getText())));
+            house.setImageCover(mainImageUrl);
             startActivity(new Intent(RegisterHouseFirstStep.this, MapActivity.class));
         }
     }

@@ -25,7 +25,7 @@ public class SplashScreenActivity extends AppCompatActivity {
 
     public void checkAuth(boolean isLoggedIn) {
         if(isLoggedIn) {
-            navigate(new Intent(SplashScreenActivity.this, SignUpActivity.class));
+            navigate(new Intent(SplashScreenActivity.this, MainActivity.class));
         } else {
             String token = storage.getToken();
 
