@@ -75,10 +75,21 @@
     <string name="house_second_step_btn"> Submit</string>
     <string name="house_location_choice">Choose location mode</string>
 
+    <!-- ******** register user preference ************-->
+    <!-- Author: Yves Ngabonziza -->
+    <string name="submit_preference">Submit preference</string>
+    <string name="canal_Box">Canal</string>
+    <string name="liquid">Liquid</string>
+    <string name="MTN">MTN</string>
+    <string name="None">None</string>
+    <string name="add_preference">Add Preference</string>
+    <string name="max_price">Max Price</string>
+    <string name="min_price">Min Price</string>
+    <string name="location">location</string>
+    <string name="number_of_bed">Number of Bed</string>
+
     <string name="house_map_title">House map location</string>
     <string name="map_house_btn">Map</string>
     <string name="book_house_btn">Book now</string>
 
-
->>>>>>> c356b5d55eba9d25885ecd5ef2c69e2206110cf8
 </resources>
