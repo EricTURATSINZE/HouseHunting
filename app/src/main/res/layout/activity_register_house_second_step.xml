@@ -15,7 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/house_more_images"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="30dp"
             android:textSize="14dp"
             android:layout_marginHorizontal="30dp"
             />
@@ -29,32 +29,66 @@
             android:layout_below="@+id/house_more_images_label"
             android:padding="2dp"
             android:src="@drawable/add_photo"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             />
         <TextView
             android:id="@+id/house_description_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:layout_marginHorizontal="30dp"
             android:layout_marginBottom="0dp"
             android:layout_below="@+id/house_more_images"
             android:text="@string/house_description"
             android:textSize="14dp"
             />
+
         <EditText
             android:id="@+id/house_description"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_marginVertical="15dp"
+            android:layout_height="100dp"
+            android:layout_below="@id/house_description_label"
             android:layout_marginHorizontal="30dp"
+            android:layout_marginVertical="15dp"
             android:background="@drawable/login_input"
             android:ems="10"
             android:inputType="text"
             android:paddingLeft="10dp"
-            android:layout_below="@id/house_description_label"
-            android:textSize="16dp"
+            android:textSize="16dp" />
+        <TextView
+            android:id="@+id/house_internet_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14dp"
+            android:text="@string/house_internet"
+            android:layout_marginHorizontal="30dp"
+            android:layout_below="@+id/house_description"
             />
+        <Spinner
+            android:id="@+id/house_internet"
+            android:layout_width="match_parent"
+            android:background="@drawable/login_input"
+            android:layout_height="50dp"
+            android:textSize="16dp"
+            android:paddingLeft="10dp"
+            android:layout_marginVertical="15dp"
+            android:layout_marginHorizontal="30dp"
+            android:layout_below="@+id/house_internet_label"
+            />
+<!--        <EditText-->
+<!--            android:id="@+id/house_internet"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:layout_marginVertical="10dp"-->
+<!--            android:layout_marginHorizontal="30dp"-->
+<!--            android:background="@drawable/login_input"-->
+<!--            android:ems="10"-->
+<!--            android:textSize="16dp"-->
+<!--            android:hint="@string/house_internet_hint"-->
+<!--            android:inputType="text"-->
+<!--            android:paddingLeft="10dp"-->
+<!--            android:layout_below="@+id/house_internet_label"-->
+<!--            />-->
         <TextView
             android:id="@+id/house_landlord_name_label"
             android:layout_width="wrap_content"
@@ -62,18 +96,17 @@
             android:textSize="14dp"
             android:text="@string/house_landlord_names"
             android:layout_marginHorizontal="30dp"
-            android:layout_below="@+id/house_description"
+            android:layout_below="@+id/house_internet"
             />
         <EditText
             android:id="@+id/house_landlord_name"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginVertical="15dp"
+            android:layout_marginVertical="10dp"
             android:layout_marginHorizontal="30dp"
             android:background="@drawable/login_input"
             android:ems="10"
             android:textSize="16dp"
-            android:hint="200,000 Rwf"
             android:inputType="text"
             android:paddingLeft="10dp"
             android:layout_below="@+id/house_landlord_name_label"
@@ -87,35 +120,38 @@
             android:layout_marginHorizontal="30dp"
             android:layout_below="@+id/house_landlord_name"
             />
+
+
         <EditText
             android:id="@+id/house_contact"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginVertical="15dp"
+            android:layout_below="@+id/house_contact_label"
             android:layout_marginHorizontal="30dp"
+            android:layout_marginVertical="10dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/login_input"
             android:ems="10"
             android:hint="3"
-            android:textSize="16dp"
             android:inputType="phone"
             android:paddingLeft="10dp"
-            android:layout_below="@+id/house_contact_label"
-            />
-
+            android:textSize="16dp" />
 
         <Button
             android:id="@+id/house_submit_btn"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:text="@string/house_second_step_btn"
-            android:textSize="20dp"
-            android:background="@drawable/login_button"
-            android:textStyle="bold"
-            android:textAllCaps="false"
-            android:layout_margin="30dp"
             android:layout_below="@id/house_contact"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/login_button"
 
-            />
+            android:text="@string/house_second_step_btn"
+            android:textAllCaps="false"
+            android:textSize="20dp"
+            android:textStyle="bold" />
     </RelativeLayout>
 
 </LinearLayout>

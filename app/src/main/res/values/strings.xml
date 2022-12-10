@@ -72,8 +72,24 @@
     <string name="house_description">Description</string>
     <string name="house_landlord_names">Landlord names</string>
     <string name="house_landlord_contact">Landlord contact</string>
+    <string name="house_internet">Internet</string>
+    <string name="house_internet_hint">Canal Box</string>
     <string name="house_second_step_btn"> Submit</string>
-    <string name="house_location_choice">Choose location mode</string>
+    <string name="house_location_choice">House Location</string>
+    <string name="location_choice">Select Mode</string>
+    <string name="current_location_choice">Current Location</string>
+    <string name="map_location_choice">Map</string>
+
+    <string name="house_map_title">House map location</string>
+    <string name="map_house_btn">Map</string>
+    <string name="book_house_btn">Book now</string>
+
+    <string name="canalbox_internet_choice">CanalBox</string>
+    <string name="liquid_internet_choice">Liquid</string>
+    <string name="mtn_internet_choice">Mtn</string>
+    <string name="airtel_internet_choice">Airtel</string>
+    <string name="mango_internet_choice">Mango</string>
+    <string name="no_internet_choice">No Internet</string>
 
     <!-- ******** register user preference ************-->
     <!-- Author: Yves Ngabonziza -->
