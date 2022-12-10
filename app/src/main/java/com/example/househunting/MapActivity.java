@@ -86,8 +86,6 @@ public class MapActivity extends FragmentActivity implements LocationDialog.Loca
 
     @Override
     public void onYesClicked() {
-        System.out.println( ((MyCustomApplication)getApplication()).getHouse() == null);
-        System.out.println("YYYYYyyyyyyyyyyyyyyyyyyyye sit  9888 ");
         House house = ((MyCustomApplication)getApplication()).getHouse();
         house.getLocation().setCoordinates(new double[]{LocationService.getLocation().getLatitude(), LocationService.getLocation().getLongitude()});
         startActivity(new Intent(MapActivity.this, RegisterHouseFirstStep.class));

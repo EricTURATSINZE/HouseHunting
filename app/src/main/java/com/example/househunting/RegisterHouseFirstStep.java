@@ -196,7 +196,6 @@ public class RegisterHouseFirstStep extends AppCompatActivity implements
                             startActivity(intent);
                         }
 
-                        System.out.println("========================================="+resultData.get("url"));
                     }
                     @Override
                     public void onError(String requestId, ErrorInfo error)
