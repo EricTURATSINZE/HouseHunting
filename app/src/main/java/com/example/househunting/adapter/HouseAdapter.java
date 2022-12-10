@@ -3,6 +3,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.Location;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,12 +15,19 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.househunting.HouseDetailActivity;
 import com.example.househunting.R;
+import com.example.househunting.fragments.HomeFragment;
 import com.example.househunting.model.house.Data;
+import com.example.househunting.utils.EarthDistance;
 import com.example.househunting.utils.CalculateDistance;
 import com.example.househunting.utils.LoadImage;
 import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 
 /** Author: David
@@ -29,6 +37,7 @@ public class HouseAdapter extends RecyclerView.Adapter<HouseAdapter.ViewHolder> 
 
     private ArrayList<Data> houseList;
     private int length;
+    private Location location;
     private static Context context;
     private OnItemClickListener mListener;
     public interface OnItemClickListener {
@@ -52,6 +61,7 @@ public class HouseAdapter extends RecyclerView.Adapter<HouseAdapter.ViewHolder> 
         private TextView textName;
         private TextView address;
         private TextView priceText;
+        private TextView distanceText;
 
 
         public ViewHolder(View view, final OnItemClickListener listener) {
@@ -96,14 +106,6 @@ public class HouseAdapter extends RecyclerView.Adapter<HouseAdapter.ViewHolder> 
         public TextView getPriceText() {
             return priceText;
         }
-
-//        @Override
-//        public void onClick(View v) {
-//            Intent intent = new Intent(context, HouseDetailActivity.class);
-//            intent.putExtra("houseId", "");
-//            context.startActivity(intent);
-////            Log.d(TAG, "onClick+++++++++++++++++++++++++++++ ");
-//        }
     }
 
     /**
@@ -115,6 +117,13 @@ public class HouseAdapter extends RecyclerView.Adapter<HouseAdapter.ViewHolder> 
     public HouseAdapter(ArrayList<Data> _houseList) {
         houseList = _houseList;
         length = _houseList.size();
+    }
+
+    public HouseAdapter(ArrayList<Data> _houseList, Location loc) {
+        houseList = _houseList;
+        length = _houseList.size();
+        location = loc;
+
     }
 
     // Create new views (invoked by the layout manager)
@@ -132,19 +141,27 @@ public class HouseAdapter extends RecyclerView.Adapter<HouseAdapter.ViewHolder> 
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
 
         int pos = position;
-        // Get element from your dataset at this position and replace the
-        // contents of the view with that element
-        Log.d("Test", "================" + houseList.size());
+        Location loc = new Location("dummyprovider");
+        loc.setLatitude(houseList.get(pos).getLocation().getCoordinates().get(0));
+        loc.setLongitude(houseList.get(pos).getLocation().getCoordinates().get(1));
+        int nearDistance = EarthDistance.distance(location, loc);
+
+        if(houseList.get(pos).getDistance() == null)
+            houseList.get(pos).setDistance(nearDistance);
+
+        DecimalFormat formatter = (DecimalFormat) NumberFormat.getInstance(Locale.US);
+        DecimalFormatSymbols symbols = formatter.getDecimalFormatSymbols();
+        symbols.setGroupingSeparator(' ');
+        formatter.setDecimalFormatSymbols(symbols);
+  
         ArrayList<Double> coordinates = houseList.get(pos).getLocation().getCoordinates();
         float distance = CalculateDistance.getDistance( coordinates.get(1), coordinates.get(0));
         viewHolder.getAddress().setText(String.valueOf(distance) + " " + context.getString(R.string.near));
         viewHolder.getTextName().setText(houseList.get(pos).getLocation().getAddress());
         viewHolder.getPriceText().setText(NumberFormat.getInstance().format(houseList.get(pos).getPriceMonthly()) + context.getString(R.string.currency));
         LoadImage.loadImage(context, houseList.get(pos).getImageCover(), viewHolder.getImage(), R.drawable.card_back);
-//        new DownloadImageFromInternet((ImageView) viewHolder.getImage()).execute(houseList.get(pos).getImageCover());
     }
 
-    // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
         return length;

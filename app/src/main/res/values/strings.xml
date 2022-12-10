@@ -44,6 +44,9 @@
     <string name="month">/monthly</string>
     <string name="rooms">Bedrooms</string>
     <string name="greeting">Hello,</string>
+
+    <string name="no_data_available">no_string</string>
+
     <string name="foreground">"Service to pull new houses"</string>
     <string name="notificationTitle">New house has been created</string>
     <string name="notificationBody">The newly created house match your preferences, Be the first person to talk to the own!</string>
@@ -77,4 +80,5 @@
     <string name="book_house_btn">Book now</string>
 
 
+>>>>>>> c356b5d55eba9d25885ecd5ef2c69e2206110cf8
 </resources>
