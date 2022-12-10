@@ -74,7 +74,11 @@ public class ProfileFragment extends Fragment {
         manageHousebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TO DO
+                Bundle bundle = new Bundle();
+                bundle.putBoolean("isMyHouses", true);
+                Fragment nextFrag= new HomeFragment();
+                nextFrag.setArguments(bundle);
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, nextFrag).commit();
             }
         });
 

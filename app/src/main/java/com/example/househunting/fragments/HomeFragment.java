@@ -1,5 +1,6 @@
 package com.example.househunting.fragments;
 
+import static android.content.ContentValues.TAG;
 import static android.content.Context.LOCATION_SERVICE;
 
 import android.annotation.SuppressLint;
@@ -57,11 +58,12 @@ public class HomeFragment extends Fragment implements LocationListener {
     private static final String KEY_LAYOUT_MANAGER = "layoutManager";
     private static final int SPAN_COUNT = 2;
     public static Location location;
+    public static boolean isMyhouses;
+    TextView empty_view ;
 
     @Override
     public void onLocationChanged(@NonNull Location _location) {
         location = _location;
-        Log.d("location", "location================" + _location.getAltitude());
     }
 
     private enum LayoutManagerType {
@@ -75,7 +77,8 @@ public class HomeFragment extends Fragment implements LocationListener {
     protected HouseAdapter houseAdapter;
     protected RecyclerView.LayoutManager mLayoutManager;
     protected TextView textView;
-    LocationManager locationManager;
+    protected LocationManager locationManager;
+
 
     ArrayList<Data> houseList;
     View view;
@@ -84,36 +87,57 @@ public class HomeFragment extends Fragment implements LocationListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        isMyhouses = getArguments() == null? false: getArguments().getBoolean("isMyHouses");
         getLocation();
         view = inflater.inflate(R.layout.home_fragment, container, false);
         TextView wifi = view.findViewById(R.id.amenity1);
         TextView nearest = view.findViewById(R.id.amenity2);
         TextView rated = view.findViewById(R.id.amenity3);
-        TextView empty_view = view.findViewById(R.id.empty_view);
         TextView search_button = view.findViewById(R.id.search_btn);
         TextView cheaper = view.findViewById(R.id.amenity4);
+        empty_view = view.findViewById(R.id.empty_view);
 
         shimmerFrameLayout = view.findViewById(R.id.shimmer);
         shimmerFrameLayout.startShimmer();
-        fetchData();
+
+        if(isMyhouses) fetchData(isMyhouses);
+        else
+            fetchData();
         // BEGIN_INCLUDE(initializeRecyclerView)
         mRecyclerView = view.findViewById(R.id.house_recycleview);
         mRecyclerView.setVisibility(View.GONE);
-
         nearest.setOnClickListener(v -> {
             ArrayList<Data> houses = (ArrayList<Data>) new CriteriaNearest(location).meetCriteria(houseList);
             Collections.sort(houses, new CustomDistanceComparator());
             empty_view.setVisibility(View.GONE);
             mRecyclerView.setVisibility(View.VISIBLE);
-            houseAdapter = new HouseAdapter(houses, location);
+            houseAdapter = new HouseAdapter(houses, location, isMyhouses);
             mRecyclerView.setAdapter(houseAdapter);
+            houseAdapter.setOnItemClickListener(new HouseAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(int position) {
+                    Intent intent = new Intent(getContext(), HouseDetailActivity.class);
+                    intent.putExtra("houseId", houses.get(position).get_id());
+                    startActivity(intent);
+                }
+            });
+
         });
         cheaper.setOnClickListener(v -> {
             Collections.sort(houseList, new CustomPriceComparator());
             empty_view.setVisibility(View.GONE);
             mRecyclerView.setVisibility(View.VISIBLE);
-            houseAdapter = new HouseAdapter(houseList, location);
+            houseAdapter = new HouseAdapter(houseList, location, isMyhouses);
             mRecyclerView.setAdapter(houseAdapter);
+
+            houseAdapter.setOnItemClickListener(new HouseAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(int position) {
+                    Intent intent = new Intent(getContext(), HouseDetailActivity.class);
+                    intent.putExtra("houseId", houseList.get(position).get_id());
+                    startActivity(intent);
+                }
+            });
 
         });
         search_button.addTextChangedListener(new TextWatcher() {
@@ -131,15 +155,24 @@ public class HomeFragment extends Fragment implements LocationListener {
             public void afterTextChanged(Editable s) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                     ArrayList<Data> houses = (ArrayList<Data>) new CriteriaGlobal(s.toString()).meetCriteria(houseList);
+                    houseAdapter = new HouseAdapter(houses, location, isMyhouses);
+                    mRecyclerView.setAdapter(houseAdapter);
                     if (houses != null) {
                         empty_view.setVisibility(View.GONE);
                         mRecyclerView.setVisibility(View.VISIBLE);
-                        houseAdapter = new HouseAdapter(houses, location);
-                        mRecyclerView.setAdapter(houseAdapter);
                     } else {
                         mRecyclerView.setVisibility(View.GONE);
                         empty_view.setVisibility(View.VISIBLE);
                     }
+
+                    houseAdapter.setOnItemClickListener(new HouseAdapter.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(int position) {
+                            Intent intent = new Intent(getContext(), HouseDetailActivity.class);
+                            intent.putExtra("houseId", houses.get(position).get_id());
+                            startActivity(intent);
+                        }
+                    });
                 }
             }
         });
@@ -148,15 +181,25 @@ public class HomeFragment extends Fragment implements LocationListener {
             shimmerFrameLayout.setVisibility(View.GONE);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 ArrayList<Data> houses = (ArrayList<Data>) new CriteriaRated().meetCriteria(houseList);
+
+                houseAdapter = new HouseAdapter(houses, location, isMyhouses);
+                mRecyclerView.setAdapter(houseAdapter);
                 if (houses != null) {
                     empty_view.setVisibility(View.GONE);
                     mRecyclerView.setVisibility(View.VISIBLE);
-                    houseAdapter = new HouseAdapter(houses, location);
-                    mRecyclerView.setAdapter(houseAdapter);
                 } else {
                     mRecyclerView.setVisibility(View.GONE);
                     empty_view.setVisibility(View.VISIBLE);
                 }
+
+                houseAdapter.setOnItemClickListener(new HouseAdapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(int position) {
+                        Intent intent = new Intent(getContext(), HouseDetailActivity.class);
+                        intent.putExtra("houseId", houses.get(position).get_id());
+                        startActivity(intent);
+                    }
+                });
 
 
             }
@@ -167,17 +210,23 @@ public class HomeFragment extends Fragment implements LocationListener {
             shimmerFrameLayout.setVisibility(View.GONE);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 ArrayList<Data> houses = (ArrayList<Data>) new CriteriaWifi().meetCriteria(houseList);
+                houseAdapter = new HouseAdapter(houses, location, isMyhouses);
+                mRecyclerView.setAdapter(houseAdapter);
                 if (houses != null) {
                     empty_view.setVisibility(View.GONE);
                     mRecyclerView.setVisibility(View.VISIBLE);
-                    houseAdapter = new HouseAdapter(houses, location);
-                    mRecyclerView.setAdapter(houseAdapter);
-                    Log.d("note", "Not Empty================" + houses.size());
                 } else {
                     mRecyclerView.setVisibility(View.GONE);
                     empty_view.setVisibility(View.VISIBLE);
-                    Log.d("note", "Empty=======================");
                 }
+                houseAdapter.setOnItemClickListener(new HouseAdapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(int position) {
+                        Intent intent = new Intent(getContext(), HouseDetailActivity.class);
+                        intent.putExtra("houseId", houses.get(position).get_id());
+                        startActivity(intent);
+                    }
+                });
 
 
             }
@@ -226,11 +275,54 @@ public class HomeFragment extends Fragment implements LocationListener {
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.scrollToPosition(scrollPosition);
     }
+    private void fetchData(boolean isMyHouse) {
+        Storage storage = new Storage(getContext());
+        String token = storage.getToken();
+        RetrofitClient.getClient(isMyhouses?"houses/my-houses":"houses/my-houses").create(HouseApiService.class)
+                .getMyHouses(token)
+                .enqueue(new Callback<ViewAllHouseResponse>() {
+                    @Override
+                    public void onResponse(@NonNull Call<ViewAllHouseResponse> call, @NonNull Response<ViewAllHouseResponse> response) {
+                        if (response.code() == 200) {
 
+                            shimmerFrameLayout.stopShimmer();
+                            shimmerFrameLayout.setVisibility(View.GONE);
+                            mRecyclerView.setVisibility(View.VISIBLE);
+                            ArrayList<Data> data = response.body().getData();
+                            houseAdapter = new HouseAdapter(data, isMyHouse);
+                            mRecyclerView.setAdapter(houseAdapter);
+                            if (data.size() > 0) {
+                                empty_view.setVisibility(View.GONE);
+                                mRecyclerView.setVisibility(View.VISIBLE);
+                            } else {
+                                mRecyclerView.setVisibility(View.GONE);
+                                empty_view.setVisibility(View.VISIBLE);
+                            }
+                            houseList = data;
+                            houseAdapter.setOnItemClickListener(new HouseAdapter.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(int position) {
+                                    Intent intent = new Intent(getContext(), HouseDetailActivity.class);
+                                    intent.putExtra("houseId", data.get(position).get_id());
+                                    startActivity(intent);
+                                }
+                            });
+
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull Call<ViewAllHouseResponse> call, @NonNull Throwable t) {
+                        Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+/** End of david edit */
+    }
     private void fetchData() {
         Storage storage = new Storage(getContext());
         String token = storage.getToken();
-        RetrofitClient.getClient("").create(HouseApiService.class)
+        RetrofitClient.getClient(isMyhouses?"houses/my-houses":"houses/my-houses").create(HouseApiService.class)
                 .getAllHouse(token)
                 .enqueue(new Callback<ViewAllHouseResponse>() {
                     @Override
@@ -241,8 +333,15 @@ public class HomeFragment extends Fragment implements LocationListener {
                             mRecyclerView.setVisibility(View.VISIBLE);
                             ArrayList<Data> data = response.body().getData();
                             houseAdapter = new HouseAdapter(data);
-                            houseList = data;
                             mRecyclerView.setAdapter(houseAdapter);
+                            if (data != null) {
+                                empty_view.setVisibility(View.GONE);
+                                mRecyclerView.setVisibility(View.VISIBLE);
+                            } else {
+                                mRecyclerView.setVisibility(View.GONE);
+                                empty_view.setVisibility(View.VISIBLE);
+                            }
+                            houseList = data;
                             houseAdapter.setOnItemClickListener(new HouseAdapter.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(int position) {
