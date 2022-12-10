@@ -7,11 +7,17 @@
     android:layout_height="match_parent"
     tools:context=".RegisterHouseFirstStep">
 
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimary"
+            />
         <TextView
             android:id="@+id/house_address_label"
             android:layout_width="wrap_content"

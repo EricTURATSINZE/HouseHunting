@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="profile">Wasifu</string>
+    <string name="firstName">Jina la kwanza</string>
+    <string name="lastName">Jina la familia</string>
+    <string name="phone">Nambari ya simu</string>
+    <string name="email">Barua pepe</string>
+    <string name="manageHouse">kusimamia nyumba zangu</string>
+    <string name="greeting">Habari,</string>
+
+    <string name="house_address_label"> Anwani ya nyumba</string>
+    <string name="house_price_label_label"> Bei kwa mwezi</string>
+    <string name="house_bedroom_label"> Chumba cha kulala</string>
+    <string name="house_bathroom_label"> Bafuni</string>
+    <string name="house_main_image_label">Picha kuu</string>
+    <string name="house_first_step_btn"> Inayofuata</string>
+    <string name="house_more_images">Picha zaidi</string>
+    <string name="house_description">Maelezo</string>
+    <string name="house_landlord_names">Majina ya mwenye nyumba</string>
+    <string name="house_landlord_contact">Simu ya mwenye nyumba</string>
+    <string name="house_second_step_btn"> Wasilisha</string>
+    <string name="house_location_choice">Chagua hali ya eneo</string>
+</resources>

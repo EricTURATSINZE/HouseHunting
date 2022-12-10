@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="profile">Profil</string>
+    <string name="firstName">Prénom</string>
+    <string name="lastName">Nom de famille</string>
+    <string name="phone">Numéro de téléphone</string>
+    <string name="email">E-mail</string>
+    <string name="manageHouse">Gérer Mes Maisons</string>
+    <string name="greeting">Salût,</string>
+
+    <string name="house_address_label"> Adresse de la maison</string>
+    <string name="house_price_label_label"> Prix par mois</string>
+    <string name="house_bedroom_label"> Chambre</string>
+    <string name="house_bathroom_label"> Salle de bains</string>
+    <string name="house_main_image_label"> Image principale</string>
+    <string name="house_first_step_btn"> Prochain</string>
+    <string name="house_more_images">Plus d\'images</string>
+    <string name="house_description">La description</string>
+    <string name="house_landlord_names">Noms des propriétaires</string>
+    <string name="house_landlord_contact">Coordonnées du propriétaire</string>
+    <string name="house_second_step_btn"> Soumettre</string>
+    <string name="house_location_choice">Choisissez le mode de localisation</string>
+</resources>
