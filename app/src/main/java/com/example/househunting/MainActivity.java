@@ -38,8 +38,8 @@ public class MainActivity extends AppCompatActivity {
         upload_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent = new Intent(this, RegisterHouseFirstStep.class);
-//                startActivity(intent);
+                Intent intent = new Intent(MainActivity.this, RegisterHouseFirstStep.class);
+                startActivity(intent);
             }
         });
 

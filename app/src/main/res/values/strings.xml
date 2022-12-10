@@ -1,63 +1,63 @@
 <resources>
     <!-- The string resources will continue to grow, better to separate by screen, using comments like these -->
-    <string name="app_name">HouseHunting</string>
-    <string name="search">Search</string>
-    <string name="amenities">Amenities</string>
+    <string name="app_name" translatable="false">HouseHunting</string>
+    <string name="search" translatable="false">Search</string>
+    <string name="amenities" translatable="false">Amenities</string>
     <string name="profile">Profile</string>
     <string name="firstName">First Name</string>
     <string name="lastName">Last Name</string>
     <string name="phone">Phone Number</string>
     <string name="email">Email</string>
     <string name="manageHouse">Manage My Houses</string>
-    <string name="title_activity_login">LoginActivity</string>
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome !"</string>
-    <string name="invalid_username">Not a valid username</string>
-    <string name="invalid_password">Password must be >5 characters</string>
-    <string name="login_failed">"Login failed"</string>
+    <string name="title_activity_login" translatable="false">LoginActivity</string>
+    <string name="prompt_email" translatable="false">Email</string>
+    <string name="prompt_password" translatable="false">Password</string>
+    <string name="action_sign_in" translatable="false">Sign in or register</string>
+    <string name="action_sign_in_short" translatable="false">Sign in</string>
+    <string name="welcome" translatable="false">"Welcome !"</string>
+    <string name="invalid_username" translatable="false">Not a valid username</string>
+    <string name="invalid_password" translatable="false">Password must be >5 characters</string>
+    <string name="login_failed" translatable="false">"Login failed"</string>
 
     <!-- String Resources for Sign Up Screen -->
-    <string name="Signup">Sign Up</string>
-    <string name="Already_have_Account">Already Have An Account?</string>
-    <string name="house_hunting_title">House Hunting</string>
-    <string name="create_account">Create an account</string>
-    <string name="names_hint">Names</string>
-    <string name="email_hint">Email</string>
-    <string name="phone_hint">Phone</string>
-    <string name="password_hint">Password</string>
+    <string name="Signup" translatable="false">Sign Up</string>
+    <string name="Already_have_Account" translatable="false">Already Have An Account?</string>
+    <string name="house_hunting_title" translatable="false">House Hunting</string>
+    <string name="create_account" translatable="false">Create an account</string>
+    <string name="names_hint" translatable="false">Names</string>
+    <string name="email_hint" translatable="false">Email</string>
+    <string name="phone_hint" translatable="false">Phone</string>
+    <string name="password_hint" translatable="false">Password</string>
 
     <!-- ************ OTP Verification ************* -->
-    <string name="Sigin_text">Sign In To Continue</string>
-    <string name="login_btn">Login</string>
+    <string name="Sigin_text" translatable="false">Sign In To Continue</string>
+    <string name="login_btn" translatable="false">Login</string>
 
     <!-- OTP Verification -->
-    <string name="verification_code">Verification Code</string>
-    <string name="action_enter_otp">Please enter the verification code sent to your andrew email</string>
-    <string name="verify_email">Verify Code</string>
-    <string name="resend_otp">Re-send Code</string>
+    <string name="verification_code" translatable="false">Verification Code</string>
+    <string name="action_enter_otp" translatable="false">Please enter the verification code sent to your andrew email</string>
+    <string name="verify_email" translatable="false">Verify Code</string>
+    <string name="resend_otp" translatable="false">Re-send Code</string>
 
-    <string name="loading">Loading.....</string>
-    <string name="currency">rwf</string>
-    <string name="month">/monthly</string>
-    <string name="rooms">Bedrooms</string>
+    <string name="loading" translatable="false">Loading.....</string>
+    <string name="currency" translatable="false">rwf</string>
+    <string name="month" translatable="false">/monthly</string>
+    <string name="rooms" translatable="false">Bedrooms</string>
     <string name="greeting">Hello,</string>
 
-    <string name="no_data_available">no_string</string>
+    <string name="no_data_available" translatable="false">no_string</string>
 
-    <string name="foreground">"Service to pull new houses"</string>
-    <string name="notificationTitle">New house has been created</string>
-    <string name="notificationBody">The newly created house match your preferences, Be the first person to talk to the own!</string>
-    <string name="near">Km away from Campus</string>
+    <string name="foreground" translatable="false">"Service to pull new houses"</string>
+    <string name="notificationTitle" translatable="false">New house has been created</string>
+    <string name="notificationBody" translatable="false">The newly created house match your preferences, Be the first person to talk to the own!</string>
+    <string name="near" translatable="false">Km away from Campus</string>
 
     <!-- Login -->
-    <string name="no_account">Don\'t Have Account?</string>
+    <string name="no_account" translatable="false">Don\'t Have Account?</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
 
 
     <!-- ******** register house************-->
@@ -77,19 +77,18 @@
 
     <!-- ******** register user preference ************-->
     <!-- Author: Yves Ngabonziza -->
-    <string name="submit_preference">Submit preference</string>
-    <string name="canal_Box">Canal</string>
-    <string name="liquid">Liquid</string>
-    <string name="MTN">MTN</string>
-    <string name="None">None</string>
-    <string name="add_preference">Add Preference</string>
-    <string name="max_price">Max Price</string>
-    <string name="min_price">Min Price</string>
-    <string name="location">location</string>
-    <string name="number_of_bed">Number of Bed</string>
-
-    <string name="house_map_title">House map location</string>
-    <string name="map_house_btn">Map</string>
-    <string name="book_house_btn">Book now</string>
+    <string name="submit_preference" translatable="false">Submit preference</string>
+    <string name="canal_Box" translatable="false">Canal</string>
+    <string name="liquid" translatable="false">Liquid</string>
+    <string name="MTN" translatable="false">MTN</string>
+    <string name="None" translatable="false">None</string>
+    <string name="add_preference" translatable="false">Add Preference</string>
+    <string name="max_price" translatable="false">Max Price</string>
+    <string name="min_price" translatable="false">Min Price</string>
+    <string name="location" translatable="false">location</string>
+    <string name="number_of_bed" translatable="false">Number of Bed</string>
+    <string name="map_house_btn" translatable="false">Map</string>
+    <string name="book_house_btn" translatable="false">Book now</string>
+    <string name="house_map_title" translatable="false">House map location</string>
 
 </resources>
