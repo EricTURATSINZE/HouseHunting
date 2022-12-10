@@ -127,7 +127,7 @@ public class RegisterHouseFirstStep extends AppCompatActivity
          */
 
         ArrayAdapter choiceAdapter = new ArrayAdapter(this, R.layout.spinner_item, locationChoices);
-        choiceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        choiceAdapter.setDropDownViewResource(R.layout.spinner_item);
         locationSpinner.setAdapter(choiceAdapter );
         locationSpinner .setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -151,8 +151,8 @@ public class RegisterHouseFirstStep extends AppCompatActivity
 
         });
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,languages);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.spinner_item,languages);
+        adapter.setDropDownViewResource(R.layout.spinner_item);
         spinner.setAdapter(adapter);
         spinner.setSelection(0);
 

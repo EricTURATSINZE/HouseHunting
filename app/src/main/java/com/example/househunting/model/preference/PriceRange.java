@@ -4,9 +4,25 @@ public class PriceRange {
     int max;
     int min;
 
-    PriceRange(int newMax,int newMin)
+    public PriceRange(int newMax,int newMin)
     {
         max = newMax;
         min = newMin;
+    }
+
+    public int getMax() {
+        return max;
+    }
+
+    public int getMin() {
+        return min;
+    }
+
+    @Override
+    public String toString() {
+        return "PriceRange{" +
+                "max=" + max +
+                ", min=" + min +
+                '}';
     }
 }

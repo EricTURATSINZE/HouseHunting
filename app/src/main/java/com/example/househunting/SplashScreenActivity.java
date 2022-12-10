@@ -20,6 +20,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         storage = new Storage(this);
 
         boolean isLoggedIn = storage.isLoggedIn();
+
         checkAuth(isLoggedIn);
     }
 

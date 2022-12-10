@@ -12,21 +12,28 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <Spinner
-            android:id="@+id/spinner"
-            android:layout_width="160dp"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/colorPrimary"
-            />
-        <TextView
+        <LinearLayout
             android:id="@+id/house_address_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="30dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="0dp"
-            android:text="@string/house_address_label"
-            android:textSize="14dp" />
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginTop="15dp"
+            android:layout_height="30dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginLeft="10dp"
+                android:text="@string/house_address_label"
+                android:textSize="14dp"
+                />
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorPrimary"
+
+                />
+        </LinearLayout>
         <EditText
             android:id="@+id/house_address"
             android:layout_width="match_parent"

@@ -99,10 +99,16 @@
     <string name="MTN" translatable="false">MTN</string>
     <string name="None" translatable="false">None</string>
     <string name="add_preference" translatable="false">Add Preference</string>
-    <string name="max_price" translatable="false">Max Price</string>
-    <string name="min_price" translatable="false">Min Price</string>
+    <string name="max_price" translatable="false">Max Price in rwf</string>
+    <string name="min_price" translatable="false">Min Price in rwf</string>
     <string name="location" translatable="false">location</string>
-    <string name="number_of_bed" translatable="false">Number of Bed</string>
+    <string name="installed_internet" translatable="false">Installed Internet</string>
+    <string name="number_of_bed" translatable="false">Number of Bedrooms</string>
+    <string name="map_house_btn" translatable="false">Map</string>
+    <string name="book_house_btn" translatable="false">Book now</string>
+    <string name="house_map_title" translatable="false">House map location</string>
+    <string name="editPref" translatable="false">Edit Preferences</string>
+
 
 
     <!-- Author: NGIRIMANA Schadrack -->
