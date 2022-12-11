@@ -42,6 +42,8 @@
         <activity android:name=".HouseDetailActivity" />
         <activity android:name=".MapActivity" />
         <activity android:name=".HouseMapLocation" />
+        <activity android:name=".RegisterPreferenceActivity" />
+
         <activity
             android:name=".SplashScreenActivity"
             android:exported="true" >

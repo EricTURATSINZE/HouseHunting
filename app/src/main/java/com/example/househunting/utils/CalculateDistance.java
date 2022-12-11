@@ -1,6 +1,8 @@
 package com.example.househunting.utils;
 
-
+/**
+ * Author: FABRICE IRANKUNDA
+ */
 import android.location.Location;
 
 public class CalculateDistance {

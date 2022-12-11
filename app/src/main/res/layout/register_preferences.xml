@@ -31,7 +31,9 @@
         android:layout_marginTop="25dp"
         android:hint="@string/min_price"
         android:background="@drawable/login_input"
+        android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
+        android:inputType="number"
         app:layout_constraintHorizontal_bias="0.441"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView7"
@@ -42,6 +44,8 @@
         android:layout_width="291dp"
         android:layout_height="42dp"
         android:layout_marginTop="25dp"
+        android:inputType="number"
+        android:padding="10dp"
         android:hint="@string/max_price"
         android:background="@drawable/login_input"
         app:layout_constraintEnd_toEndOf="parent"
@@ -49,6 +53,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/minPrice"
         tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="28dp"
+        android:text="@string/installed_internet"
+        android:textSize="14dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.105"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/maxPrice" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/internet"
@@ -64,41 +81,49 @@
         tools:ignore="MissingConstraints">
 
         <CheckBox
-            android:id="@+id/checkBox"
+            android:id="@+id/mtn"
             android:layout_width="71dp"
             android:layout_height="wrap_content"
             android:text="@string/MTN"
             app:layout_constraintStart_toStartOf="parent"
             tools:ignore="MissingConstraints"
+            android:buttonTint="@color/colorPrimary"
+            android:textColor="@color/grey"
             tools:layout_editor_absoluteY="34dp" />
 
         <CheckBox
-            android:id="@+id/checkBox1"
+            android:id="@+id/canal"
             android:layout_width="71dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="3dp"
+            android:buttonTint="@color/colorPrimary"
+            android:textColor="@color/grey"
             android:text="@string/canal_Box"
-            app:layout_constraintStart_toEndOf="@+id/checkBox"
+            app:layout_constraintStart_toEndOf="@+id/mtn"
             tools:ignore="MissingConstraints"
             tools:layout_editor_absoluteY="34dp" />
 
         <CheckBox
-            android:id="@+id/checkBox4"
+            android:id="@+id/liquid"
             android:layout_width="71dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="3dp"
+            android:buttonTint="@color/colorPrimary"
+            android:textColor="@color/grey"
             android:text="@string/liquid"
-            app:layout_constraintStart_toEndOf="@+id/checkBox1"
+            app:layout_constraintStart_toEndOf="@+id/canal"
             tools:ignore="MissingConstraints"
             tools:layout_editor_absoluteY="34dp" />
 
         <CheckBox
-            android:id="@+id/checkBox5"
+            android:id="@+id/none"
             android:layout_width="71dp"
             android:layout_height="wrap_content"
+            android:buttonTint="@color/colorPrimary"
             android:layout_marginStart="3dp"
+            android:textColor="@color/grey"
             android:text="@string/None"
-            app:layout_constraintStart_toEndOf="@+id/checkBox4"
+            app:layout_constraintStart_toEndOf="@+id/liquid"
             tools:ignore="MissingConstraints"
             tools:layout_editor_absoluteY="34dp" />
 
@@ -109,6 +134,7 @@
         android:layout_width="291dp"
         android:layout_height="42dp"
         android:layout_marginTop="25dp"
+        android:padding="10dp"
         android:hint="@string/location"
         android:background="@drawable/login_input"
         app:layout_constraintEnd_toEndOf="parent"
@@ -119,9 +145,11 @@
 
     <EditText
         android:id="@+id/numBedRooms"
+        android:padding="10dp"
         android:layout_width="291dp"
         android:layout_height="42dp"
         android:layout_marginTop="25dp"
+        android:inputType="number"
         android:hint="@string/number_of_bed"
         android:background="@drawable/login_input"
         app:layout_constraintEnd_toEndOf="parent"
@@ -131,12 +159,12 @@
         tools:ignore="MissingConstraints" />
 
     <RelativeLayout
-        android:id="@+id/signup_btn"
-        android:layout_width="match_parent"
+        android:id="@+id/submitPreference_btn"
+        android:layout_width="291dp"
         android:layout_height="50dp"
-        android:layout_marginLeft="30dp"
+        android:layout_marginLeft="45dp"
         android:layout_marginRight="30dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/login_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -154,7 +182,7 @@
             android:textStyle="bold" />
 
         <ProgressBar
-            android:id="@+id/signup_btn_pb"
+            android:id="@+id/submitPreference_btn_pb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"

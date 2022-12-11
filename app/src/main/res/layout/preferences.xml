@@ -17,38 +17,19 @@
     </com.facebook.shimmer.ShimmerFrameLayout>
 
     <LinearLayout
-        android:id="@+id/profile_container"
+        android:id="@+id/preference_container"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="200dp"
         android:orientation="vertical"
         android:background="@drawable/profile_back"
         >
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:paddingTop="20dp"
             android:paddingHorizontal="20dp"
-            android:paddingBottom="10dp"
             >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/profile"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:textSize="20dp"
-                android:drawableLeft="@drawable/ic_baseline_arrow_back_ios_24"
-                android:layout_marginRight="230dp"
-                />
-            <TextView
-                android:id="@+id/logout_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="20dp"
-                android:drawableLeft="@drawable/ic_baseline_logout_24"
-                />
 
         </LinearLayout>
 
@@ -57,7 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:text="Good Morning, John"
+            android:text="Your preferences"
             android:textSize="23dp"
             android:textColor="@color/white"
             android:textStyle="bold"
@@ -65,27 +46,12 @@
 
             />
     </LinearLayout>
+
     <RelativeLayout
+        android:id="@+id/prefInfo"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="450dp"
         android:layout_marginTop="250dp"
-        >
-        <ImageView
-            android:id="@+id/profile_pic"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_centerHorizontal="true"
-            android:background="@drawable/circle_profile"
-            android:src="@drawable/ic_profile"
-            />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/info"
-        android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:layout_marginTop="350dp"
         >
         <LinearLayout
             android:layout_width="match_parent"
@@ -94,7 +60,7 @@
             >
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="70dp"
                 android:paddingTop="10dp"
                 android:paddingHorizontal="20dp"
                 android:paddingBottom="5dp"
@@ -103,16 +69,71 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/firstName"
+                    android:text="@string/min_price"
                     android:textColor="@color/grey"
                     android:textStyle="normal"
                     android:textSize="15dp"
                     />
                 <TextView
-                    android:id="@+id/firstName"
+                    android:id="@+id/minPrefPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="John"
+                    android:text="@string/None"
+                    android:textStyle="bold"
+                    android:textSize="16dp"
+                    android:textColor="@color/black"
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:paddingTop="10dp"
+                android:paddingHorizontal="20dp"
+                android:paddingBottom="10dp"
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/max_price"
+                    android:textColor="@color/grey"
+                    android:textStyle="normal"
+                    android:textSize="15dp"
+                    />
+                <TextView
+                    android:id="@+id/maxPrefPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/None"
+                    android:textStyle="bold"
+                    android:textSize="16dp"
+                    android:textColor="@color/black"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:paddingTop="10dp"
+                android:paddingHorizontal="20dp"
+                android:paddingBottom="5dp"
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/location"
+                    android:textColor="@color/grey"
+                    android:textStyle="normal"
+                    android:textSize="15dp"
+                    />
+                <TextView
+                    android:id="@+id/prefLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/None"
                     android:textStyle="bold"
                     android:textSize="16dp"
                     android:textColor="@color/black"
@@ -130,16 +151,17 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/lastName"
+                    android:text="@string/installed_internet"
                     android:textColor="@color/grey"
+                    android:layout_marginBottom="15dp"
                     android:textStyle="normal"
                     android:textSize="15dp"
                     />
                 <TextView
-                    android:id="@+id/lastName"
+                    android:id="@+id/prefInternets"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Mukoki"
+                    android:text="@string/None"
                     android:textStyle="bold"
                     android:textSize="16dp"
                     android:textColor="@color/black"
@@ -147,33 +169,6 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:paddingTop="10dp"
-                android:paddingHorizontal="20dp"
-                android:paddingBottom="5dp"
-                android:orientation="vertical"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/phone"
-                    android:textColor="@color/grey"
-                    android:textStyle="normal"
-                    android:textSize="15dp"
-                    />
-                <TextView
-                    android:id="@+id/phone_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="+250 788 123 456"
-                    android:textStyle="bold"
-                    android:textSize="16dp"
-                    android:textColor="@color/black"
-                    />
-
-            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
@@ -185,16 +180,17 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/email"
+                    android:text="@string/number_of_bed"
                     android:textColor="@color/grey"
+                    android:layout_marginBottom="15dp"
                     android:textStyle="normal"
                     android:textSize="15dp"
                     />
                 <TextView
-                    android:id="@+id/email_tv"
+                    android:id="@+id/prefNumBeds"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="johnmuko@gmail.com"
+                    android:text="@string/None"
                     android:textStyle="bold"
                     android:textSize="16dp"
                     android:textColor="@color/black"
@@ -205,6 +201,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
                 android:gravity="center"
                 >
                 <TextView
@@ -213,7 +210,7 @@
                     android:layout_height="40dp"
                     android:paddingTop="10dp"
                     android:paddingBottom="10dp"
-                    android:text="@string/manageHouse"
+                    android:text="@string/add_preference"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textStyle="bold"

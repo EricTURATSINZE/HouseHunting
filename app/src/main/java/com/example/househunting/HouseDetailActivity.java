@@ -1,11 +1,8 @@
 package com.example.househunting;
-import static android.content.ContentValues.TAG;
-
 import android.app.ActionBar;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -16,21 +13,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
-
 import com.example.househunting.model.house.Data;
-import com.example.househunting.model.house.Location;
 import com.example.househunting.model.house.ViewHouseResponse;
 import com.example.househunting.network.HouseApiService;
 import com.example.househunting.network.RetrofitClient;
 import com.example.househunting.utils.LoadImage;
 import com.example.househunting.utils.Storage;
 import com.facebook.shimmer.ShimmerFrameLayout;
-
 import java.util.ArrayList;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+/**
+ * Author: FABRICE IRANKUNDA
+ */
 
 public class HouseDetailActivity extends AppCompatActivity {
     private String houseId;
@@ -56,8 +52,6 @@ public class HouseDetailActivity extends AppCompatActivity {
         shimmerFrameLayout = findViewById(R.id.shimmer);
         shimmerFrameLayout.startShimmer();
         houseId = getIntent().getStringExtra("houseId");
-        if(houseId.isEmpty())
-            houseId = "6387de9aa239796011cc81c2";;
         coverImage = findViewById(R.id.coverImage);
         price = findViewById(R.id.priceView);
         bedRooms = findViewById(R.id.numBedRooms);

@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="profile">Wasifu</string>
-    <string name="firstName">Jina la kwanza</string>
-    <string name="lastName">Jina la familia</string>
-    <string name="phone">Nambari ya simu</string>
-    <string name="email">Barua pepe</string>
-    <string name="manageHouse">kusimamia nyumba zangu</string>
-    <string name="greeting">Habari,</string>
-
     <string name="house_address_label"> Anwani ya nyumba</string>
     <string name="house_price_label_label"> Bei kwa mwezi</string>
     <string name="house_bedroom_label"> Chumba cha kulala</string>

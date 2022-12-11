@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.os.Build;
 
 import com.example.househunting.services.PullPreferredHousesService;
+/**
+ * Author: FABRICE IRANKUNDA
+ */
 
 public class NotificationBroadCastReceiver extends BroadcastReceiver {
     @Override
