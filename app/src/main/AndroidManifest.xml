@@ -9,7 +9,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
     <application
-        android:name=".MyCustomApplication"
+        android:name=".utils.MyCustomApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -33,16 +33,16 @@
             android:value="CLOUDINARY_URL=cloudinary://622489496465415:dAogkM6LaPF9S_m9oHKnHquzITA@kuranga"
             />
 
-        <activity android:name=".RegisterHouseSecondStep"/>
-        <activity android:name=".RegisterHouseFirstStep" />
+        <activity android:name=".houseActivities.RegisterHouseSecondStep"/>
+        <activity android:name=".houseActivities.RegisterHouseFirstStep" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".VerifyEmailActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".SignUpActivity" />
-        <activity android:name=".HouseDetailActivity" />
-        <activity android:name=".MapActivity" />
-        <activity android:name=".HouseMapLocation" />
-        <activity android:name=".RegisterPreferenceActivity" />
+        <activity android:name=".authActivities.VerifyEmailActivity" />
+        <activity android:name=".authActivities.LoginActivity" />
+        <activity android:name=".authActivities.SignUpActivity" />
+        <activity android:name=".houseActivities.HouseDetailActivity" />
+        <activity android:name=".houseActivities.MapActivity" />
+        <activity android:name=".houseActivities.HouseMapLocation" />
+        <activity android:name=".preferencesActivities.RegisterPreferenceActivity" />
 
         <activity
             android:name=".SplashScreenActivity"

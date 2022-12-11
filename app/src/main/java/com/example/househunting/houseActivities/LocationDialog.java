@@ -1,4 +1,4 @@
-package com.example.househunting;
+package com.example.househunting.houseActivities;
 
 import android.app.Dialog;
 import android.content.Context;

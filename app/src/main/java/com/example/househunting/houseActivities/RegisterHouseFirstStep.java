@@ -1,7 +1,4 @@
-package com.example.househunting;
-
-import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
-
+package com.example.househunting.houseActivities;
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -10,22 +7,15 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.Manifest;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.res.Configuration;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -36,18 +26,17 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.cloudinary.android.MediaManager;
 import com.cloudinary.android.callback.ErrorInfo;
 import com.cloudinary.android.callback.UploadCallback;
-import com.example.househunting.fragments.ProfileFragment;
+import com.example.househunting.utils.MyCustomApplication;
+import com.example.househunting.R;
 import com.example.househunting.model.HouseRegister.House;
 import com.example.househunting.services.LocationService;
+import com.example.househunting.utils.ManageLanguage;
+import com.example.househunting.utils.Storage;
 import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 
 
@@ -57,31 +46,30 @@ import java.util.Map;
 
 public class RegisterHouseFirstStep extends AppCompatActivity
 {
-    RelativeLayout next_button;
-    TextView next;
-    EditText houseAddress_et;
-    EditText pricePerMonth;
-    EditText numberOfBedrooms;
-    EditText numberOfBathroom;
-    ImageView mainImage;
-    String houseAddress;
-    String price;
-    String bedroom;
-    String bathroom;
-    String mainImageUrl;
+    private RelativeLayout next_button;
+    private TextView next;
+    private EditText houseAddress_et;
+    private EditText pricePerMonth;
+    private EditText numberOfBedrooms;
+    private EditText numberOfBathroom;
+    private ImageView mainImage;
+    private String houseAddress;
+    private String price;
+    private String bedroom;
+    private String bathroom;
+    private String mainImageUrl;
     private static int IMAGE_REQ=1;
     private static final int REQUEST_LOCATION =1 ;
     private Uri imagePath;
     private static final int IMAGE_PICK_CAMERA_CODE=102;
-    Spinner locationSpinner;
-    ArrayList<String> locationChoices = new ArrayList<>();
-    Location houseCoordinates;
-    MyCustomApplication application;
-    ProgressBar progressBar;
-    House house;
-
+    private Spinner locationSpinner;
+    private ArrayList<String> locationChoices = new ArrayList<>();
+    private Location houseCoordinates;
+    private MyCustomApplication application;
+    private ProgressBar progressBar;
+    private House house;
+    private Storage storage;
     private Spinner spinner;
-    public static final String[] languages = {"Select Language", "English", "Swahili", "Français"};
 
     boolean isAllFieldsChecked = false;
 
@@ -101,6 +89,10 @@ public class RegisterHouseFirstStep extends AppCompatActivity
         progressBar = (ProgressBar) findViewById(R.id.next_btn_pb);
         locationSpinner = (Spinner) findViewById(R.id.spinner_location);
         spinner = findViewById(R.id.spinner);
+        storage = new Storage(RegisterHouseFirstStep.this);
+        String lan = storage.getLanguage();
+        ManageLanguage manageLanguage = new ManageLanguage();
+        manageLanguage.setLocal(this, lan);
 
         /**
          * Populating fields with their prior values, if there are, once you are navigating back to this screen
@@ -151,6 +143,7 @@ public class RegisterHouseFirstStep extends AppCompatActivity
 
         });
 
+        final String[] languages = {getString(R.string.select_language), "English", "Swahili", "Français"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.spinner_item,languages);
         adapter.setDropDownViewResource(R.layout.spinner_item);
         spinner.setAdapter(adapter);
@@ -160,17 +153,21 @@ public class RegisterHouseFirstStep extends AppCompatActivity
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String selectedLang = parent.getItemAtPosition(position).toString();
+                ManageLanguage manageLanguage = new ManageLanguage();
                 if(selectedLang.equals("English")){
-                    setLocal(RegisterHouseFirstStep.this, "en");
+                    manageLanguage.setLocal(RegisterHouseFirstStep.this, "en");
+                    storage.setLanguage("English");
                     finish();
                     startActivity(getIntent());
 
                 } else if(selectedLang.equals("Swahili")){
-                    setLocal(RegisterHouseFirstStep.this, "sw");
+                    storage.setLanguage("Swahili");
+                    manageLanguage.setLocal(RegisterHouseFirstStep.this, "sw");
                     finish();
                     startActivity(getIntent());
                 } else if(selectedLang.equals("Français")){
-                    setLocal(RegisterHouseFirstStep.this, "fr");
+                    storage.setLanguage("Français");
+                    manageLanguage.setLocal(RegisterHouseFirstStep.this, "fr");
                     finish();
                     startActivity(getIntent());
                 }
@@ -384,14 +381,4 @@ public class RegisterHouseFirstStep extends AppCompatActivity
         }
     }
 
-
-
-    private void setLocal(Activity activity, String langCode){
-        Locale locale = new Locale(langCode);
-        locale.setDefault(locale);
-        Resources resources = activity.getResources();
-        Configuration config = resources.getConfiguration();
-        config.setLocale(locale);
-        resources.updateConfiguration(config, resources.getDisplayMetrics());
-    }
 }

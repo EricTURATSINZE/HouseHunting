@@ -1,8 +1,6 @@
 package com.example.househunting.adapter;
-import static android.content.ContentValues.TAG;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.location.Location;
@@ -15,18 +13,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.househunting.HouseDetailActivity;
+
 import com.example.househunting.R;
-import com.example.househunting.fragments.HomeFragment;
 import com.example.househunting.model.RootResponse;
 import com.example.househunting.model.house.Data;
-import com.example.househunting.model.house.ViewAllHouseResponse;
-import com.example.househunting.model.house.ViewHouseResponse;
 import com.example.househunting.network.HouseApiService;
 import com.example.househunting.network.RetrofitClient;
 import com.example.househunting.utils.EarthDistance;
@@ -35,8 +28,6 @@ import com.example.househunting.utils.LoadImage;
 import com.example.househunting.utils.Storage;
 
 import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;

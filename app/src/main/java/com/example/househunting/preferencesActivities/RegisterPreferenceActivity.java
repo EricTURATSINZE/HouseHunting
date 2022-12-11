@@ -1,4 +1,4 @@
-package com.example.househunting;
+package com.example.househunting.preferencesActivities;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -9,6 +9,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.househunting.R;
 import com.example.househunting.constants.Internet;
 import com.example.househunting.model.preference.Preference;
 import com.example.househunting.model.preference.PriceRange;

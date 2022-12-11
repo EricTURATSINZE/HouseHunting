@@ -2,8 +2,6 @@
 
 package com.example.househunting.fragments;
 
-import static androidx.core.content.ContextCompat.startForegroundService;
-
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,12 +11,11 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
 import com.example.househunting.R;
-import com.example.househunting.RegisterPreferenceActivity;
+import com.example.househunting.preferencesActivities.RegisterPreferenceActivity;
 import com.example.househunting.model.preference.Preference;
 import com.example.househunting.model.preference.UserPreferenceResponse;
 import com.example.househunting.network.RetrofitClient;
@@ -26,9 +23,6 @@ import com.example.househunting.network.UserPreferenceService;
 import com.example.househunting.services.PullPreferredHousesService;
 import com.example.househunting.utils.Storage;
 import com.facebook.shimmer.ShimmerFrameLayout;
-import com.google.android.material.snackbar.Snackbar;
-
-import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;

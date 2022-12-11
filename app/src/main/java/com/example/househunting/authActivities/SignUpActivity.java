@@ -1,4 +1,4 @@
-package com.example.househunting;
+package com.example.househunting.authActivities;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.househunting.R;
 import com.example.househunting.model.auth.SignupResponse;
 import com.example.househunting.network.AuthApiService;
 import com.example.househunting.network.RetrofitClient;
