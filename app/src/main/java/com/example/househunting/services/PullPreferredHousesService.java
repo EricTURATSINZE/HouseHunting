@@ -26,7 +26,9 @@ import java.util.UUID;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
+/**
+ * Author: FABRICE IRANKUNDA
+ */
 public class PullPreferredHousesService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {

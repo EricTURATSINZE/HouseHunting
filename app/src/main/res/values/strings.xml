@@ -3,12 +3,12 @@
     <string name="app_name" translatable="false">HouseHunting</string>
     <string name="search" translatable="false">Search</string>
     <string name="amenities" translatable="false">Amenities</string>
-    <string name="profile">Profile</string>
-    <string name="firstName">First Name</string>
-    <string name="lastName">Last Name</string>
-    <string name="phone">Phone Number</string>
-    <string name="email">Email</string>
-    <string name="manageHouse">Manage My Houses</string>
+    <string name="profile" translatable="false">Profile</string>
+    <string name="firstName" translatable="false">First Name</string>
+    <string name="lastName" translatable="false">Last Name</string>
+    <string name="phone" translatable="false">Phone Number</string>
+    <string name="email" translatable="false">Email</string>
+    <string name="manageHouse" translatable="false">Manage My Houses</string>
     <string name="title_activity_login" translatable="false">LoginActivity</string>
     <string name="prompt_email" translatable="false">Email</string>
     <string name="prompt_password" translatable="false">Password</string>
@@ -28,6 +28,7 @@
     <string name="email_hint" translatable="false">Email</string>
     <string name="phone_hint" translatable="false">Phone</string>
     <string name="password_hint" translatable="false">Password</string>
+    <string name="myHouses" translatable="false">isMyHouses</string>
 
     <!-- ************ OTP Verification ************* -->
     <string name="Sigin_text" translatable="false">Sign In To Continue</string>
@@ -38,15 +39,12 @@
     <string name="action_enter_otp" translatable="false">Please enter the verification code sent to your andrew email</string>
     <string name="verify_email" translatable="false">Verify Code</string>
     <string name="resend_otp" translatable="false">Re-send Code</string>
-
     <string name="loading" translatable="false">Loading.....</string>
     <string name="currency" translatable="false">rwf</string>
     <string name="month" translatable="false">/monthly</string>
     <string name="rooms" translatable="false">Bedrooms</string>
-    <string name="greeting">Hello,</string>
-
+    <string name="greeting" translatable="false">Hello,</string>
     <string name="no_data_available" translatable="false">no_string</string>
-
     <string name="foreground" translatable="false">"Service to pull new houses"</string>
     <string name="notificationTitle" translatable="false">New house has been created</string>
     <string name="notificationBody" translatable="false">The newly created house match your preferences, Be the first person to talk to the own!</string>
@@ -80,9 +78,6 @@
     <string name="current_location_choice" translatable="false">Current Location</string>
     <string name="map_location_choice" translatable="false">Map</string>
     <string name="select_how_to_take_image" translatable="false">Select image</string>
-    <string name="house_map_title" translatable="false">House map location</string>
-    <string name="map_house_btn" translatable="false">Map</string>
-    <string name="book_house_btn" translatable="false">Book now</string>
 
     <string name="canalbox_internet_choice" translatable="false">CanalBox</string>
     <string name="liquid_internet_choice" translatable="false">Liquid</string>

@@ -8,9 +8,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.househunting.constants.Internet;
 import com.example.househunting.model.preference.Preference;
 import com.example.househunting.model.preference.PriceRange;
@@ -19,12 +17,14 @@ import com.example.househunting.network.RetrofitClient;
 import com.example.househunting.network.UserPreferenceService;
 import com.example.househunting.utils.Storage;
 import com.google.android.material.snackbar.Snackbar;
-
 import java.util.ArrayList;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+/**
+ * Author: FABRICE IRANKUNDA
+ */
 
 public class RegisterPreferenceActivity extends AppCompatActivity {
     private TextView max;

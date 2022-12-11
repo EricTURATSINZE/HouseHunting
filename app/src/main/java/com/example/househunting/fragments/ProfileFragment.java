@@ -36,6 +36,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * Author: FABRICE IRANKUNDA
+ */
+
 public class ProfileFragment extends Fragment {
     private TextView greetings;
     private ImageView profile;
@@ -75,7 +79,7 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
-                bundle.putBoolean("isMyHouses", true);
+                bundle.putBoolean(getString(R.string.myHouses), true);
                 Fragment nextFrag= new HomeFragment();
                 nextFrag.setArguments(bundle);
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, nextFrag).commit();

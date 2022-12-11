@@ -1,6 +1,9 @@
 package com.example.househunting.model;
 
 import com.google.gson.annotations.SerializedName;
+/**
+ * Author: FABRICE IRANKUNDA
+ */
 
 public class RootResponse {
     @SerializedName("status")

@@ -14,7 +14,9 @@ import androidx.core.app.NotificationManagerCompat;
 import com.example.househunting.MainActivity;
 
 import java.util.UUID;
-
+/**
+ * Author: FABRICE IRANKUNDA
+ */
 public class NotificationService {
     private String title;
     private String body;

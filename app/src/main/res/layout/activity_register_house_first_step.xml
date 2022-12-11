@@ -118,7 +118,7 @@
             android:id="@+id/house_bathroom_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Bathroom"
+            android:text="@string/house_bathroom_label"
             android:textSize="14dp"
             android:layout_marginHorizontal="30dp"
             android:layout_below="@id/house_bedroom"
