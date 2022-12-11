@@ -3,6 +3,7 @@ package com.example.househunting.fragments;
 import static android.content.Context.LOCATION_SERVICE;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -75,11 +76,15 @@ public class HomeFragment extends Fragment implements LocationListener {
     protected RecyclerView.LayoutManager mLayoutManager;
     protected TextView textView;
     protected LocationManager locationManager;
-
+    protected TextView wifi;
+    protected TextView nearest;
+    protected TextView rated;
+    protected TextView cheaper;
 
     ArrayList<Data> houseList;
     View view;
 
+    @SuppressLint("ResourceAsColor")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -87,11 +92,11 @@ public class HomeFragment extends Fragment implements LocationListener {
         isMyhouses = getArguments() == null? false: getArguments().getBoolean("isMyHouses");
         getLocation();
         view = inflater.inflate(R.layout.home_fragment, container, false);
-        TextView wifi = view.findViewById(R.id.amenity1);
-        TextView nearest = view.findViewById(R.id.amenity2);
-        TextView rated = view.findViewById(R.id.amenity3);
+        wifi = view.findViewById(R.id.amenity1);
+        nearest = view.findViewById(R.id.amenity2);
+        rated = view.findViewById(R.id.amenity3);
         TextView search_button = view.findViewById(R.id.search_btn);
-        TextView cheaper = view.findViewById(R.id.amenity4);
+        cheaper = view.findViewById(R.id.amenity4);
         empty_view = view.findViewById(R.id.empty_view);
 
         shimmerFrameLayout = view.findViewById(R.id.shimmer);
@@ -104,6 +109,7 @@ public class HomeFragment extends Fragment implements LocationListener {
         mRecyclerView = view.findViewById(R.id.house_recycleview);
         mRecyclerView.setVisibility(View.GONE);
         nearest.setOnClickListener(v -> {
+            setColor(nearest);
             ArrayList<Data> houses = (ArrayList<Data>) new CriteriaNearest(location).meetCriteria(houseList);
             Collections.sort(houses, new CustomDistanceComparator());
             empty_view.setVisibility(View.GONE);
@@ -121,6 +127,7 @@ public class HomeFragment extends Fragment implements LocationListener {
 
         });
         cheaper.setOnClickListener(v -> {
+            setColor(cheaper);
             Collections.sort(houseList, new CustomPriceComparator());
             empty_view.setVisibility(View.GONE);
             mRecyclerView.setVisibility(View.VISIBLE);
@@ -175,6 +182,7 @@ public class HomeFragment extends Fragment implements LocationListener {
             }
         });
         rated.setOnClickListener(v -> {
+            setColor(rated);
             shimmerFrameLayout.stopShimmer();
             shimmerFrameLayout.setVisibility(View.GONE);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
@@ -206,6 +214,7 @@ public class HomeFragment extends Fragment implements LocationListener {
         });
 
         wifi.setOnClickListener(v -> {
+            setColor(wifi);
             shimmerFrameLayout.stopShimmer();
             shimmerFrameLayout.setVisibility(View.GONE);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
@@ -375,6 +384,16 @@ public class HomeFragment extends Fragment implements LocationListener {
             e.printStackTrace();
         }
     }
-
+    /** author: David */
+    @SuppressLint("ResourceAsColor")
+    private void setColor(TextView view)
+    {
+        nearest.setTextColor(Color.WHITE);
+        wifi.setTextColor(Color.WHITE);
+        rated.setTextColor(Color.WHITE);
+        cheaper.setTextColor(Color.WHITE);
+        view.setTextColor(Color.GRAY);
+    }
+    /** end of david edit */
 }
 
