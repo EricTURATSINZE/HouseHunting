@@ -72,24 +72,24 @@
     <string name="house_description">Description</string>
     <string name="house_landlord_names">Landlord names</string>
     <string name="house_landlord_contact">Landlord contact</string>
-    <string name="house_internet">Internet</string>
-    <string name="house_internet_hint">Canal Box</string>
+    <string name="house_internet" translatable="false">Internet</string>
+    <string name="house_internet_hint" translatable="false">Canal Box</string>
     <string name="house_second_step_btn"> Submit</string>
     <string name="house_location_choice">House Location</string>
-    <string name="location_choice">Select Mode</string>
-    <string name="current_location_choice">Current Location</string>
-    <string name="map_location_choice">Map</string>
+    <string name="location_choice" translatable="false">Select Mode</string>
+    <string name="current_location_choice" translatable="false">Current Location</string>
+    <string name="map_location_choice" translatable="false">Map</string>
+    <string name="select_how_to_take_image" translatable="false">Select image</string>
+    <string name="house_map_title" translatable="false">House map location</string>
+    <string name="map_house_btn" translatable="false">Map</string>
+    <string name="book_house_btn" translatable="false">Book now</string>
 
-    <string name="house_map_title">House map location</string>
-    <string name="map_house_btn">Map</string>
-    <string name="book_house_btn">Book now</string>
-
-    <string name="canalbox_internet_choice">CanalBox</string>
-    <string name="liquid_internet_choice">Liquid</string>
-    <string name="mtn_internet_choice">Mtn</string>
-    <string name="airtel_internet_choice">Airtel</string>
-    <string name="mango_internet_choice">Mango</string>
-    <string name="no_internet_choice">No Internet</string>
+    <string name="canalbox_internet_choice" translatable="false">CanalBox</string>
+    <string name="liquid_internet_choice" translatable="false">Liquid</string>
+    <string name="mtn_internet_choice" translatable="false">Mtn</string>
+    <string name="airtel_internet_choice" translatable="false">Airtel</string>
+    <string name="mango_internet_choice" translatable="false">Mango</string>
+    <string name="no_internet_choice" translatable="false">No Internet</string>
 
     <!-- ******** register user preference ************-->
     <!-- Author: Yves Ngabonziza -->
@@ -103,8 +103,26 @@
     <string name="min_price" translatable="false">Min Price</string>
     <string name="location" translatable="false">location</string>
     <string name="number_of_bed" translatable="false">Number of Bed</string>
-    <string name="map_house_btn" translatable="false">Map</string>
-    <string name="book_house_btn" translatable="false">Book now</string>
-    <string name="house_map_title" translatable="false">House map location</string>
 
+
+    <!-- Author: NGIRIMANA Schadrack -->
+    <string name="name_error" translatable="false">Names are required</string>
+    <string name="email_empty_error" translatable="false">Email is required</string>
+    <string name="email_type_error" translatable="false">Your should use your andrew email</string>
+    <string name="phone_empty_error" translatable="false">Phone number is required</string>
+    <string name="phone_country_code_error" translatable="false">Your phone should start with country code</string>
+    <string name="password_empty_error" translatable="false">Password is required</string>
+    <string name="password_length_error" translatable="false">Password must be minimum 6 characters</string>
+    <string name="house_address_error" translatable="false">House address is required</string>
+    <string name="house_price_error" translatable="false">Hose price per month  is not valid</string>
+    <string name="house_coordinates_error" translatable="false">The location is not available, try other way!</string>
+    <string name="house_bathroom_error" translatable="false">House bathroom number  is not valid</string>
+    <string name="house_bedroom_error" translatable="false">House bedroom  is not valid</string>
+    <string name="house_main_image_error" translatable="false">Please, pick house image</string>
+    <string name="house_more_images_error" translatable="false">Please, pick more house images</string>
+    <string name="house_internet_error" translatable="false">Choose available internet type</string>
+    <string name="house_description_error" translatable="false">House description is required</string>
+    <string name="house_landlord_contact_error" translatable="false">Landlord contact is required</string>
+    <string name="house_landlord_contact_country_code_error" translatable="false">Landlord contact should start with country code</string>
+    <string name="house_land_lord_names_error" translatable="false">Landlord names are required</string>
 </resources>

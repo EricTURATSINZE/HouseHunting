@@ -28,7 +28,7 @@ public class LoginActivity extends AppCompatActivity {
     Button login_btn;
     ProgressDialog progressDialog;
     Storage storage;
-
+    boolean isAllFieldsChecked = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,10 +52,34 @@ public class LoginActivity extends AppCompatActivity {
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                login(view);
+                isAllFieldsChecked = CheckAllFields();
+                if(isAllFieldsChecked) {
+                    login(view);
+                }
             }
         });
     }
+    private boolean CheckAllFields() {
+        /**
+         * Author NGIRIMANA Schadrack
+         */
+
+        if (email.length() == 0) {
+            email.setError(getText(R.string.email_empty_error));
+            return false;
+        }
+        else if(!email.getText().toString().contains("@andrew.cmu.edu")) {
+            email.setError(getText(R.string.email_type_error));
+            return false;
+        }
+
+        if (password.length() == 0) {
+            password.setError(getText(R.string.password_empty_error));
+            return false;
+        }
+        return true;
+    }
+
 
     private void login(View view) {
         progressDialog.show();

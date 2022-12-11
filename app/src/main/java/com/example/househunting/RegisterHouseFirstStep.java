@@ -41,6 +41,8 @@ import com.cloudinary.android.MediaManager;
 import com.cloudinary.android.callback.ErrorInfo;
 import com.cloudinary.android.callback.UploadCallback;
 import com.example.househunting.fragments.ProfileFragment;
+import com.example.househunting.model.HouseRegister.House;
+import com.example.househunting.services.LocationService;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -53,8 +55,7 @@ import java.util.Map;
  * Author: NGIRIMANA Schadrack
  */
 
-public class RegisterHouseFirstStep extends AppCompatActivity implements
-        AdapterView.OnItemSelectedListener
+public class RegisterHouseFirstStep extends AppCompatActivity
 {
     RelativeLayout next_button;
     TextView next;
@@ -82,6 +83,8 @@ public class RegisterHouseFirstStep extends AppCompatActivity implements
     private Spinner spinner;
     public static final String[] languages = {"Select Language", "English", "Swahili", "Français"};
 
+    boolean isAllFieldsChecked = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -97,6 +100,7 @@ public class RegisterHouseFirstStep extends AppCompatActivity implements
         next = findViewById(R.id.house_next_btn);
         progressBar = (ProgressBar) findViewById(R.id.next_btn_pb);
         locationSpinner = (Spinner) findViewById(R.id.spinner_location);
+        spinner = findViewById(R.id.spinner);
 
         /**
          * Populating fields with their prior values, if there are, once you are navigating back to this screen
@@ -121,10 +125,22 @@ public class RegisterHouseFirstStep extends AppCompatActivity implements
         /**
          * setting the location choice mode
          */
-        locationSpinner .setOnItemSelectedListener(this);
+
         ArrayAdapter choiceAdapter = new ArrayAdapter(this, R.layout.spinner_item, locationChoices);
         choiceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         locationSpinner.setAdapter(choiceAdapter );
+        locationSpinner .setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                locationChoiceSelected(locationChoices.get(position));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
 
         /**
          * Picking image from gallery or camera
@@ -166,66 +182,37 @@ public class RegisterHouseFirstStep extends AppCompatActivity implements
             }
         });
 
-        initConfig();
+
         /**
          * Setting sending data to the next screen and upload main image to cloudinary
          */
         next_button.setOnClickListener(v ->
         {
-            next.setVisibility(View.GONE);
-            progressBar.setVisibility(View.VISIBLE);
-
-            if(imagePath != null) {
-                MediaManager.get().upload(imagePath).callback(new UploadCallback()
-                {
-                    @Override
-                    public void onStart(String requestId)
+            isAllFieldsChecked= checkAllFields();
+            if(isAllFieldsChecked)
+            {
+                if(imagePath != null) {
+                    next.setVisibility(View.GONE);
+                    progressBar.setVisibility(View.VISIBLE);
+                    MediaManager.get().upload(imagePath).callback(new UploadCallback()
                     {
-                        Log.d(TAG, "=================================: "+"started");
-                    }
+                        @Override
+                        public void onStart(String requestId)
+                        {
+                        }
 
-                    @Override
-                    public void onProgress(String requestId, long bytes, long totalBytes)
-                    {
-                        Log.d(TAG, "=================================: "+"uploading");
-                    }
+                        @Override
+                        public void onProgress(String requestId, long bytes, long totalBytes)
+                        {
+                        }
 
-                    @Override
-                    public void onSuccess(String requestId, Map resultData) {
-                        Log.d(TAG, "=================================: "+"success");
-                        mainImageUrl= (String) resultData.get("url");
-                        houseAddress = String.valueOf(houseAddress_et.getText());
-                        bedroom= String.valueOf(numberOfBedrooms.getText());
-                        bathroom = String.valueOf(numberOfBathroom.getText());
-                        price = String.valueOf(pricePerMonth.getText());
-
-
-                        if(houseAddress.length()==0)
-                        {
-                            Toast.makeText(getApplicationContext(),"House address is empty",Toast.LENGTH_SHORT).show();
-                        }
-                        else if(bedroom.length()==0)
-                        {
-                            Toast.makeText(getApplicationContext(),"House bedroom is empty",Toast.LENGTH_SHORT).show();
-                        }
-                        else if(bathroom.length()==0)
-                        {
-                            Toast.makeText(getApplicationContext(),"House bathroom is empty",Toast.LENGTH_SHORT).show();
-                        }
-                        else if(price.length()==0)
-                        {
-                            Toast.makeText(getApplicationContext(),"House price is empty",Toast.LENGTH_SHORT).show();
-                        }
-                        else if(mainImageUrl.length()==0)
-                        {
-                            Toast.makeText(getApplicationContext(),"House main image is empty",Toast.LENGTH_SHORT).show();
-                        }
-                        else if (houseCoordinates == null) {
-                            Toast.makeText(getApplicationContext(),"The location is not available, try other way!",Toast.LENGTH_SHORT).show();
-                        }
-                        else
-                        {
-                            // Close the progress bar
+                        @Override
+                        public void onSuccess(String requestId, Map resultData) {
+                            mainImageUrl= (String) resultData.get("url");
+                            houseAddress = String.valueOf(houseAddress_et.getText());
+                            bedroom= String.valueOf(numberOfBedrooms.getText());
+                            bathroom = String.valueOf(numberOfBathroom.getText());
+                            price = String.valueOf(pricePerMonth.getText());
 
                             Intent intent = new Intent(RegisterHouseFirstStep.this, RegisterHouseSecondStep.class);
                             house.getLocation().setAddress(houseAddress);
@@ -236,26 +223,52 @@ public class RegisterHouseFirstStep extends AppCompatActivity implements
                             next.setVisibility(View.VISIBLE);
                             progressBar.setVisibility(View.GONE);
                             startActivity(intent);
-                        }
 
-                    }
-                    @Override
-                    public void onError(String requestId, ErrorInfo error)
-                    {
-                        Log.d(TAG, "=================================: "+error);
-                    }
-                    @Override
-                    public void onReschedule(String requestId, ErrorInfo error)
-                    {
-                        Log.d(TAG, "=================================: "+error);
-                    }
-                }).dispatch();
-            } else {
-                Toast.makeText(getApplicationContext(),"Please Pick House Image",Toast.LENGTH_SHORT).show();
+
+                        }
+                        @Override
+                        public void onError(String requestId, ErrorInfo error)
+                        {
+                        }
+                        @Override
+                        public void onReschedule(String requestId, ErrorInfo error)
+                        {
+                        }
+                    }).dispatch();
+                } else {
+                    Toast.makeText(getApplicationContext(),R.string.house_main_image_error,Toast.LENGTH_SHORT).show();
+                }
+
             }
+
+
         });
     }
 
+    private boolean checkAllFields() {
+        if (houseAddress_et.length() == 0) {
+            houseAddress_et.setError(getText(R.string.house_address_error));
+            return false;
+        }
+        if(houseCoordinates == null && house.getLocation().getCoordinates()== null)
+        {
+            Toast.makeText(getApplicationContext(),R.string.house_coordinates_error,Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (pricePerMonth.length() == 0 ||  Integer.valueOf(pricePerMonth.getText().toString())<=0) {
+            pricePerMonth.setError(getText(R.string.house_price_error));
+            return false;
+        }
+        if (numberOfBedrooms.length() == 0 ||  Integer.valueOf(numberOfBedrooms.getText().toString())<=0) {
+            numberOfBedrooms.setError(getText(R.string.house_bedroom_error));
+            return false;
+        }
+        if (numberOfBathroom.length() == 0 ||  Integer.valueOf(numberOfBathroom.getText().toString())<=0) {
+            numberOfBathroom.setError(getText(R.string.house_bathroom_error));
+            return false;
+        }
+        return true;
+    }
     /**
      * Picking image dialog
      */
@@ -263,7 +276,7 @@ public class RegisterHouseFirstStep extends AppCompatActivity implements
     {
         String[] options={"Camera","Gallery"};
         AlertDialog.Builder builder =new AlertDialog.Builder(this);
-        builder.setTitle("Select image");
+        builder.setTitle(R.string.select_how_to_take_image);
         builder.setItems(options, (dialog, which) ->
         {
             if(which == 0)
@@ -353,10 +366,9 @@ public class RegisterHouseFirstStep extends AppCompatActivity implements
      * select how to get location
      */
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+
+    public void locationChoiceSelected(String choice)
     {
-        String choice= locationChoices.get(position);
         if(choice.equals(getApplicationContext().getString(R.string.current_location_choice)))
         {
             houseCoordinates= LocationService.getCurrentLocation(this, this, REQUEST_LOCATION);
@@ -372,11 +384,7 @@ public class RegisterHouseFirstStep extends AppCompatActivity implements
         }
     }
 
-    @Override
-    public void onNothingSelected(AdapterView<?> parent)
-    {
 
-    }
 
     private void setLocal(Activity activity, String langCode){
         Locale locale = new Locale(langCode);

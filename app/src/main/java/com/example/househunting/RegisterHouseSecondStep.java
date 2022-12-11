@@ -60,7 +60,7 @@ public class RegisterHouseSecondStep extends AppCompatActivity
     ArrayList<String> internetChoices = new ArrayList<>();
     ProgressDialog progressDialog;
     House house;
-
+    boolean isAllFieldsChecked = false;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -115,46 +115,80 @@ public class RegisterHouseSecondStep extends AppCompatActivity
 
         submitButton.setOnClickListener(v->
         {
-            for (Uri uri : images)
-            {
-                MediaManager.get().upload(uri).callback(new UploadCallback()
-                {
-                    @Override
-                    public void onStart(String requestId)
-                    {
-                    }
+            isAllFieldsChecked= checkAllFields();
+            if(isAllFieldsChecked) {
+                for (Uri uri : images) {
+                    MediaManager.get().upload(uri).callback(new UploadCallback() {
+                        @Override
+                        public void onStart(String requestId) {
+                        }
 
-                    @Override
-                    public void onProgress(String requestId, long bytes, long totalBytes)
-                    {
-                    }
+                        @Override
+                        public void onProgress(String requestId, long bytes, long totalBytes) {
+                        }
 
-                    @Override
-                    public void onSuccess(String requestId, Map resultData)
-                    {
+                        @Override
+                        public void onSuccess(String requestId, Map resultData) {
 
-                        moreImagesUrls.add((String) resultData.get("url"));
-                    }
-                    @Override
-                    public void onError(String requestId, ErrorInfo error)
-                    {
-                    }
-                    @Override
-                    public void onReschedule(String requestId, ErrorInfo error)
-                    {
-                    }
-                }).dispatch();
+                            moreImagesUrls.add((String) resultData.get("url"));
+                            if (images.size() == moreImagesUrls.size()) {
+                                String descriptionText = String.valueOf(description.getText());
+
+                                house.getOwnerInfo().setNames(String.valueOf(landLordNames.getText()));
+                                house.getOwnerInfo().setPhone(String.valueOf(landLordContact.getText()));
+                                /* use images urls to get more images urls uploaded*/
+                                CreateHouseBody createHouseBody = new CreateHouseBody(house.getBedrooms(), house.getPriceMonthly(), descriptionText, house.getInternet(), moreImagesUrls, house.getImageCover(), house.getLocation(), house.getOwnerInfo());
+
+                                submitHouse(createHouseBody);
+
+                            }
+
+                        }
+
+                        @Override
+                        public void onError(String requestId, ErrorInfo error) {
+                        }
+
+                        @Override
+                        public void onReschedule(String requestId, ErrorInfo error) {
+                        }
+                    }).dispatch();
+                }
             }
-            String desc= String.valueOf(description.getText());
-            house.getOwnerInfo().setNames(String.valueOf(landLordNames.getText()));
-            house.getOwnerInfo().setPhone(String.valueOf(landLordContact.getText()));
-            /* use images urls to get more images urls uploaded*/
-
-            CreateHouseBody createHouseBody = new CreateHouseBody(house.getBedrooms(), house.getPriceMonthly(), house.getDescription(), house.getInternet(), moreImagesUrls, house.getImageCover(), house.getLocation(), house.getOwnerInfo());
-
-            submitHouse(createHouseBody);
 
         });
+    }
+
+    private boolean checkAllFields() {
+        if (images.size() == 0) {
+            Toast.makeText(getApplicationContext(), R.string.house_more_images_error,Toast.LENGTH_SHORT).show();
+            return  false;
+        }
+        if (description.length() == 0) {
+            description.setError(getText(R.string.house_description_error));
+            return false;
+        }
+        if (house.getInternet().size() == 0) {
+            Toast.makeText(getApplicationContext(), R.string.house_internet_error,Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (landLordNames.length() == 0) {
+            landLordNames.setError(getText(R.string.house_land_lord_names_error));
+            return false;
+        }
+        if (landLordContact.length() == 0) {
+
+            landLordContact.setError(getText(R.string.house_landlord_contact_error));
+            return false;
+        }
+        else if(!landLordContact.getText().toString().substring(0,1).equals("+"))
+        {
+            landLordContact.setError(getText(R.string.house_landlord_contact_country_code_error));
+            return false;
+        }
+
+        return true;
     }
 
 
@@ -189,6 +223,9 @@ public class RegisterHouseSecondStep extends AppCompatActivity
         }
     }
 
+    /**
+     * Author: TURATSINZE Eric
+     */
     public void submitHouse(CreateHouseBody body) {
         progressDialog.show();
         RetrofitClient.getClient("").create(HouseApiService.class)
@@ -199,7 +236,7 @@ public class RegisterHouseSecondStep extends AppCompatActivity
                         progressDialog.dismiss();
                         if (response.code()== 201) {
                             try {
-                                Intent i = new Intent(RegisterHouseSecondStep.this, VerifyEmailActivity.class);
+                                Intent i = new Intent(RegisterHouseSecondStep.this, MainActivity.class);
                                 startActivity(i);
                             } catch (Exception e) {
                                 Toast.makeText(RegisterHouseSecondStep.this, e.getMessage(), Toast.LENGTH_SHORT).show();

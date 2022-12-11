@@ -217,10 +217,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
-
                 android:backgroundTint="@color/white"
                 android:drawableLeft="@drawable/ic_map"
                 android:paddingLeft="23dp"
+                android:layout_weight="1"
                 android:text="@string/map_house_btn"
                 android:textColor="@color/colorPrimary" />
 

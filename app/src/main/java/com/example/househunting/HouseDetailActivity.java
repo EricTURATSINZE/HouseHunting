@@ -68,9 +68,9 @@ public class HouseDetailActivity extends AppCompatActivity {
         mapBtn =  findViewById(R.id.map_btn);
         bookNowBtn =  findViewById(R.id.book_btn);
 
-        fetchData(houseId);
         Storage storage = new Storage(this);
         token = storage.getToken();
+        fetchData(houseId);
 
         mapBtn.setOnClickListener(v-> {
             /**
