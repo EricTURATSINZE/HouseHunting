@@ -12,4 +12,5 @@
     <string name="house_landlord_contact">Coordonnées du propriétaire</string>
     <string name="house_second_step_btn"> Soumettre</string>
     <string name="house_location_choice">Choisissez le mode de localisation</string>
+    <string name="select_language">Choisir la langue</string>
 </resources>
