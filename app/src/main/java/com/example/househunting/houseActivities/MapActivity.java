@@ -1,18 +1,14 @@
-package com.example.househunting;
+package com.example.househunting.houseActivities;
 
-import android.Manifest;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
+import com.example.househunting.utils.MyCustomApplication;
+import com.example.househunting.R;
 import com.example.househunting.model.HouseRegister.House;
 import com.example.househunting.services.LocationService;
 import com.google.android.gms.maps.CameraUpdateFactory;

@@ -1,4 +1,4 @@
-package com.example.househunting;
+package com.example.househunting.houseActivities;
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -29,6 +29,8 @@ import android.widget.Toast;
 import com.cloudinary.android.MediaManager;
 import com.cloudinary.android.callback.ErrorInfo;
 import com.cloudinary.android.callback.UploadCallback;
+import com.example.househunting.utils.MyCustomApplication;
+import com.example.househunting.R;
 import com.example.househunting.model.HouseRegister.House;
 import com.example.househunting.services.LocationService;
 import com.example.househunting.utils.ManageLanguage;

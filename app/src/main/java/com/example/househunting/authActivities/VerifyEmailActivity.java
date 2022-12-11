@@ -1,4 +1,4 @@
-package com.example.househunting;
+package com.example.househunting.authActivities;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -16,6 +16,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.chaos.view.PinView;
+import com.example.househunting.MainActivity;
+import com.example.househunting.R;
 import com.example.househunting.model.auth.OTPResponse;
 import com.example.househunting.network.AuthApiService;
 import com.example.househunting.network.RetrofitClient;

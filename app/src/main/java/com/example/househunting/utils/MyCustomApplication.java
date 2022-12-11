@@ -1,4 +1,4 @@
-package com.example.househunting;
+package com.example.househunting.utils;
 
 import android.app.Application;
 

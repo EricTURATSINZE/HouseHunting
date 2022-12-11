@@ -1,8 +1,10 @@
-package com.example.househunting;
+package com.example.househunting.houseActivities;
 
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
+
+import com.example.househunting.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
