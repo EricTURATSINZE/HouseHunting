@@ -114,16 +114,18 @@ public class ProfileFragment extends Fragment {
 
                             Profile data = response.body().getData();
                             String arr[] = data.getNames().split(" ");
-                            String fname = null;
+                            String fname;
                             String lname = null;
-                            if(arr.length > 2){
+                            if(arr.length >= 2){
                                  fname = data.getNames().split(" ")[0];
                                  lname = data.getNames().split(" ")[1];
+
                             } else
                                 fname = data.getNames().split(" ")[0];
                             LoadImage.loadImage(getContext(), data.getProfile(), profile, R.drawable.ic_profile);
                             greetings.setText(getString(R.string.greeting) + " " + (fname.isEmpty() ? "User" : fname));
                             firstName.setText(fname);
+
                             lastName.setText(lname);
                             phone.setText(data.getPhone());
                             email.setText(data.getEmail());
