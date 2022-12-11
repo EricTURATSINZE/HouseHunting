@@ -14,6 +14,7 @@ import com.example.househunting.fragments.HomeFragment;
 import com.example.househunting.fragments.NotificationsFragment;
 import com.example.househunting.fragments.PreferencesFragment;
 import com.example.househunting.fragments.ProfileFragment;
+import com.example.househunting.houseActivities.RegisterHouseFirstStep;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 

@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.househunting.authActivities.SignUpActivity;
+import com.example.househunting.authActivities.VerifyEmailActivity;
 import com.example.househunting.utils.Storage;
 
 import java.util.Timer;

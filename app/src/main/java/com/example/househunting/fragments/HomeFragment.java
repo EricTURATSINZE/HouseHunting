@@ -1,6 +1,5 @@
 package com.example.househunting.fragments;
 
-import static android.content.ContentValues.TAG;
 import static android.content.Context.LOCATION_SERVICE;
 
 import android.annotation.SuppressLint;
@@ -12,7 +11,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,13 +23,12 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.househunting.HouseDetailActivity;
+import com.example.househunting.houseActivities.HouseDetailActivity;
 import com.example.househunting.R;
 import com.example.househunting.adapter.HouseAdapter;
 import com.example.househunting.model.house.CriteriaGlobal;
 import com.example.househunting.model.house.CriteriaNearest;
 import com.example.househunting.model.house.CriteriaRated;
-import com.example.househunting.model.house.CriteriaVisible;
 import com.example.househunting.model.house.CriteriaWifi;
 import com.example.househunting.model.house.Data;
 import com.example.househunting.model.house.ViewAllHouseResponse;

@@ -1,6 +1,4 @@
-package com.example.househunting;
-
-import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
+package com.example.househunting.houseActivities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,7 +7,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -22,6 +19,9 @@ import android.widget.Toast;
 import com.cloudinary.android.MediaManager;
 import com.cloudinary.android.callback.ErrorInfo;
 import com.cloudinary.android.callback.UploadCallback;
+import com.example.househunting.MainActivity;
+import com.example.househunting.utils.MyCustomApplication;
+import com.example.househunting.R;
 import com.example.househunting.model.HouseRegister.House;
 import com.example.househunting.model.house.CreateHouseBody;
 import com.example.househunting.model.house.CreateHouseResponse;
@@ -29,10 +29,8 @@ import com.example.househunting.network.HouseApiService;
 import com.example.househunting.network.RetrofitClient;
 import com.example.househunting.utils.Storage;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
 

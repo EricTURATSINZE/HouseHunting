@@ -1,4 +1,4 @@
-package com.example.househunting;
+package com.example.househunting.houseActivities;
 import android.app.ActionBar;
 import android.content.Intent;
 import android.net.Uri;
@@ -13,6 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+
+import com.example.househunting.R;
 import com.example.househunting.model.house.Data;
 import com.example.househunting.model.house.ViewHouseResponse;
 import com.example.househunting.network.HouseApiService;
