@@ -17,6 +17,8 @@ import com.example.househunting.network.RetrofitClient;
 import com.example.househunting.utils.Storage;
 import com.google.android.material.snackbar.Snackbar;
 
+import org.json.JSONObject;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -97,6 +99,14 @@ public class LoginActivity extends AppCompatActivity {
                                 startActivity(i);
                             } catch (Exception e) {
                                 Snackbar.make(view, e.getMessage(), Snackbar.LENGTH_LONG).show();
+                            }
+                        } else {
+                            try {
+                                String json = response.errorBody().string();
+                                JSONObject jObjError = new JSONObject(json.substring(json.indexOf("{"), json.lastIndexOf("}") + 1));
+                                Toast.makeText(LoginActivity.this, jObjError.getJSONObject("error").getString("message"), Toast.LENGTH_LONG).show();
+                            } catch (Exception e) {
+                                Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
                             }
                         }
                     }

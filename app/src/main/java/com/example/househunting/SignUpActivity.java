@@ -18,6 +18,8 @@ import com.example.househunting.network.RetrofitClient;
 import com.example.househunting.utils.Storage;
 import com.google.android.material.snackbar.Snackbar;
 
+import org.json.JSONObject;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -126,7 +128,13 @@ public class SignUpActivity extends AppCompatActivity {
                                 Snackbar.make(view, e.getMessage(), Snackbar.LENGTH_LONG).show();
                             }
                         } else {
-                            Toast.makeText(SignUpActivity.this, String.valueOf(response.code()), Toast.LENGTH_SHORT).show();
+                            try {
+                                String json = response.errorBody().string();
+                                JSONObject jObjError = new JSONObject(json.substring(json.indexOf("{"), json.lastIndexOf("}") + 1));
+                                Toast.makeText(SignUpActivity.this, jObjError.getJSONObject("message").getString("message"), Toast.LENGTH_LONG).show();
+                            } catch (Exception e) {
+                                Toast.makeText(SignUpActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                            }
                         }
                     }
 

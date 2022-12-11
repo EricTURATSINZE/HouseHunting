@@ -100,7 +100,13 @@ public class VerifyEmailActivity extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         } else {
-                            Toast.makeText(getApplicationContext(), "Not 200", Toast.LENGTH_SHORT);
+                            try {
+                                String json = response.errorBody().string();
+                                JSONObject jObjError = new JSONObject(json.substring(json.indexOf("{"), json.lastIndexOf("}") + 1));
+                                Toast.makeText(VerifyEmailActivity.this, jObjError.getJSONObject("message").getString("message"), Toast.LENGTH_LONG).show();
+                            } catch (Exception e) {
+                                Toast.makeText(VerifyEmailActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                            }
                         }
                     }
                     @Override
