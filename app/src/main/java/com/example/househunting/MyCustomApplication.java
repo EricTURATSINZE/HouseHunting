@@ -34,7 +34,7 @@ public class MyCustomApplication extends Application {
         initConfig();
     }
 
-    private void initConfig()
+    void initConfig()
     {
         Map config = new HashMap();
         config.put("cloud_name", "kuranga");

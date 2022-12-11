@@ -32,7 +32,7 @@ public class SignUpActivity extends AppCompatActivity {
     TextView signup_btn_txt;
     ProgressBar progressBar;
     Storage storage;
-
+    boolean isAllFieldsChecked = false;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,10 +60,52 @@ public class SignUpActivity extends AppCompatActivity {
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                signUp(view);
+                isAllFieldsChecked = CheckAllFields();
+                if(isAllFieldsChecked) {
+                    signup_btn_txt.setVisibility(View.GONE);
+                    progressBar.setVisibility(View.VISIBLE);
+                    signUp(view);
+                }
             }
         });
     }
+
+
+    private boolean CheckAllFields() {
+        /**
+         * Author NGIRIMANA Schadrack
+         */
+        if (names.length() == 0) {
+            names.setError(getText(R.string.name_error));
+            return false;
+        }
+
+        if (email.length() == 0) {
+            email.setError(getText(R.string.email_empty_error));
+            return false;
+        }
+        else if(!email.getText().toString().contains("@andrew.cmu.edu")) {
+            email.setError(getText(R.string.email_type_error));
+            return false;
+        }
+        if (phone.length() == 0) {
+            phone.setError(getText(R.string.phone_empty_error));
+            return false;
+        }
+        else if (!phone.getText().toString().substring(0,1).equals("+")){
+            phone.setError(getText(R.string.phone_country_code_error));
+            return false;
+        }
+        if (password.length() == 0) {
+            password.setError(getText(R.string.password_empty_error));
+            return false;
+        } else if (password.length() < 6) {
+            password.setError(getText(R.string.password_length_error));
+            return false;
+        }
+        return true;
+    }
+
 
     public void signUp(View view) {
         signup_btn_txt.setVisibility(View.GONE);
