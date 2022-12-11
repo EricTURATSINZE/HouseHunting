@@ -158,7 +158,7 @@ public class HomeFragment extends Fragment implements LocationListener {
                     if (houses != null) {
                         empty_view.setVisibility(View.GONE);
                         mRecyclerView.setVisibility(View.VISIBLE);
-                        houseAdapter = new HouseAdapter(houses, location, isMyhouses);
+                        houseAdapter = new HouseAdapter(houses);
                         mRecyclerView.setAdapter(houseAdapter);
                         houseAdapter.setOnItemClickListener(new HouseAdapter.OnItemClickListener() {
                             @Override
