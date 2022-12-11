@@ -11,6 +11,7 @@ public class Storage {
     private static final String KEY_IS_LOGGEDIN = "isLoggedIn";
     private static final String USER_TOKEN = "USER_TOKEN";
     private static final String SEEN_HOUSES="SEEN_HOUSES";
+    private static final String LANGUAGE="English";
 
     public Storage(Context context) {
         this._context = context;
@@ -28,6 +29,12 @@ public class Storage {
         editor.commit();
     }
 
+
+    public void setLanguage(String lang) {
+        editor.putString(LANGUAGE, lang);
+        editor.commit();
+    }
+
     public String getSeenHouses() {
         return pref.getString(SEEN_HOUSES, "");
     }
@@ -39,6 +46,8 @@ public class Storage {
     public String getToken() {
         return pref.getString(USER_TOKEN, "");
     }
+
+    public String getLanguage(){return  pref.getString(LANGUAGE, "");}
 
     public void setToken(String token){
         editor.putString(USER_TOKEN, token);

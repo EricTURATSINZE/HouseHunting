@@ -85,6 +85,7 @@
     <string name="airtel_internet_choice" translatable="false">Airtel</string>
     <string name="mango_internet_choice" translatable="false">Mango</string>
     <string name="no_internet_choice" translatable="false">No Internet</string>
+    <string name="select_language">Select Language</string>
 
     <!-- ******** register user preference ************-->
     <!-- Author: Yves Ngabonziza -->
