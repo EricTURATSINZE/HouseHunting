@@ -125,21 +125,57 @@
             android:paddingLeft="10dp"
             android:textSize="16dp" />
 
-        <Button
+        <RelativeLayout
             android:id="@+id/house_submit_btn"
             android:layout_width="match_parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
             android:layout_height="60dp"
             android:layout_below="@id/house_contact"
             android:layout_marginStart="30dp"
             android:layout_marginTop="25dp"
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="30dp"
-            android:background="@drawable/login_button"
+            android:background="@drawable/login_button">
 
-            android:text="@string/house_second_step_btn"
-            android:textAllCaps="false"
-            android:textSize="20dp"
-            android:textStyle="bold" />
+            <TextView
+                android:id="@+id/submit_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Submit"
+                android:textColor="@color/white"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <ProgressBar
+                android:id="@+id/submit_btn_pb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:elevation="8dp"
+                android:indeterminate="true"
+                android:indeterminateTint="@color/white"
+                android:indeterminateTintMode="src_in"
+                android:layout_centerInParent="true"
+                android:visibility="gone"/>
+        </RelativeLayout>
+
+<!--        <Button-->
+<!--            android:id="@+id/house_submit_btn"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="60dp"-->
+<!--            android:layout_below="@id/house_contact"-->
+<!--            android:layout_marginStart="30dp"-->
+<!--            android:layout_marginTop="25dp"-->
+<!--            android:layout_marginEnd="30dp"-->
+<!--            android:layout_marginBottom="30dp"-->
+<!--            android:background="@drawable/login_button"-->
+
+<!--            android:text="@string/house_second_step_btn"-->
+<!--            android:textAllCaps="false"-->
+<!--            android:textSize="20dp"-->
+<!--            android:textStyle="bold" />-->
     </RelativeLayout>
 
 </LinearLayout>

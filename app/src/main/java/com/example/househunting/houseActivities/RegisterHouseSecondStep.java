@@ -13,13 +13,17 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cloudinary.android.MediaManager;
 import com.cloudinary.android.callback.ErrorInfo;
 import com.cloudinary.android.callback.UploadCallback;
 import com.example.househunting.MainActivity;
+import com.example.househunting.authActivities.SignUpActivity;
 import com.example.househunting.utils.MyCustomApplication;
 import com.example.househunting.R;
 import com.example.househunting.model.HouseRegister.House;
@@ -44,8 +48,9 @@ import retrofit2.Response;
 
 public class RegisterHouseSecondStep extends AppCompatActivity
 {
-    Button submitButton;
+    RelativeLayout submitButton;
     ImageView moreImages;
+    TextView submit_text;
     EditText landLordNames;
     EditText landLordContact;
     Spinner houseInternet;
@@ -57,6 +62,7 @@ public class RegisterHouseSecondStep extends AppCompatActivity
     private static final int IMAGE_PICK_GALLERY_CODE=103;
     ArrayList<String> internetChoices = new ArrayList<>();
     ProgressDialog progressDialog;
+    private ProgressBar progressBar;
     House house;
     boolean isAllFieldsChecked = false;
     @Override
@@ -70,6 +76,8 @@ public class RegisterHouseSecondStep extends AppCompatActivity
         submitButton = findViewById(R.id.house_submit_btn);
         description = findViewById(R.id.house_description);
         houseInternet = findViewById(R.id.house_internet);
+        progressBar = (ProgressBar) findViewById(R.id.submit_btn_pb);
+        submit_text = findViewById(R.id.submit_text_view);
         house = ((MyCustomApplication)getApplication()).getHouse();
 
         progressDialog = new ProgressDialog(this);
@@ -113,8 +121,11 @@ public class RegisterHouseSecondStep extends AppCompatActivity
 
         submitButton.setOnClickListener(v->
         {
+
             isAllFieldsChecked= checkAllFields();
             if(isAllFieldsChecked) {
+                submit_text.setVisibility(View.GONE);
+                progressBar.setVisibility(View.VISIBLE);
                 for (Uri uri : images) {
                     MediaManager.get().upload(uri).callback(new UploadCallback() {
                         @Override
@@ -225,13 +236,17 @@ public class RegisterHouseSecondStep extends AppCompatActivity
      * Author: TURATSINZE Eric
      */
     public void submitHouse(CreateHouseBody body) {
-        progressDialog.show();
+//        progressDialog.show();
+        submit_text.setVisibility(View.GONE);
+        progressBar.setVisibility(View.VISIBLE);
         RetrofitClient.getClient("").create(HouseApiService.class)
                 .uploadHouse(body, storage.getToken())
                 .enqueue(new Callback<CreateHouseResponse>() {
                     @Override
                     public void onResponse(Call<CreateHouseResponse> call, Response<CreateHouseResponse> response) {
-                        progressDialog.dismiss();
+//                        progressDialog.dismiss();
+                        submit_text.setVisibility(View.VISIBLE);
+                        progressBar.setVisibility(View.GONE);
                         if (response.code()== 201) {
                             try {
                                 Intent i = new Intent(RegisterHouseSecondStep.this, MainActivity.class);
@@ -243,7 +258,7 @@ public class RegisterHouseSecondStep extends AppCompatActivity
                             try {
                                 String json = response.errorBody().string();
                                 JSONObject jObjError = new JSONObject(json.substring(json.indexOf("{"), json.lastIndexOf("}") + 1));
-                                Toast.makeText(RegisterHouseSecondStep.this, jObjError.getJSONObject("error").getString("message"), Toast.LENGTH_LONG).show();
+                                Toast.makeText(RegisterHouseSecondStep.this, jObjError.getJSONObject("message").getString("message"), Toast.LENGTH_LONG).show();
                             } catch (Exception e) {
                                 Toast.makeText(RegisterHouseSecondStep.this, e.getMessage(), Toast.LENGTH_LONG).show();
                             }
@@ -252,6 +267,8 @@ public class RegisterHouseSecondStep extends AppCompatActivity
 
                     @Override
                     public void onFailure(Call<CreateHouseResponse> call, Throwable t) {
+                        submit_text.setVisibility(View.VISIBLE);
+                        progressBar.setVisibility(View.GONE);
                         progressDialog.dismiss();
                         Toast.makeText(RegisterHouseSecondStep.this, t.getMessage(), Toast.LENGTH_SHORT).show();
                     }

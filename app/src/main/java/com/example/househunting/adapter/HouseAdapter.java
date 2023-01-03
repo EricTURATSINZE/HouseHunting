@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
@@ -159,9 +160,10 @@ public class HouseAdapter extends RecyclerView.Adapter<HouseAdapter.ViewHolder> 
             RetrofitClient.getClient("").create(HouseApiService.class)
                     .getBookedHouse(houseList.get(pos).get_id(), token)
                     .enqueue(new Callback<RootResponse>() {
-
                         @Override
                         public void onResponse(Call<RootResponse> call, Response<RootResponse> response) {
+
+                            Toast.makeText(context, "House booked successfully",  Toast.LENGTH_SHORT).show();
                         }
 
                         @Override
@@ -180,6 +182,7 @@ public class HouseAdapter extends RecyclerView.Adapter<HouseAdapter.ViewHolder> 
                     .enqueue(new Callback<RootResponse>() {
                         @Override
                         public void onResponse(Call<RootResponse> call, Response<RootResponse> response) {
+                            Toast.makeText(context, "House deleted successfully",  Toast.LENGTH_SHORT).show();
                         }
 
                         @Override
